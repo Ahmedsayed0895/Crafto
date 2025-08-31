@@ -45,7 +45,7 @@ val CraftoLightColors = CraftoColors(
     brand = Brand(
         primary = Color(0xFF5C9EFF),
         secondary = Color(0xFFC1DAFF),
-        tertiary = Color(0xFFF2F27B)
+        tertiary = Color(0xFFF2F7FF)
     ),
     button = Button(
         primary = Color(0xFF5C9EFF),
