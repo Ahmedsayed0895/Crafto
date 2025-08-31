@@ -36,7 +36,7 @@ fun ProgressIndicator(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(currentPage.toFloat() / totalPage.toFloat())
+                .fillMaxWidth((currentPage.toFloat() / totalPage.toFloat()).coerceIn(0f,1f))
                 .height(8.dp)
                 .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
                 .background(
