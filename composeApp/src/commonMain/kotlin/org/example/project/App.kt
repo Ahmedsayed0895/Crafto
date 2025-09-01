@@ -8,7 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
 import org.example.project.designSystem.components.CraftoCircularProgressIndicator
 import org.example.project.designSystem.textStyle.AppTheme
 
