@@ -33,14 +33,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AppBar(
     modifier: Modifier = Modifier,
     title: String? = null,
-    caption: String? = null,
+    locationItem: (@Composable () -> Unit)? = null,
     endIcon: Painter? = null,
     hasBackground: Boolean = true,
     showBackButton: Boolean = false,
     onBackButtonClick: () -> Unit = {},
     onEndIconClick: () -> Unit = {},
 ) {
-    val background = if (hasBackground) AppTheme.craftoColors.background.screen else Color.Transparent
+    val background =
+        if (hasBackground) AppTheme.craftoColors.background.screen else Color.Transparent
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -54,17 +55,17 @@ fun AppBar(
             onBackButtonClick = onBackButtonClick
         )
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
+            if (locationItem != null) {
+                locationItem()
+            }
             Title(
                 title = title,
                 modifier = Modifier
             )
-            Caption(
-                caption = caption,
-                modifier = Modifier
-            )
         }
+
         EndIcon(painter = endIcon, onEndIconClick = onEndIconClick)
     }
 }
@@ -83,20 +84,6 @@ private fun BackButton(showBackButton: Boolean, onBackButtonClick: () -> Unit) {
                     onClick = dropUnlessResumed { onBackButtonClick() }
                 )
                 .padding(8.dp)
-        )
-    }
-}
-
-@Composable
-private fun Caption(caption: String?, modifier: Modifier = Modifier) {
-    caption?.let {
-        Text(
-            text = it,
-            maxLines = 1,
-            style = AppTheme.textStyle.body.smallMedium,
-            color = AppTheme.craftoColors.shade.secondary,
-            overflow = TextOverflow.Ellipsis,
-            modifier = modifier
         )
     }
 }
@@ -136,10 +123,11 @@ private fun EndIcon(painter: Painter?, onEndIconClick: () -> Unit, modifier: Mod
 @Preview
 @Composable
 private fun AppbarPreview() {
-    Column(){
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         AppBar(
-            title = "Hend Sayed",
-            caption = "Cairo,Egypt",
+            title = "Title",
             endIcon = painterResource(Res.drawable.notifications),
             showBackButton = true,
         )
@@ -148,20 +136,12 @@ private fun AppbarPreview() {
             showBackButton = true,
         )
         AppBar(
-            title = "Title",
-            caption = "Caption",
-            showBackButton = false,
+            locationItem = {},
+            endIcon = painterResource(Res.drawable.notifications),
         )
         AppBar(
             title = "Title",
-            showBackButton = true,
-        )
-        AppBar(
-            showBackButton = true,
-        )
-        AppBar(
-            title = "Title",
-            showBackButton = false,
+            showBackButton = false
         )
     }
 }
