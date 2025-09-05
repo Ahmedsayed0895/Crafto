@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798724632011",
+    "project_id": "crafto-33c46",
+    "storage_bucket": "crafto-33c46.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798724632011:android:c6bc14b43d5ed1ea4f1a4e",
+        "android_client_info": {
+          "package_name": "org.example.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAA3M9zscl98Nbl0aa3oEFwClOyAE8-4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
