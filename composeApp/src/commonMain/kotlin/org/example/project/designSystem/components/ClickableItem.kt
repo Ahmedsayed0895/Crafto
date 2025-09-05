@@ -87,13 +87,6 @@ fun ClickableItemPreview() {
             onClick = {},
             icon = painterResource(Res.drawable.sledgehammer),
             title = "Switch to Craftsman",
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(Res.drawable.alt_arrow_right),
-                    contentDescription = "Chevron right",
-                    tint = AppTheme.craftoColors.shade.tertiary,
-                )
-            }
         )
     }
 
