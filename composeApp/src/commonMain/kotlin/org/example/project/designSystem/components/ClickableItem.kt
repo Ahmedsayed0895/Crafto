@@ -3,12 +3,10 @@ package org.example.project.designSystem.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -21,7 +19,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.alt_arrow_right
-import crafto.composeapp.generated.resources.arrow_right
 import crafto.composeapp.generated.resources.logout
 import crafto.composeapp.generated.resources.sledgehammer
 import org.example.project.designSystem.textStyle.AppTheme
