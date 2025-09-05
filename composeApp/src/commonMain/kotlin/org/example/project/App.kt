@@ -8,10 +8,8 @@ import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.DefaultButton
 import org.example.project.designSystem.components.PrimaryButton
 import org.example.project.designSystem.components.SecondaryButton
 import org.example.project.designSystem.components.TextButton
