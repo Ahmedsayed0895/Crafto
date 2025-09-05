@@ -24,7 +24,7 @@ fun TextButton(
         enabled =enabled,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
-            contentColor = AppTheme.craftoColors.button.onSecondary,
+            contentColor = AppTheme.craftoColors.button.onTertiary,
             disabledContainerColor = Color.Transparent,
             disabledContentColor = AppTheme.craftoColors.button.onDisabled
         ),
