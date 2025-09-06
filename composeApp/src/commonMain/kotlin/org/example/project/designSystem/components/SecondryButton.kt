@@ -6,6 +6,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import org.example.project.designSystem.textStyle.AppTheme
 
 @Composable
@@ -15,6 +16,7 @@ fun SecondaryButton(
     enabled: Boolean,
     buttonState: ButtonState,
     contentPadding: PaddingValues=ButtonDefaults.ContentPadding,
+    containerColor: Color = AppTheme.craftoColors.button.secondary,
     onClick: () -> Unit,
 ){
     val contentColor by animateColorAsState(
@@ -26,7 +28,7 @@ fun SecondaryButton(
         buttonState =buttonState,
         enabled =enabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppTheme.craftoColors.button.secondary,
+            containerColor =containerColor,
             contentColor = contentColor,
             disabledContainerColor = AppTheme.craftoColors.button.disabled,
             disabledContentColor = AppTheme.craftoColors.button.onDisabled
