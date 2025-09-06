@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import crafto.composeapp.generated.resources.Res
+import crafto.composeapp.generated.resources.allDrawableResources
+import crafto.composeapp.generated.resources.craftman_avatar
+import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -17,7 +21,7 @@ enum class OfferCardState{
 }
 @Composable
 fun OfferCard(
-    state: OfferCardState = OfferCardState.WAITING,
+    cardState: OfferCardState = OfferCardState.WAITING,
     modifier: Modifier = Modifier
 ) {
   Column (
@@ -30,6 +34,12 @@ fun OfferCard(
               .fillMaxWidth()
       )
       {
+            Image(
+                painter = painterResource(Res.drawable.craftman_avatar),
+                contentDescription = "Offer Image",
+                modifier = Modifier
+                    .fillMaxSize()
+            )
 
       }
 
