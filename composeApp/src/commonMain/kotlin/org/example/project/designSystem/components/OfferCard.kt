@@ -31,8 +31,11 @@ import crafto.composeapp.generated.resources.chat
 import crafto.composeapp.generated.resources.clock_circle
 import crafto.composeapp.generated.resources.craftman_avatar
 import crafto.composeapp.generated.resources.star_1
+import crafto.composeapp.generated.resources.verified_check
+import crafto.composeapp.generated.resources.verified_check_1
 import crafto.composeapp.generated.resources.wallet
 import org.example.project.designSystem.textStyle.AppTheme
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -46,6 +49,7 @@ fun OfferCard(
     offerDardState: OfferCardState = OfferCardState.WAITING,
     modifier: Modifier = Modifier,
     name: String,
+    image: DrawableResource,
     rating: Double,
     reviews: Int,
     hour: Int,
@@ -92,7 +96,7 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour)
+                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
                     OfferBody(
                         fees = fees,
                         date = date,
@@ -117,7 +121,7 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour)
+                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
                     OfferBody(
                         fees = fees,
                         date = date,
@@ -142,7 +146,7 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour)
+                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
                     OfferBody(
                         fees = fees,
                         date = date,
@@ -261,6 +265,7 @@ private fun OfferDetails(
 private fun CardHeader(
     modifier: Modifier = Modifier,
     name: String,
+    image: DrawableResource,
     rating: Double,
     reviews: Int,
     hour: Int,
@@ -270,14 +275,29 @@ private fun CardHeader(
             .fillMaxWidth()
     )
     {
-        Image(
-            painter = painterResource(Res.drawable.craftman_avatar),
-            contentDescription = "Offer Image",
+        Box(
             modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape),
-            contentScale = ContentScale.Crop
-        )
+                .size(48.dp)
+        ) {
+            Image(
+                painter = painterResource(image),
+                contentDescription = "Offer Image",
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .align(Alignment.TopCenter),
+                contentScale = ContentScale.Crop
+            )
+            Icon(
+                modifier = Modifier
+                    .size(16.dp)
+                    .align(Alignment.BottomCenter),
+                painter = painterResource(Res.drawable.verified_check_1),
+                tint = AppTheme.craftoColors.additional.primarySuccess,
+                contentDescription = "verified Icon",
+            )
+
+        }
         CraftsManInfo(
             name = name,
             rating = rating,
@@ -349,7 +369,8 @@ fun OfferCardPreview_waiting() {
         time = "2:00 PM",
         offerDardState = OfferCardState.WAITING,
         onChatClick = {},
-        onAcceptClick = {}
+        onAcceptClick = {},
+        image = Res.drawable.craftman_avatar,
     )
 }
 
@@ -368,7 +389,8 @@ fun OfferCardPreview_accepted() {
         time = "2:00 PM",
         offerDardState = OfferCardState.ACCEPTED,
         onChatClick = {},
-        onAcceptClick = {}
+        onAcceptClick = {},
+        image = Res.drawable.craftman_avatar,
     )
 }
 
@@ -387,6 +409,7 @@ fun OfferCardPreview_rejected() {
         time = "2:00 PM",
         offerDardState = OfferCardState.REJECTED,
         onChatClick = {},
-        onAcceptClick = {}
+        onAcceptClick = {},
+        image = Res.drawable.craftman_avatar,
     )
 }
