@@ -43,8 +43,8 @@ fun TextField(
     onTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     showAsPassword: Boolean = false,
-    revealPassword: Boolean = false, // Hoisted for external control if needed
-    onRevealPasswordToggle: (() -> Unit)? = null, // Optional callback
+    revealPassword: Boolean = false,
+    onRevealPasswordToggle: (() -> Unit)? = null,
     readOnlyMode: Boolean = false,
     enabledState: Boolean = true,
     errorState: Boolean = false,
