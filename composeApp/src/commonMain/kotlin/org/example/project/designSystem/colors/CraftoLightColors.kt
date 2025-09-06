@@ -49,11 +49,11 @@ val CraftoLightColors = CraftoColors(
     ),
     button = Button(
         primary = Color(0xFF5C9EFF),
-        secondary = Color(0xFF20263B),
+        secondary = Color(0xFFFFFFFF),
         disabled = Color(0xFFECECEC),
         onPrimary = Color(0xFFFFFFFF),
         onSecondary = Color(0xFF313131),
         onDisabled = Color(0xFFA5A5A5),
-        onTertiary = Color(0xFF72727B)
+        onTertiary = Color(0xFF5C9EFF)
     )
 )
