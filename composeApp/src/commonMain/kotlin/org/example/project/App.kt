@@ -23,8 +23,6 @@ fun App() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("I can fix this today. I have 10+ years experience with kitchen plumbing."
-            , style = AppTheme.textStyle.body.smallMedium)
             CraftoCircularProgressIndicator()
         }
     }
