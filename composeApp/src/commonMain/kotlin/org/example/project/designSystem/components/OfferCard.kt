@@ -31,7 +31,6 @@ import crafto.composeapp.generated.resources.chat
 import crafto.composeapp.generated.resources.clock_circle
 import crafto.composeapp.generated.resources.craftman_avatar
 import crafto.composeapp.generated.resources.star_1
-import crafto.composeapp.generated.resources.verified_check
 import crafto.composeapp.generated.resources.verified_check_1
 import crafto.composeapp.generated.resources.wallet
 import org.example.project.designSystem.textStyle.AppTheme
@@ -357,59 +356,65 @@ private fun CraftsManInfo(
 @Preview
 @Composable
 fun OfferCardPreview_waiting() {
-    OfferCard(
-        name = "Muhammed Ali",
-        rating = 4.7,
-        reviews = 121,
-        hour = 5,
-        offerDescription = "I can fix this today." +
-                " I have 10+ years experience with kitchen plumbing.",
-        fees = 200.0,
-        date = "Tomorrow",
-        time = "2:00 PM",
-        offerDardState = OfferCardState.WAITING,
-        onChatClick = {},
-        onAcceptClick = {},
-        image = Res.drawable.craftman_avatar,
-    )
+    AppTheme {
+        OfferCard(
+            name = "Muhammed Ali",
+            rating = 4.7,
+            reviews = 121,
+            hour = 5,
+            offerDescription = "I can fix this today." +
+                    " I have 10+ years experience with kitchen plumbing.",
+            fees = 200.0,
+            date = "Tomorrow",
+            time = "2:00 PM",
+            offerDardState = OfferCardState.WAITING,
+            onChatClick = {},
+            onAcceptClick = {},
+            image = Res.drawable.craftman_avatar
+        )
+    }
 }
 
 @Preview
 @Composable
 fun OfferCardPreview_accepted() {
-    OfferCard(
-        name = "Muhammed Ali",
-        rating = 4.7,
-        reviews = 121,
-        hour = 5,
-        offerDescription = "I can fix this today." +
-                " I have 10+ years experience with kitchen plumbing.",
-        fees = 200.0,
-        date = "Tomorrow",
-        time = "2:00 PM",
-        offerDardState = OfferCardState.ACCEPTED,
-        onChatClick = {},
-        onAcceptClick = {},
-        image = Res.drawable.craftman_avatar,
-    )
+    AppTheme {
+        OfferCard(
+            name = "Muhammed Ali",
+            rating = 4.7,
+            reviews = 121,
+            hour = 5,
+            offerDescription = "I can fix this today." +
+                    " I have 10+ years experience with kitchen plumbing.",
+            fees = 200.0,
+            date = "Tomorrow",
+            time = "2:00 PM",
+            offerDardState = OfferCardState.ACCEPTED,
+            onChatClick = {},
+            onAcceptClick = {},
+            image = Res.drawable.craftman_avatar
+        )
+    }
 }
 
 @Preview
 @Composable
 fun OfferCardPreview_rejected() {
-    OfferCard(
-        name = "Muhammed Ali",
-        rating = 4.7,
-        reviews = 121,
-        hour = 5,
-        offerDescription = "I can fix this today." +
-                " I have 10+ years experience with kitchen plumbing.",
-        fees = 200.0,
-        date = "Tomorrow",
-        time = "2:00 PM",
-        offerDardState = OfferCardState.REJECTED,
-        onChatClick = {},
-        onAcceptClick = {},
-        image = Res.drawable.craftman_avatar,
-    )
+    AppTheme {
+        OfferCard(
+            name = "Muhammed Ali",
+            rating = 4.7,
+            reviews = 121,
+            hour = 5,
+            offerDescription = "I can fix this today." +
+                    " I have 10+ years experience with kitchen plumbing.",
+            fees = 200.0,
+            date = "Tomorrow",
+            time = "2:00 PM",
+            offerDardState = OfferCardState.REJECTED,
+            onChatClick = {},
+            onAcceptClick = {},
+            image = Res.drawable.craftman_avatar
+        )
+    }
 }
