@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -51,11 +50,11 @@ fun OfferCard(
     image: DrawableResource,
     rating: Double,
     reviews: Int,
-    hour: Int,
+    offerCreationTime: Int,
     offerDescription: String,
     fees: Double,
-    date: String,
-    time: String,
+    visitDate: String,
+    visitTime: String,
     onChatClick: () -> Unit,
     onAcceptClick: () -> Unit,
 ) {
@@ -95,11 +94,17 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
+                    CardHeader(
+                        name = name,
+                        rating = rating,
+                        reviews = reviews,
+                        hour = offerCreationTime,
+                        image = image
+                    )
                     OfferBody(
                         fees = fees,
-                        date = date,
-                        time = time,
+                        date = visitDate,
+                        time = visitTime,
                         offerDescription = offerDescription
                     )
                 }
@@ -120,11 +125,17 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
+                    CardHeader(
+                        name = name,
+                        rating = rating,
+                        reviews = reviews,
+                        hour = offerCreationTime,
+                        image = image
+                    )
                     OfferBody(
                         fees = fees,
-                        date = date,
-                        time = time,
+                        date = visitDate,
+                        time = visitTime,
                         offerDescription = offerDescription
                     )
                 }
@@ -145,11 +156,17 @@ fun OfferCard(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 )
                 {
-                    CardHeader(name = name, rating = rating, reviews = reviews, hour = hour, image = image)
+                    CardHeader(
+                        name = name,
+                        rating = rating,
+                        reviews = reviews,
+                        hour = offerCreationTime,
+                        image = image
+                    )
                     OfferBody(
                         fees = fees,
-                        date = date,
-                        time = time,
+                        date = visitDate,
+                        time = visitTime,
                         offerDescription = offerDescription
                     )
                     OfferButtons(onChatClick,onAcceptClick)
@@ -361,12 +378,12 @@ fun OfferCardPreview_waiting() {
             name = "Muhammed Ali",
             rating = 4.7,
             reviews = 121,
-            hour = 5,
+            offerCreationTime = 5,
             offerDescription = "I can fix this today." +
                     " I have 10+ years experience with kitchen plumbing.",
             fees = 200.0,
-            date = "Tomorrow",
-            time = "2:00 PM",
+            visitDate = "Tomorrow",
+            visitTime = "2:00 PM",
             offerDardState = OfferCardState.WAITING,
             onChatClick = {},
             onAcceptClick = {},
@@ -383,12 +400,12 @@ fun OfferCardPreview_accepted() {
             name = "Muhammed Ali",
             rating = 4.7,
             reviews = 121,
-            hour = 5,
+            offerCreationTime = 5,
             offerDescription = "I can fix this today." +
                     " I have 10+ years experience with kitchen plumbing.",
             fees = 200.0,
-            date = "Tomorrow",
-            time = "2:00 PM",
+            visitDate = "Tomorrow",
+            visitTime = "2:00 PM",
             offerDardState = OfferCardState.ACCEPTED,
             onChatClick = {},
             onAcceptClick = {},
@@ -405,12 +422,12 @@ fun OfferCardPreview_rejected() {
             name = "Muhammed Ali",
             rating = 4.7,
             reviews = 121,
-            hour = 5,
+            offerCreationTime = 5,
             offerDescription = "I can fix this today." +
                     " I have 10+ years experience with kitchen plumbing.",
             fees = 200.0,
-            date = "Tomorrow",
-            time = "2:00 PM",
+            visitDate = "Tomorrow",
+            visitTime = "2:00 PM",
             offerDardState = OfferCardState.REJECTED,
             onChatClick = {},
             onAcceptClick = {},
