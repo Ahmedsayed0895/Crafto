@@ -2,7 +2,6 @@ package org.example.project.designSystem.textStyle
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -23,9 +22,9 @@ fun fontResources(): FontFamily {
     )
 }
 
-val defaultTextStyle: CraftoTextStyle
-    @Composable
-    get() = CraftoTextStyle(
+@Composable
+fun defaultTextStyle(): CraftoTextStyle{
+  return  CraftoTextStyle(
         title = TitleTextStyle(
             xLarge = TextStyle(
                 fontSize = 24.sp,
@@ -118,3 +117,4 @@ val defaultTextStyle: CraftoTextStyle
             fontFamily = fontResources()
         ),
     )
+}
