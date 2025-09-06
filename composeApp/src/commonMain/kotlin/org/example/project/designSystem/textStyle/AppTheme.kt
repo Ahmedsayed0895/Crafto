@@ -33,7 +33,7 @@ object AppTheme {
         val color = if(isDarkTheme) CraftoDarkColors else CraftoLightColors
         CompositionLocalProvider(
             LocalCraftoColors provides color,
-            LocalCraftoTextStyle provides defaultTextStyle,
+            LocalCraftoTextStyle provides defaultTextStyle(),
             LocalCraftoRadius provides CraftoRadius()
         ) {
             content()
@@ -44,6 +44,8 @@ object AppTheme {
 }
 private val LocalCraftoColors =staticCompositionLocalOf { CraftoLightColors }
 
-private val LocalCraftoTextStyle = staticCompositionLocalOf { defaultTextStyle }
+private val LocalCraftoTextStyle = staticCompositionLocalOf <CraftoTextStyle>{
+    error("No default text style provided")
+}
 
 private val LocalCraftoRadius = staticCompositionLocalOf { CraftoRadius() }
