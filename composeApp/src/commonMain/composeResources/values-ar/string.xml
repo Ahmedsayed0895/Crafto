@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chat">محادثة</string>
+    <string name="accept_offer">قبول العرض</string>
+
+</resources>
