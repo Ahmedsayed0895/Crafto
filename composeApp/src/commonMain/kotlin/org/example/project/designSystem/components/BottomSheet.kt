@@ -32,7 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomSheet(
     modifier: Modifier = Modifier,
-    title: String,
+    title: String? = null,
     onDismissRequest: () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -69,11 +69,13 @@ fun BottomSheet(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = title,
-                    style = AppTheme.textStyle.title.small,
-                    color = AppTheme.craftoColors.shade.primary
-                )
+                title?.let {
+                    Text(
+                        text = title,
+                        style = AppTheme.textStyle.title.small,
+                        color = AppTheme.craftoColors.shade.primary
+                    )
+                }
                 Box(
                     modifier = Modifier
                         .size(40.dp)
