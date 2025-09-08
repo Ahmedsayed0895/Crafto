@@ -1,0 +1,59 @@
+name: On Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant gradlew permissions execution
+        run: chmod +x ./gradlew
+
+      - name: Assemble Debug
+        run: ./gradlew :composeApp:assembleDebug
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: composeApp/build/outputs/apk/debug/composeApp-debug.apk
+
+
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Grant gradlew permissions execution
+        run: chmod +x ./gradlew
+
+      - name: Build iOS Framework
+        run: ./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64
+
+      - name: Upload iOS Framework
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-framework
+          path: composeApp/build/bin/iosSimulatorArm64/debugFramework/

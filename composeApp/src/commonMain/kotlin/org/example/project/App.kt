@@ -1,50 +1,97 @@
 package org.example.project
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.unit.dp
+import org.example.project.designSystem.components.ButtonState
+import org.example.project.designSystem.components.PrimaryButton
+import org.example.project.designSystem.components.SecondaryButton
+import org.example.project.designSystem.components.TextButton
+import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import crafto.composeapp.generated.resources.Res
-import crafto.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
+    AppTheme {
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
                 .safeContentPadding()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
         ) {
+            PrimaryButton(
+                enabled = true,
+                onClick = {},
+                text = "Button",
+                buttonState = ButtonState.Enable,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+            )
+            PrimaryButton(
+                enabled = false,
+                onClick = {},
+                text = "Button",
+                buttonState = ButtonState.DISABLED,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+            )
 
-            Button(onClick = { showContent = !showContent }) {
-                Text(" hello Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+            PrimaryButton(
+                enabled = true,
+                onClick = {},
+                text = "Button",
+                buttonState = ButtonState.LOADING,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+            )
+            SecondaryButton(
+                text = "Secondary Button",
+                enabled = true,
+                buttonState = ButtonState.Enable,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
+            SecondaryButton(
+                text = "Secondary Button",
+                enabled = false,
+                buttonState = ButtonState.DISABLED,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
+            SecondaryButton(
+                text = "Secondary Button",
+                enabled = true,
+                buttonState = ButtonState.LOADING,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
+
+            TextButton(
+                text = "Text Button",
+                enabled = false,
+                buttonState = ButtonState.DISABLED,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
+            TextButton(
+                text = "Text Button",
+                enabled = true,
+                buttonState = ButtonState.Enable,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
+            TextButton(
+                text = "Text Button",
+                enabled = true,
+                buttonState = ButtonState.LOADING,
+                contentPadding = PaddingValues(vertical = 15.dp, horizontal = 24.dp),
+                onClick = {}
+            )
         }
     }
 }
