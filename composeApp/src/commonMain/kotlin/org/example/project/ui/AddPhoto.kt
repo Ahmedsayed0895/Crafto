@@ -23,8 +23,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.camera
+import crafto.composeapp.generated.resources.tab_to_add_photo
 import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -61,7 +63,7 @@ fun AddPhoto(
                 tint = AppTheme.craftoColors.shade.secondary
             )
             Text(
-                text = "Tap to add photo",
+                text = stringResource(Res.string.tab_to_add_photo),
                 color = AppTheme.craftoColors.shade.secondary,
                 style = AppTheme.textStyle.body.smallMedium,
             )
