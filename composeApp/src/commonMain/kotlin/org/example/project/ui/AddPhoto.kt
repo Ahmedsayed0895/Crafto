@@ -1,10 +1,14 @@
-package org.example.project
+package org.example.project.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +19,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.camera
@@ -26,10 +31,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AddPhoto(
     modifier: Modifier = Modifier,
     dashedLineColor: Color,
+    background: Color,
+    cornerRadius: Dp = AppTheme.craftoRadius.lg,
+    onClick: () -> Unit,
 ) {
-    val cornerRadius = AppTheme.craftoRadius.lg
     Box(
         modifier = modifier
+
             .drawBehind {
                 drawRoundRect(
                     color = dashedLineColor,
@@ -39,7 +47,7 @@ fun AddPhoto(
                     ),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
-            }.padding(vertical = 24.5.dp),
+            }.clickable { onClick }.background(background, RoundedCornerShape(cornerRadius)).padding(vertical = 24.5.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -64,8 +72,13 @@ fun AddPhoto(
 
 @Preview()
 @Composable
-private fun AddPhotoPreview(){
-    AddPhoto(
-        dashedLineColor=AppTheme.craftoColors.shade.quaternary,
-    )
+private fun AddPhotoPreview() {
+    AppTheme {
+        AddPhoto(
+            modifier = Modifier.fillMaxWidth(),
+            dashedLineColor = AppTheme.craftoColors.shade.quaternary,
+            background = AppTheme.craftoColors.background.bottomSheet,
+            onClick = {}
+        )
+    }
 }

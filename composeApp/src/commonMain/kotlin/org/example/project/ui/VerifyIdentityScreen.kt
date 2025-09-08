@@ -1,10 +1,12 @@
-package org.example.project
+package org.example.project.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,12 +24,21 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.arrow_left
+import crafto.composeapp.generated.resources.i_ll_verify_later
+import crafto.composeapp.generated.resources.optional
+import crafto.composeapp.generated.resources.see_nearby_requests
+import crafto.composeapp.generated.resources.upload_back_of_national_id
+import crafto.composeapp.generated.resources.upload_front_of_national_id
+import crafto.composeapp.generated.resources.verify_identity_description
+import crafto.composeapp.generated.resources.verify_your_identity
 import org.example.project.designSystem.components.ButtonState
 import org.example.project.designSystem.components.PrimaryButton
 import org.example.project.designSystem.components.ProgressIndicator
 import org.example.project.designSystem.components.SecondaryButton
 import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun VerifyIdentityScreen() {
@@ -39,37 +50,47 @@ fun VerifyIdentityScreen() {
 @Composable
 fun VerifyIdentityContent() {
     Column(
-        modifier = Modifier.statusBarsPadding().padding(16.dp)
+        modifier = Modifier.fillMaxSize().background(AppTheme.craftoColors.background.screen)
+            .statusBarsPadding().padding(16.dp)
     ) {
-        ScreenHeader()
-        VerifyText(modifier = Modifier.padding(bottom = 32.dp))
+        ScreenHeader(modifier = Modifier.padding(bottom = 32.dp))
+        VerifyText(modifier = Modifier.padding(bottom = 32.dp, top = 58.dp))
         TextUpload(
-            text = "Upload Front of National ID",
+            text = stringResource(Res.string.upload_front_of_national_id),
             modifier = Modifier.padding(bottom = 12.dp)
         )
         AddPhoto(
             dashedLineColor = AppTheme.craftoColors.shade.quaternary,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            background = AppTheme.craftoColors.background.bottomSheet,
+            onClick = {},
         )
-        TextUpload(text = "Upload Back of National ID", modifier = Modifier.padding(bottom = 12.dp))
+        TextUpload(
+            text = stringResource(Res.string.upload_back_of_national_id),
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
         AddPhoto(
             dashedLineColor = AppTheme.craftoColors.shade.quaternary,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)
+            modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
+            background = AppTheme.craftoColors.background.bottomSheet,
+            onClick = {}
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
-            text = "I'll Verify Later",
+            text = stringResource(Res.string.i_ll_verify_later),
             enabled = true,
             buttonState = ButtonState.Enable,
-            onClick = {}
+            onClick = {},
+            contentPadding = PaddingValues(vertical = 15.dp)
         )
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = "See Nearby Requests",
+            text = stringResource(Res.string.see_nearby_requests),
             enabled = true,
             buttonState = ButtonState.Enable,
-            onClick = {}
+            onClick = {},
+            contentPadding = PaddingValues(vertical = 15.dp)
         )
 
 
@@ -101,7 +122,7 @@ fun ScreenHeader(modifier: Modifier = Modifier) {
         ProgressIndicator(
             currentPage = 4,
             totalPage = 4,
-            modifier = Modifier.padding(start = 16.dp),
+            modifier = Modifier.fillMaxWidth(0.8f).padding(start = 16.dp),
             progressColor = AppTheme.craftoColors.brand.primary,
             trackColor = AppTheme.craftoColors.background.card
         )
@@ -115,21 +136,21 @@ fun VerifyText(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            buildAnnotatedString {
-                append("Verify Your Identity ")
+            text = buildAnnotatedString {
+                append(stringResource(Res.string.verify_your_identity))
                 withStyle(
                     style = SpanStyle(
                         color = AppTheme.craftoColors.shade.secondary
                     )
                 ) {
-                    append("(Optional)")
+                    append(stringResource(Res.string.optional))
                 }
             },
             color = AppTheme.craftoColors.shade.primary,
             style = AppTheme.textStyle.display
         )
         Text(
-            text = "Uploading your ID helps build trust with customers. Verified craftsmen get more jobs and a special badge on their profile.",
+            text = stringResource(Res.string.verify_identity_description),
             color = AppTheme.craftoColors.shade.secondary,
             style = AppTheme.textStyle.body.largeRegular
         )
@@ -146,6 +167,14 @@ fun TextUpload(modifier: Modifier = Modifier, text: String) {
         modifier = modifier
 
     )
+}
+
+@Preview
+@Composable
+private fun VerifyIdentityPreview() {
+    AppTheme {
+        VerifyIdentityScreen()
+    }
 }
 
 
