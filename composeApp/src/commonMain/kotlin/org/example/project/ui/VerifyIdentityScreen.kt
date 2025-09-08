@@ -46,7 +46,6 @@ fun VerifyIdentityScreen() {
     VerifyIdentityContent()
 }
 
-
 @Composable
 fun VerifyIdentityContent() {
     Column(
@@ -96,7 +95,6 @@ fun VerifyIdentityContent() {
 
     }
 }
-
 
 @Composable
 fun ScreenHeader(modifier: Modifier = Modifier) {
