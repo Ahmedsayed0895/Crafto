@@ -2,4 +2,7 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+    <string name="error_bottom_sheet_header">Oops, Something Broke</string>
+    <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
+    <string name="ok_text">Ok</string>
 </resources>

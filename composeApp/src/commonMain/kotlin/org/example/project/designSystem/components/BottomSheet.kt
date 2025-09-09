@@ -2,12 +2,10 @@ package org.example.project.designSystem.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,6 +31,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun BottomSheet(
     modifier: Modifier = Modifier,
     title: String? = null,
+    showCloseIcon: Boolean = true,
     onDismissRequest: () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -62,33 +61,35 @@ fun BottomSheet(
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 title?.let {
                     Text(
+                        modifier = Modifier.align(Alignment.CenterStart),
                         text = title,
                         style = AppTheme.textStyle.title.small,
                         color = AppTheme.craftoColors.shade.primary
                     )
                 }
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(shape = CircleShape)
-                        .clickable { onDismissRequest() }, contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = painterResource(Res.drawable.x),
-                        contentDescription = null,
-                        tint = AppTheme.craftoColors.shade.secondary,
+                if (showCloseIcon){
+                    Box(
                         modifier = Modifier
-                            .size(20.dp)
-                    )
+                            .align(Alignment.CenterEnd)
+                            .size(40.dp)
+                            .clip(shape = CircleShape)
+                            .clickable { onDismissRequest() }, contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Res.drawable.x),
+                            contentDescription = null,
+                            tint = AppTheme.craftoColors.shade.secondary,
+                            modifier = Modifier
+                                .size(20.dp)
+                        )
+                    }
                 }
             }
             content()

@@ -3,21 +3,26 @@ package org.example.project.presentation.screen.register.component
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
-import crafto.composeapp.generated.resources.check_read
+import crafto.composeapp.generated.resources.error_bottom_sheet_content
+import crafto.composeapp.generated.resources.error_bottom_sheet_header
+import crafto.composeapp.generated.resources.ok_text
 import crafto.composeapp.generated.resources.register_error
 import org.example.project.designSystem.components.BottomSheet
 import org.example.project.designSystem.components.ButtonState
 import org.example.project.designSystem.components.PrimaryButton
 import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -31,26 +36,29 @@ fun ErrorBottomSheet(
     ){
         Column (modifier = Modifier.fillMaxWidth()) {
             Image(
-                modifier = Modifier.size(120.dp),
+                modifier = Modifier
+                    .size(120.dp)
+                    .align(Alignment.CenterHorizontally),
                 contentDescription = "register error",
                 painter = painterResource(Res.drawable.register_error),
             )
             Text(
                 modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
-                text = "Oops, Something Broke",
+                text = stringResource(Res.string.error_bottom_sheet_header),
                 textAlign = TextAlign.Center,
                 style = AppTheme.textStyle.title.small,
                 color = AppTheme.craftoColors.shade.primary
             )
             Text(
                 modifier = Modifier.padding(top = 8.dp),
-                text = "Our team is working on a fix. Please try again later.",
+                text = stringResource(Res.string.error_bottom_sheet_content),
+                textAlign = TextAlign.Center,
                 style = AppTheme.textStyle.body.medium,
                 color = AppTheme.craftoColors.shade.secondary
             )
             PrimaryButton (
-                modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
-                text = "Ok",
+                modifier = Modifier.heightIn(min = 48.dp).padding(top = 24.dp).fillMaxWidth(),
+                text = stringResource(Res.string.ok_text),
                 enabled = true,
                 buttonState = ButtonState.Enable,
                 onClick = onDismissRequest
@@ -62,7 +70,9 @@ fun ErrorBottomSheet(
 @Preview
 @Composable
 private fun ErrorBottomSheetPreview(){
-    ErrorBottomSheet(
-        onDismissRequest = {},
-    )
+    AppTheme{
+        ErrorBottomSheet(
+            onDismissRequest = {},
+        )
+    }
 }
