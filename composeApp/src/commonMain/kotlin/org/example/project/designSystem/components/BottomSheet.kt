@@ -30,9 +30,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomSheet(
     modifier: Modifier = Modifier,
-    title: String? = null,
     showCloseIcon: Boolean = true,
     onDismissRequest: () -> Unit = {},
+    headerContent: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
     ModalBottomSheet(
@@ -66,13 +66,8 @@ fun BottomSheet(
                     .fillMaxWidth()
                     .padding(bottom = 20.dp),
             ) {
-                title?.let {
-                    Text(
-                        modifier = Modifier.align(Alignment.CenterStart),
-                        text = title,
-                        style = AppTheme.textStyle.title.small,
-                        color = AppTheme.craftoColors.shade.primary
-                    )
+                Box(modifier = Modifier.align(Alignment.CenterStart)){
+                    headerContent()
                 }
                 if (showCloseIcon){
                     Box(
@@ -102,7 +97,13 @@ fun BottomSheet(
 private fun BottomSheetPreview() {
     AppTheme {
         BottomSheet(
-            title = "title",
+            headerContent = {
+                Text(
+                    text = "title",
+                    style = AppTheme.textStyle.title.small,
+                    color = AppTheme.craftoColors.shade.primary
+                )
+            },
             onDismissRequest = {},
             content = {}
         )
