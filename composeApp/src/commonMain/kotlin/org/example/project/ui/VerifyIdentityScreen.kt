@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -74,7 +75,7 @@ fun VerifyIdentityContent() {
             background = AppTheme.craftoColors.background.bottomSheet,
             onClick = {}
         )
-
+        Spacer(modifier = Modifier.weight(1f))
         SecondaryButton(
             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
             text = stringResource(Res.string.i_ll_verify_later),
@@ -84,7 +85,7 @@ fun VerifyIdentityContent() {
             contentPadding = PaddingValues(vertical = 15.dp)
         )
         PrimaryButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
             text = stringResource(Res.string.see_nearby_requests),
             enabled = true,
             buttonState = ButtonState.Enable,
