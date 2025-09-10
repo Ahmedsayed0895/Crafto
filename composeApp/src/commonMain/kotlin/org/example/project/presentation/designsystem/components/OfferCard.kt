@@ -32,7 +32,7 @@ import crafto.composeapp.generated.resources.craftman_avatar
 import crafto.composeapp.generated.resources.star_1
 import crafto.composeapp.generated.resources.verified_check_1
 import crafto.composeapp.generated.resources.wallet
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

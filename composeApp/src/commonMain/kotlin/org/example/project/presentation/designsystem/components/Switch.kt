@@ -5,8 +5,8 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import org.example.project.designsystem.colors.ExtraColors
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.colors.ExtraColors
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**

@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -66,7 +66,7 @@ fun Chip(
 @Preview
 @Composable
 private fun ChipPreview() {
-    var selectedChip by remember { mutableStateOf(true) }
+    val selectedChip by remember { mutableStateOf(true) }
     AppTheme(isDarkTheme =true) {
         Chip(
             text = "Label",

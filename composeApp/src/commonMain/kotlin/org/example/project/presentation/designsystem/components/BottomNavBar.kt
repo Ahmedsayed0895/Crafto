@@ -31,7 +31,7 @@ import crafto.composeapp.generated.resources.home_angle
 import crafto.composeapp.generated.resources.home_angle_1
 import crafto.composeapp.generated.resources.user_circle
 import crafto.composeapp.generated.resources.user_circle_1
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

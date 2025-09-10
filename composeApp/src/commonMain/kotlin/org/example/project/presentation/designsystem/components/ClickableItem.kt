@@ -21,7 +21,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.alt_arrow_right
 import crafto.composeapp.generated.resources.logout
 import crafto.composeapp.generated.resources.sledgehammer
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

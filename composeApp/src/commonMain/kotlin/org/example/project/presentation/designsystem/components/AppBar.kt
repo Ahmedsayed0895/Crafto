@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.dropUnlessResumed
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.arrow_left
 import crafto.composeapp.generated.resources.notifications
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

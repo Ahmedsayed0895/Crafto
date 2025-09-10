@@ -29,7 +29,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.ic_error
 import crafto.composeapp.generated.resources.ic_eye__closed
 import crafto.composeapp.generated.resources.ic_eye_opened
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

@@ -5,17 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
-import org.example.project.designsystem.colors.CraftoColors
-import org.example.project.designsystem.colors.CraftoDarkColors
-import org.example.project.presentation.designsystem.colors.CraftoLightColors
-import org.example.project.designsystem.radius.CraftoRadius
+import org.example.project.presentation.designsystem.colors.CraftoColors
+import org.example.project.presentation.designsystem.colors.CraftoDarkColors
+import org.example.project.presentation.designsystem.radius.CraftoRadius
 
 object AppTheme {
     val textStyle : CraftoTextStyle
         @Composable
         @ReadOnlyComposable
         get() = LocalCraftoTextStyle.current
-    val craftoColors :CraftoColors
+    val craftoColors : CraftoColors
         @Composable
         @ReadOnlyComposable
         get() = LocalCraftoColors.current

@@ -39,7 +39,7 @@ import crafto.composeapp.generated.resources.star
 import crafto.composeapp.generated.resources.star_1
 import crafto.composeapp.generated.resources.user_rounded
 import crafto.composeapp.generated.resources.verified_check_1
-import org.example.project.designsystem.textstyle.AppTheme
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
