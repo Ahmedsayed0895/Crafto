@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.PrimaryButton
-import org.example.project.designSystem.components.SecondaryButton
-import org.example.project.designSystem.components.TextButton
-import org.example.project.designSystem.textStyle.AppTheme
+import org.example.project.designsystem.components.ButtonState
+import org.example.project.designsystem.components.PrimaryButton
+import org.example.project.designsystem.components.SecondaryButton
+import org.example.project.designsystem.components.TextButton
+import org.example.project.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
