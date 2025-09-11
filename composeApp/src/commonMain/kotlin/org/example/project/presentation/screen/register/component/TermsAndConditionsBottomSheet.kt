@@ -9,13 +9,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.ok_text
 import crafto.composeapp.generated.resources.privacy_policy_content
-import crafto.composeapp.generated.resources.privacy_policy_header
+import crafto.composeapp.generated.resources.terms_conditions_header
 import org.example.project.designSystem.components.BottomSheet
 import org.example.project.designSystem.components.ButtonState
 import org.example.project.designSystem.components.PrimaryButton
@@ -24,7 +23,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun PrivacyPolicyBottomSheet(
+fun TermsAndConditionsBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ){
@@ -35,7 +34,7 @@ fun PrivacyPolicyBottomSheet(
         headerContent = {
             Text(
                 modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
-                text = stringResource(Res.string.privacy_policy_header),
+                text = stringResource(Res.string.terms_conditions_header),
                 style = AppTheme.textStyle.title.small,
                 color = AppTheme.craftoColors.shade.primary
             )
@@ -43,14 +42,12 @@ fun PrivacyPolicyBottomSheet(
     ){
         Column (
             modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = buildAnnotatedString {
-                    append(stringResource(Res.string.privacy_policy_content))
-                },
+                text = stringResource(Res.string.privacy_policy_content),
                 textAlign = TextAlign.Start,
                 style = AppTheme.textStyle.body.medium,
                 color = AppTheme.craftoColors.shade.primary
@@ -71,9 +68,9 @@ fun PrivacyPolicyBottomSheet(
 
 @Preview
 @Composable
-private fun PrivacyPolicyBottomSheetPreview(){
+private fun TermsAndConditionsBottomSheetPreview(){
     AppTheme{
-        PrivacyPolicyBottomSheet(
+        TermsAndConditionsBottomSheet(
             onDismissRequest = {},
         )
     }
