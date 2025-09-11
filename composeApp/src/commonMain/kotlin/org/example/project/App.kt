@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.project.designSystem.textStyle.AppTheme
-import org.example.project.ui.VerifyIdentityScreen
+import org.example.project.ui.IdentityVerificationScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -21,7 +21,7 @@ fun App() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
         ) {
-            VerifyIdentityScreen()
+            IdentityVerificationScreen()
         }
     }
 }

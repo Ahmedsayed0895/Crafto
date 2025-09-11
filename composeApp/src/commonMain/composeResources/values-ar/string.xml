@@ -3,11 +3,11 @@
     <string name="chat">محادثة</string>
     <string name="accept_offer">قبول العرض</string>
     <string name="verify_your_identity">تحقق من هويتك</string>
-    <string name="optional">(اختياري)</string>
+    <string name="optional"> (اختياري)</string>
     <string name="verify_identity_description">تحميل بطاقة هويتك يساعد على بناء الثقة مع العملاء. الحرفيون الذين يتم التحقق منهم يحصلون على المزيد من الأعمال وشارة مميزة على ملفاتهم الشخصية.</string>
     <string name="upload_front_of_national_id">ارفع صورة الوجه الأمامي للبطاقة القومية</string>
     <string name="upload_back_of_national_id">ارفع صورة الوجه الخلفي للبطاقة القومية</string>
-    <string name="i_ll_verify_later">سأتحقق لاحقًا</string>
+    <string name="i_will_verify_later">سأتحقق لاحقًا</string>
     <string name="see_nearby_requests">عرض الطلبات القريبة</string>
     <string name="tab_to_add_photo">اضغط لإضافة صورة</string>
 

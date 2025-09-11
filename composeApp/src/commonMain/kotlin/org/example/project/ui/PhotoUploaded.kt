@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AddPhoto(
+fun PhotoUploaded(
     modifier: Modifier = Modifier,
     dashedLineColor: Color,
     background: Color,
@@ -39,7 +39,6 @@ fun AddPhoto(
 ) {
     Box(
         modifier = modifier
-
             .drawBehind {
                 drawRoundRect(
                     color = dashedLineColor,
@@ -49,7 +48,7 @@ fun AddPhoto(
                     ),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
-            }.clickable { onClick }.background(background, RoundedCornerShape(cornerRadius)).padding(vertical = 24.5.dp),
+            }.clickable { onClick() }.background(background, RoundedCornerShape(cornerRadius)).padding(vertical = 24.5.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -58,7 +57,7 @@ fun AddPhoto(
         ) {
             Icon(
                 painter = painterResource(Res.drawable.camera),
-                contentDescription = null,
+                contentDescription ="camera",
                 modifier = Modifier.size(24.dp),
                 tint = AppTheme.craftoColors.shade.secondary
             )
@@ -74,9 +73,9 @@ fun AddPhoto(
 
 @Preview()
 @Composable
-private fun AddPhotoPreview() {
+private fun PhotoUploadedPreview() {
     AppTheme {
-        AddPhoto(
+        PhotoUploaded(
             modifier = Modifier.fillMaxWidth(),
             dashedLineColor = AppTheme.craftoColors.shade.quaternary,
             background = AppTheme.craftoColors.background.bottomSheet,
