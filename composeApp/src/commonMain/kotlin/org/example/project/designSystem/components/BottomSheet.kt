@@ -30,7 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomSheet(
     modifier: Modifier = Modifier,
-    showCloseIcon: Boolean = true,
+    showCloseIcon: Boolean = false,
     onDismissRequest: () -> Unit = {},
     headerContent: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
@@ -66,7 +66,7 @@ fun BottomSheet(
                     .fillMaxWidth()
                     .padding(bottom = 20.dp),
             ) {
-                Box(modifier = Modifier.align(Alignment.CenterStart)){
+                Box(modifier = Modifier.align(Alignment.TopStart)){
                     headerContent()
                 }
                 if (showCloseIcon){
@@ -104,6 +104,7 @@ private fun BottomSheetPreview() {
                     color = AppTheme.craftoColors.shade.primary
                 )
             },
+            showCloseIcon = true,
             onDismissRequest = {},
             content = {}
         )

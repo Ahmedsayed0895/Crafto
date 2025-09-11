@@ -5,4 +5,41 @@
     <string name="error_bottom_sheet_header">Oops, Something Broke</string>
     <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
     <string name="ok_text">Ok</string>
+    <string name="privacy_policy_content">
+        We value your privacy. This Privacy Policy explains how San3a collects, uses, and protects your information.
+
+1. Information We Collect
+Personal Data: Name, phone number, location, profile photo, ID (for craftsmen).
+Usage Data: How you interact with the app, device type, IP address.
+Photos &amp; Files: Only those you upload voluntarily for service requests or profile verification.
+
+2. How We Use Your Information
+To connect customers with suitable craftsmen.
+To improve app performance and user experience.
+To verify identities and prevent fraud.
+To send important updates or notifications.
+
+3. Data Sharing
+We do not sell or share your personal data with third parties except:
+When required by law.
+To enable in-app messaging and job assignment between users.
+For payment processing (if integrated).
+
+4. Location Data
+We collect your location to:
+Show you nearby services or job requests.
+Help you navigate to job locations.  You can disable location sharing at any time in your device settings.
+
+5. Security
+We use encryption and secure storage methods to protect your data. However, no system is 100% secure.
+
+6. Your Rights
+You can:
+Access and edit your profile at any time.
+Request deletion of your data by contacting us at support@san3a.com.
+
+7. Policy Updates
+We may revise this policy from time to time. You will be notified of significant changes.
+    </string>
+    <string name="privacy_policy_header">🔒 Privacy Policy</string>
 </resources>
