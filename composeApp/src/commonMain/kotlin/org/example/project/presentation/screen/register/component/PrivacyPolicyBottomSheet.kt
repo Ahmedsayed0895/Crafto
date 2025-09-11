@@ -9,8 +9,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.ok_text
@@ -27,7 +25,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PrivacyPolicyBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-){
+) {
     BottomSheet(
         modifier = modifier,
         onDismissRequest = onDismissRequest,
@@ -40,22 +38,14 @@ fun PrivacyPolicyBottomSheet(
                 color = AppTheme.craftoColors.shade.primary
             )
         }
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = buildAnnotatedString {
-                    append(stringResource(Res.string.privacy_policy_content))
-                },
-                textAlign = TextAlign.Start,
-                style = AppTheme.textStyle.body.medium,
-                color = AppTheme.craftoColors.shade.primary
-            )
-            PrimaryButton (
+            FormattedTextContent(stringResource(Res.string.privacy_policy_content))
+            PrimaryButton(
                 modifier = Modifier
                     .heightIn(min = 48.dp)
                     .padding(top = 16.dp, bottom = 16.dp)
@@ -71,8 +61,8 @@ fun PrivacyPolicyBottomSheet(
 
 @Preview
 @Composable
-private fun PrivacyPolicyBottomSheetPreview(){
-    AppTheme{
+private fun PrivacyPolicyBottomSheetPreview() {
+    AppTheme {
         PrivacyPolicyBottomSheet(
             onDismissRequest = {},
         )

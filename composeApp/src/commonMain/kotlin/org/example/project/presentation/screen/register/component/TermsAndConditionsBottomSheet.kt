@@ -9,11 +9,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.ok_text
-import crafto.composeapp.generated.resources.privacy_policy_content
+import crafto.composeapp.generated.resources.terms_conditions_content
 import crafto.composeapp.generated.resources.terms_conditions_header
 import org.example.project.designSystem.components.BottomSheet
 import org.example.project.designSystem.components.ButtonState
@@ -26,7 +25,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun TermsAndConditionsBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-){
+) {
     BottomSheet(
         modifier = modifier,
         onDismissRequest = onDismissRequest,
@@ -39,20 +38,14 @@ fun TermsAndConditionsBottomSheet(
                 color = AppTheme.craftoColors.shade.primary
             )
         }
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
         ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(Res.string.privacy_policy_content),
-                textAlign = TextAlign.Start,
-                style = AppTheme.textStyle.body.medium,
-                color = AppTheme.craftoColors.shade.primary
-            )
-            PrimaryButton (
+            FormattedTextContent(stringResource(Res.string.terms_conditions_content))
+            PrimaryButton(
                 modifier = Modifier
                     .heightIn(min = 48.dp)
                     .padding(top = 16.dp, bottom = 16.dp)
@@ -68,8 +61,8 @@ fun TermsAndConditionsBottomSheet(
 
 @Preview
 @Composable
-private fun TermsAndConditionsBottomSheetPreview(){
-    AppTheme{
+private fun TermsAndConditionsBottomSheetPreview() {
+    AppTheme {
         TermsAndConditionsBottomSheet(
             onDismissRequest = {},
         )
