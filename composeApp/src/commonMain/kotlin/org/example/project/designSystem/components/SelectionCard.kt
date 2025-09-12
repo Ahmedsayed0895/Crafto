@@ -3,6 +3,8 @@ package org.example.project.designSystem.components
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -14,9 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
-import crafto.composeapp.generated.resources.selection_card_img
+import crafto.composeapp.generated.resources.customer
 import org.example.project.designSystem.textStyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -42,32 +45,37 @@ fun SelectionCard(
 
     Card(
         onClick = onCardClick,
-        modifier.border(1.dp, strokeColor, RoundedCornerShape(AppTheme.craftoRadius.xl)),
+        modifier = modifier.border(1.dp, strokeColor, RoundedCornerShape(AppTheme.craftoRadius.xl)),
         shape = RoundedCornerShape(AppTheme.craftoRadius.xl),
         colors = CardDefaults.cardColors(
             background
         ),
     ) {
-        Image(
-            painter = img,
-            contentDescription = null,
-            modifier = Modifier.padding(12.dp)
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = img,
+                contentDescription = null,
+                modifier = Modifier.padding(12.dp)
+            )
 
-        Text(
-            text = title,
-            style = AppTheme.textStyle.body.mediumSemiBold,
-            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
-            color = titleColor
-
-        )
-        Text(
-            text = caption,
-            style = AppTheme.textStyle.body.smallMedium,
-            color = AppTheme.craftoColors.shade.secondary,
-            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally)
-        )
-
+            Text(
+                text = title,
+                style = AppTheme.textStyle.body.mediumSemiBold,
+                modifier = Modifier.padding(8.dp),
+                color = titleColor,
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = caption,
+                style = AppTheme.textStyle.body.smallMedium,
+                color = AppTheme.craftoColors.shade.secondary,
+                modifier = Modifier.padding(8.dp),
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
@@ -75,7 +83,7 @@ fun SelectionCard(
 @Composable
 private fun SelectionCardPreview() {
     SelectionCard(
-        img = painterResource(Res.drawable.selection_card_img),
+        img = painterResource(Res.drawable.customer),
         title = "Title",
         caption = "Caption",
         isSelected = true,

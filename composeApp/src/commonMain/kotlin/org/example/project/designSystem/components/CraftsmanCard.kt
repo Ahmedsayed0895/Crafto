@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -35,7 +34,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.check_mark
 import crafto.composeapp.generated.resources.clipboard_text
 import crafto.composeapp.generated.resources.dialog
-import crafto.composeapp.generated.resources.selection_card_img
+import crafto.composeapp.generated.resources.customer
 import crafto.composeapp.generated.resources.star
 import crafto.composeapp.generated.resources.star_1
 import crafto.composeapp.generated.resources.user_rounded
@@ -95,7 +94,7 @@ fun CraftsmanCard(
             CircleAvatar(
                 modifier = Modifier.clip(RoundedCornerShape(AppTheme.craftoRadius.full))
                     .size(40.dp),
-                image = painterResource(Res.drawable.selection_card_img)
+                image = painterResource(Res.drawable.customer)
             )
         }
 
@@ -218,7 +217,7 @@ private fun CraftsmanCardPreview() {
                 craftsmanName = "Hend",
                 rating = 4.5,
                 showOffers = false,
-                craftsmanImage = painterResource(Res.drawable.selection_card_img),
+                craftsmanImage = painterResource(Res.drawable.customer),
                 buttonText = "Rate",
                 buttonIcon = painterResource(Res.drawable.star),
                 buttonColors = ButtonDefaults.buttonColors(
@@ -243,7 +242,7 @@ private fun CraftsmanCardPreview() {
                 craftsmanName = "Hend",
                 rating = 4.5,
                 showOffers = false,
-                craftsmanImage = painterResource(Res.drawable.selection_card_img),
+                craftsmanImage = painterResource(Res.drawable.customer),
                 buttonText = "Chat",
                 buttonIcon = painterResource(Res.drawable.dialog),
                 buttonColors = ButtonDefaults.buttonColors(
