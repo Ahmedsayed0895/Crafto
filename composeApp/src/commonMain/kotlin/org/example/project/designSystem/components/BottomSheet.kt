@@ -79,7 +79,7 @@ fun BottomSheet(
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.x),
-                            contentDescription = null,
+                            contentDescription = "cancel button",
                             tint = AppTheme.craftoColors.shade.secondary,
                             modifier = Modifier
                                 .size(20.dp)

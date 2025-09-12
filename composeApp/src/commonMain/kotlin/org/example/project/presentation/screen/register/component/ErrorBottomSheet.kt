@@ -16,7 +16,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.error_bottom_sheet_content
 import crafto.composeapp.generated.resources.error_bottom_sheet_header
 import crafto.composeapp.generated.resources.ok_text
-import crafto.composeapp.generated.resources.register_error
+import crafto.composeapp.generated.resources.authentication_error
 import org.example.project.designSystem.components.BottomSheet
 import org.example.project.designSystem.components.ButtonState
 import org.example.project.designSystem.components.PrimaryButton
@@ -40,7 +40,7 @@ fun ErrorBottomSheet(
                     .size(120.dp)
                     .align(Alignment.CenterHorizontally),
                 contentDescription = "register error",
-                painter = painterResource(Res.drawable.register_error),
+                painter = painterResource(Res.drawable.authentication_error),
             )
             Text(
                 modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
