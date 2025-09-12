@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -38,6 +40,7 @@ private const val s = "Forgot Password?"
 @Composable
 fun TextField(
     labelText: String? = null,
+    showDividerLine : Boolean = false,
     hint: String? = null,
     text: String,
     onTextChange: (String) -> Unit,
@@ -62,8 +65,10 @@ fun TextField(
     transformation: VisualTransformation = VisualTransformation.None,
 ) {
     var internalRevealPassword by remember { mutableStateOf(revealPassword) }
-    val currentRevealPassword = if (onRevealPasswordToggle != null) revealPassword else internalRevealPassword
-    val togglePassword: () -> Unit = onRevealPasswordToggle ?: { internalRevealPassword = !internalRevealPassword }
+    val currentRevealPassword =
+        if (onRevealPasswordToggle != null) revealPassword else internalRevealPassword
+    val togglePassword: () -> Unit =
+        onRevealPasswordToggle ?: { internalRevealPassword = !internalRevealPassword }
 
     val semanticDescription = buildString {
         if (labelText != null) append("$labelText. ")
@@ -111,7 +116,12 @@ fun TextField(
             minLines = minLines,
             isError = errorState,
             enabled = enabledState,
-            leadingIcon = startIcon,
+            leadingIcon = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    startIcon?.invoke()
+                    if(showDividerLine) VerticalDivider()
+                }
+            },
             trailingIcon = {
                 Box {
                     if (showAsPassword) {
@@ -187,6 +197,18 @@ fun TextField(
         }
     }
 }
+
+@Composable
+private fun VerticalDivider() {
+    Box(
+        Modifier
+            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+            .width(1.dp)
+            .height(24.dp)
+            .background(AppTheme.craftoColors.stroke.primary)
+    )
+}
+
 
 @Preview
 @Composable
