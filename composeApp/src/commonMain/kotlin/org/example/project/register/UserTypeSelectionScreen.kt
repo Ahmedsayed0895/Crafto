@@ -110,7 +110,7 @@ fun UserTypeSelectionScreen(
 
 @Preview
 @Composable
-private fun RoleSelectionScreenPreview() {
+private fun UserTypeSelectionScreenPreview() {
     AppTheme(isDarkTheme = false) {
 
         UserTypeSelectionScreen(onNextClick = {})
