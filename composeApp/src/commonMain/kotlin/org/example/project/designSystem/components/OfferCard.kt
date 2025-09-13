@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -169,7 +170,7 @@ fun OfferCard(
                         time = visitTime,
                         offerDescription = offerDescription
                     )
-                    OfferButtons(onChatClick,onAcceptClick)
+                    OfferButtons(onChatClick, onAcceptClick)
                 }
             }
         }
@@ -187,14 +188,17 @@ private fun OfferButtons(
         verticalAlignment = Alignment.CenterVertically
     )
     {
-        SecondaryButton(
+        DefaultButton(
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 12.dp),
             text = stringResource(Res.string.chat),
             enabled = true,
             buttonState = ButtonState.Enable,
-            containerColor = AppTheme.craftoColors.shade.quaternary,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AppTheme.craftoColors.shade.quinary,
+                contentColor = AppTheme.craftoColors.button.onSecondary,
+            ),
             onClick = { onChatClick() },
         )
         PrimaryButton(

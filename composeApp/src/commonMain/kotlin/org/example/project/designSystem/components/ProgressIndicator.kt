@@ -18,7 +18,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun ProgressIndicator(
     currentPage: Int,
-    totalPage:Int,
+    totalPage: Int,
     modifier: Modifier = Modifier,
     progressColor: Color = AppTheme.craftoColors.brand.primary,
     trackColor: Color = AppTheme.craftoColors.background.card,
@@ -26,7 +26,6 @@ fun ProgressIndicator(
 
     Box(
         modifier = modifier
-            .fillMaxWidth()
             .height(8.dp)
             .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
             .background(
@@ -36,7 +35,7 @@ fun ProgressIndicator(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth((currentPage.toFloat() / totalPage.toFloat()).coerceIn(0f,1f))
+                .fillMaxWidth((currentPage.toFloat() / totalPage.toFloat()).coerceIn(0f, 1f))
                 .height(8.dp)
                 .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
                 .background(
