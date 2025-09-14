@@ -2,4 +2,18 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+
+    <!-- من RegisterScreen -->
+    <string name="welcome_title">Welcome to San3a 👋</string>
+    <string name="enter_phone">Enter your phone number to\n continue</string>
+    <string name="phone_hint">+20  000 - 000 - 0000</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_agreement">By continuing, you agree on our </string>
+    <string name="and_text">and </string>
+    <string name="continue_button">Continue</string>
+
+    <!-- ContentDescription -->
+    <string name="logo_icon">logo icon</string>
+    <string name="egypt_flag">egypt flag</string>
 </resources>
