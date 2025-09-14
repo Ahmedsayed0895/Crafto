@@ -22,7 +22,9 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun PrivacyPolicyBottomSheet(
+fun PoliciesAndConditionsBottomSheet(
+    headerText: String,
+    contentText: String,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -33,7 +35,7 @@ fun PrivacyPolicyBottomSheet(
         headerContent = {
             Text(
                 modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
-                text = stringResource(Res.string.privacy_policy_header),
+                text = headerText,
                 style = AppTheme.textStyle.title.small,
                 color = AppTheme.craftoColors.shade.primary
             )
@@ -44,7 +46,7 @@ fun PrivacyPolicyBottomSheet(
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
         ) {
-            FormattedTextContent(stringResource(Res.string.privacy_policy_content))
+            FormattedTextContent(contentText)
             PrimaryButton(
                 modifier = Modifier
                     .heightIn(min = 48.dp)
@@ -61,9 +63,11 @@ fun PrivacyPolicyBottomSheet(
 
 @Preview
 @Composable
-private fun PrivacyPolicyBottomSheetPreview() {
+private fun PoliciesAndConditionsBottomSheetPreview() {
     AppTheme {
-        PrivacyPolicyBottomSheet(
+        PoliciesAndConditionsBottomSheet(
+            headerText = stringResource(Res.string.privacy_policy_header),
+            contentText = stringResource(Res.string.privacy_policy_content),
             onDismissRequest = {},
         )
     }
