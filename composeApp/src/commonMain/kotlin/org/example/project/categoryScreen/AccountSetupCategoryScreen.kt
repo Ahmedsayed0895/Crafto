@@ -86,21 +86,20 @@ data class Category(
     val isSelected: Boolean,
     val color: Color,
 )
-
 private val categoryList = listOf(
-    Category("Plumbing", false, Color(0xFF00ff00)),
-    Category("Electrical", false, Color(0xFFff0000)),
-    Category("Cleaning", false, Color(0xFF0000ff)),
-    Category("AC Repair", false, Color(0xFF00ff00)),
-    Category("Furniture", false, Color(0xFF00ff00)),
-    Category("Painting", false, Color(0xFF00ff00)),
-    Category("Carpentry", false, Color(0xFF00ff00)),
-    Category("Roofing", false, Color(0xFF00ff00)),
-    Category("Landscaping", false, Color(0xFF00ff00)),
-    Category("Pest Control", false, Color(0xFF00ff00)),
-    Category("Appliance Repair", false, Color(0xFF00ff00)),
-    Category("Pool Maintenance", false, Color(0xFF00ff00)),
-    Category("HVAC Maintenance", false, Color(0xFF00ff00)),
+    Category("Plumbing", false, Color(0xFF9B59B6)),         // Amethyst Purple
+    Category("Electrical", false, Color(0xFF1ABC9C)),       // Turquoise
+    Category("Cleaning", false, Color(0xFF3498DB)),         // Peter River Blue
+    Category("AC Repair", false, Color(0xFFF39C12)),        // Orange
+    Category("Furniture", false, Color(0xFFD35400)),        // Pumpkin Orange
+    Category("Painting", false, Color(0xFF34495E)),         // Wet Asphalt
+    Category("Carpentry", false, Color(0xFFE67E22)),        // Carrot Orange
+    Category("Roofing", false, Color(0xFF7F8C8D)),          // Slate Gray
+    Category("Landscaping", false, Color(0xFF2ECC71)),      // Emerald Green
+    Category("Pest Control", false, Color(0xFFC0392B)),     // Pomegranate Red
+    Category("Appliance Repair", false, Color(0xFF00BCD4)), // Cyan
+    Category("Pool Maintenance", false, Color(0xFF8E44AD)), // Wisteria Purple
+    Category("HVAC Maintenance", false, Color(0xFF27AE60))  // Nephritis Green
 )
 
 
