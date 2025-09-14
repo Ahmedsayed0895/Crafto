@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.example.project.designSystem.textStyle.AppTheme
@@ -26,10 +27,12 @@ fun Chip(
     modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean,
+    textColor: Color,
     onChipSelected: (String) -> Unit = {},
 ) {
     Row(
         modifier = modifier
+            .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
             .background(
                 if (isSelected)
                     AppTheme.craftoColors.brand.tertiary
@@ -38,14 +41,14 @@ fun Chip(
                 shape = RoundedCornerShape(AppTheme.craftoRadius.full)
             )
             .then(
-                if (isSelected) Modifier.border(
+                if (isSelected) modifier.border(
                     1.dp, AppTheme.craftoColors.brand.secondary, RoundedCornerShape(
                         AppTheme.craftoRadius.full
                     )
                 )
-                else Modifier
+                else modifier
             )
-            .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
+
             .clickable(
                 enabled = true,
                 onClick = { onChipSelected(text) }
@@ -55,9 +58,10 @@ fun Chip(
     ) {
         Text(
             text = text,
-            color = if (isSelected) AppTheme.craftoColors.brand.primary else AppTheme.craftoColors.shade.secondary,
+            color = textColor,
             style = AppTheme.textStyle.label.medium,
             textAlign = TextAlign.Center,
+            maxLines = 1
         )
 
     }
@@ -71,6 +75,8 @@ private fun ChipPreview() {
         Chip(
             text = "Label",
             isSelected = selectedChip,
+            textColor = if (selectedChip) AppTheme.craftoColors.brand.primary else AppTheme.craftoColors.shade.secondary,
+
         )
     }
 }
