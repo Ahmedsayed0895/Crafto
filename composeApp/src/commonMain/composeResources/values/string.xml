@@ -2,4 +2,9 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+
+    <!-- Account Setup Category Screen -->
+    <string name="account_setup_category_title">What services do you offer?</string>
+    <string name="account_setup_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
+
 </resources>
