@@ -1,4 +1,4 @@
-package org.example.project.register
+package org.example.project.presentation.screens.register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
