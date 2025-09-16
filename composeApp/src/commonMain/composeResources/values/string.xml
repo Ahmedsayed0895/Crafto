@@ -3,7 +3,7 @@
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
 
-    <!-- من RegisterScreen -->
+    <!-- RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint">+20  000 - 000 - 0000</string>
@@ -16,4 +16,15 @@
     <!-- ContentDescription -->
     <string name="logo_icon">logo icon</string>
     <string name="egypt_flag">egypt flag</string>
+
+    <!-- OTP Screen -->
+    <string name="enter_verification-code">Enter Verification Code</string>
+    <string name="sent_message_to_phone">We sent 4-digit code to your phone number </string>
+    <string name="verify">Verify</string>
+    <string name="do_not_receive_code">Didn't receive code?</string>
+    <string name="resent_after">Resend Code after </string>
+    <string name="resent_code">Resend Code</string>
+
+
+
 </resources>
