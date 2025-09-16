@@ -1,4 +1,4 @@
-package org.example.project.categoryScreen
+package org.example.project.presentation.categoryScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,11 +32,11 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.account_setup_category_description
 import crafto.composeapp.generated.resources.account_setup_category_title
 import crafto.composeapp.generated.resources.arrow_left
-import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.Chip
-import org.example.project.designSystem.components.PrimaryButton
-import org.example.project.designSystem.components.ProgressIndicator
-import org.example.project.designSystem.textStyle.AppTheme
+import org.example.project.presentation.designsystem.components.ButtonState
+import org.example.project.presentation.designsystem.components.Chip
+import org.example.project.presentation.designsystem.components.PrimaryButton
+import org.example.project.presentation.designsystem.components.ProgressIndicator
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
