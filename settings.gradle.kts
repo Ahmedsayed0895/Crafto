@@ -8,6 +8,8 @@ pluginManagement {
                 includeGroupAndSubgroups("androidx")
                 includeGroupAndSubgroups("com.android")
                 includeGroupAndSubgroups("com.google")
+                includeGroupAndSubgroups("com.google.firebase")
+                includeGroupAndSubgroups("com.google.android.gms")
             }
         }
         mavenCentral()
@@ -22,6 +24,8 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("androidx")
                 includeGroupAndSubgroups("com.android")
                 includeGroupAndSubgroups("com.google")
+                includeGroupAndSubgroups("com.google.firebase")
+                includeGroupAndSubgroups("com.google.android.gms")
             }
         }
         mavenCentral()
