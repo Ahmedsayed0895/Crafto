@@ -1,4 +1,4 @@
-package org.example.project.presentation.categoryScreen
+package org.example.project.presentation.ui.screens.categoryScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,14 +19,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.account_setup_category_description
@@ -37,23 +34,35 @@ import org.example.project.presentation.designsystem.components.Chip
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.components.ProgressIndicator
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
+import org.example.project.presentation.viewmodel.accountSetup.AccountSetupViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AccountSetupCategoryScreen() {
+fun AccountSetupCategoryScreen(
+    viewModel: AccountSetupViewModel = koinViewModel(),
+) {
+    val state by viewModel.state.collectAsState()
     AccountSetupCategoryContent(
+        state = state,
+        isCustomer = true,
         onBackButtonClick = {},
         onNextButtonClick = {},
+        onChipSelected = viewModel::onCategorySelected
     )
 }
 
 @Composable
 fun AccountSetupCategoryContent(
     modifier: Modifier = Modifier,
+    state: AccountSetupState,
+    isCustomer: Boolean,
     onBackButtonClick: () -> Unit,
     onNextButtonClick: () -> Unit,
+    onChipSelected: (id: Int) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -69,7 +78,11 @@ fun AccountSetupCategoryContent(
             title = stringResource(Res.string.account_setup_category_title),
             description = stringResource(Res.string.account_setup_category_description)
         )
-        ActionBox()
+        ActionBox(
+            state = state,
+            onChipSelected = onChipSelected,
+            isCustomer = isCustomer,
+        )
         PrimaryButton(
             text = "Next",
             enabled = true,
@@ -80,29 +93,6 @@ fun AccountSetupCategoryContent(
 
     }
 }
-
-data class Category(
-    val title: String,
-    val isSelected: Boolean,
-    val color: Color,
-)
-private val categoryList = listOf(
-    Category("Plumbing", false, Color(0xFF9B59B6)),         // Amethyst Purple
-    Category("Electrical", false, Color(0xFF1ABC9C)),       // Turquoise
-    Category("Cleaning", false, Color(0xFF3498DB)),         // Peter River Blue
-    Category("AC Repair", false, Color(0xFFF39C12)),        // Orange
-    Category("Furniture", false, Color(0xFFD35400)),        // Pumpkin Orange
-    Category("Painting", false, Color(0xFF34495E)),         // Wet Asphalt
-    Category("Carpentry", false, Color(0xFFE67E22)),        // Carrot Orange
-    Category("Roofing", false, Color(0xFF7F8C8D)),          // Slate Gray
-    Category("Landscaping", false, Color(0xFF2ECC71)),      // Emerald Green
-    Category("Pest Control", false, Color(0xFFC0392B)),     // Pomegranate Red
-    Category("Appliance Repair", false, Color(0xFF00BCD4)), // Cyan
-    Category("Pool Maintenance", false, Color(0xFF8E44AD)), // Wisteria Purple
-    Category("HVAC Maintenance", false, Color(0xFF27AE60))  // Nephritis Green
-)
-
-
 @Composable
 private fun AccountSetupTopBar(
     modifier: Modifier = Modifier,
@@ -166,8 +156,14 @@ private fun TitleDescriptionText(
     }
 }
 
+
 @Composable
-private fun ActionBox(modifier: Modifier = Modifier) {
+private fun ActionBox(
+    modifier: Modifier = Modifier,
+    state: AccountSetupState,
+    isCustomer: Boolean,
+    onChipSelected: (id: Int) -> Unit,
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -176,23 +172,20 @@ private fun ActionBox(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            categoryList.forEachIndexed { index, category ->
-                var isSelected by remember { mutableStateOf(category.isSelected) }
+
+            state.categories.forEachIndexed { index, category ->
                 Chip(
                     text = category.title,
-                    isSelected = isSelected,
-                    onChipSelected = { text ->
-                        if (category.title == text)
-                            isSelected = !isSelected
-                    },
+                    isSelected = category.isSelected,
+                    onChipSelected = { onChipSelected(category.id) },
                     modifier = Modifier.background(
-                        if (isSelected)
+                        if (category.isSelected)
                             category.color
                         else
                             AppTheme.craftoColors.background.card,
                         shape = RoundedCornerShape(AppTheme.craftoRadius.full)
                     ),
-                    textColor = if (isSelected)
+                    textColor = if (category.isSelected)
                         AppTheme.craftoColors.background.card
                     else
                         AppTheme.craftoColors.shade.secondary
