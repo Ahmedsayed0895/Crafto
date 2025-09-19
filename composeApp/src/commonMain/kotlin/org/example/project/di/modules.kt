@@ -1,6 +1,7 @@
 package org.example.project.di
 
 import org.example.project.data.memory.dataSource.CategoryDataSourceImpl
+import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.data.repository.CategoryRepositoryImpl
 import org.example.project.data.repository.dataSource.CategoryDataSource
 import org.example.project.domain.repository.CategoryRepository
@@ -14,6 +15,7 @@ import org.koin.dsl.module
 
 val sharedModules = module {
     //account setup screens - category
+    single { categoryList }
     singleOf(::CategoryRepositoryImpl) { bind<CategoryRepository>() }
     singleOf(::CategoryDataSourceImpl) { bind<CategoryDataSource>() }
     singleOf(::GetCategoriesUseCase)
