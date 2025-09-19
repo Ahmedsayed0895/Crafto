@@ -26,8 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
-import crafto.composeapp.generated.resources.account_setup_category_description
-import crafto.composeapp.generated.resources.account_setup_category_title
+import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
+import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
+import crafto.composeapp.generated.resources.account_setup_customer_category_description
+import crafto.composeapp.generated.resources.account_setup_customer_category_title
 import crafto.composeapp.generated.resources.arrow_left
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.Chip
@@ -75,13 +77,12 @@ fun AccountSetupCategoryContent(
         AccountSetupTopBar(onBackButtonClick = onBackButtonClick)
         TitleDescriptionBox(
             modifier = Modifier.weight(7f),
-            title = stringResource(Res.string.account_setup_category_title),
-            description = stringResource(Res.string.account_setup_category_description)
+            title = selectCustomerOrCraftsmanText(isCustomer = isCustomer).first,
+            description = selectCustomerOrCraftsmanText(isCustomer = isCustomer).second,
         )
         ActionBox(
             state = state,
             onChipSelected = onChipSelected,
-            isCustomer = isCustomer,
         )
         PrimaryButton(
             text = "Next",
@@ -91,6 +92,17 @@ fun AccountSetupCategoryContent(
             onClick = onNextButtonClick
         )
 
+    }
+}
+
+@Composable
+private fun selectCustomerOrCraftsmanText(isCustomer: Boolean): Pair<String, String> {
+    return if (isCustomer) {
+        stringResource(Res.string.account_setup_customer_category_title) to
+                stringResource(Res.string.account_setup_customer_category_description)
+    } else {
+        stringResource(Res.string.account_setup_craftsman_category_title) to
+                stringResource(Res.string.account_setup_craftsman_category_description)
     }
 }
 @Composable
@@ -161,7 +173,6 @@ private fun TitleDescriptionText(
 private fun ActionBox(
     modifier: Modifier = Modifier,
     state: AccountSetupState,
-    isCustomer: Boolean,
     onChipSelected: (id: Int) -> Unit,
 ) {
     Box(
@@ -173,7 +184,7 @@ private fun ActionBox(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
-            state.categories.forEachIndexed { index, category ->
+            state.categoryState.categories.forEachIndexed { index, category ->
                 Chip(
                     text = category.title,
                     isSelected = category.isSelected,
