@@ -34,6 +34,10 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+
+            implementation("androidx.compose.material3.adaptive:adaptive:1.2.0-beta01")
+            implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0-beta01")
+            implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0-beta01")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -44,9 +48,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("androidx.compose.material3.adaptive:adaptive:1.2.0-beta01")
-            implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0-beta01")
-            implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0-beta01")
+
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
