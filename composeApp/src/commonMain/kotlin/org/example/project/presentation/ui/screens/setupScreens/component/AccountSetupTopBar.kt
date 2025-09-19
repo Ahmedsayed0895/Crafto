@@ -68,7 +68,7 @@ private fun BackButton(
 
 @Preview
 @Composable
-fun AccCategoryLightPreview() {
+fun AccountSetupTopBarLightPreview() {
     AppTheme {
         AccountSetupTopBar(
             onBackButtonClick = {},
@@ -80,7 +80,7 @@ fun AccCategoryLightPreview() {
 
 @Preview
 @Composable
-fun AccCategoryDarkPreview() {
+fun AccountSetupTopBarDarkPreview() {
     AppTheme(isDarkTheme = true) {
         AccountSetupTopBar(
             onBackButtonClick = {},

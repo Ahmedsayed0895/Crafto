@@ -13,11 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
+import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
+import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.next
+import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.viewmodel.accountSetup.AccountSetupCategoryState
+import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SetupScreenScaffold(
@@ -53,5 +59,38 @@ fun SetupScreenScaffold(
             onClick = onNextButtonClick
         )
 
+    }
+}
+
+
+@Preview
+@Composable
+fun SetupScreenScaffoldLightPreview() {
+    SetupScreenScaffold(
+        currentPageNumber = 2,
+        title = stringResource(Res.string.account_setup_craftsman_category_title),
+        description = stringResource(Res.string.account_setup_craftsman_category_description),
+        onBackButtonClick = {},
+        onNextButtonClick = {},
+    )
+    {
+        CategoryActionBox(
+            state = AccountSetupState(
+                categoryState = AccountSetupCategoryState(
+                    categories = categoryList
+                )
+            ),
+            onChipSelected = {}
+        )
+    }
+
+
+}
+
+@Preview
+@Composable
+fun SetupScreenScaffoldDarkPreview() {
+    AppTheme(isDarkTheme = true) {
+        SetupScreenScaffoldLightPreview()
     }
 }

@@ -1,5 +1,8 @@
 package org.example.project.presentation.ui.screens.setupScreens.component
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.EaseInCirc
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,13 +10,17 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.domain.entity.Category
 import org.example.project.presentation.designsystem.components.Chip
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.viewmodel.accountSetup.AccountSetupCategoryState
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CategoryActionBox(
@@ -49,9 +56,58 @@ fun CategoryActionBox(
 
 @Composable
 private fun chipColorsChanger(isSelected: Boolean, category: Category): Pair<Color, Color> {
-    return if (isSelected) {
-        category.color to AppTheme.craftoColors.background.card
-    } else {
-        AppTheme.craftoColors.background.card to AppTheme.craftoColors.shade.secondary
+    val chipColor by animateColorAsState(
+        if (isSelected) {
+            category.color
+        } else {
+            AppTheme.craftoColors.background.card
+        }, animationSpec = tween(
+            easing = EaseInCirc
+        )
+    )
+
+
+    val textColor by animateColorAsState(
+        if (isSelected) {
+            AppTheme.craftoColors.background.card
+        } else {
+            AppTheme.craftoColors.shade.secondary
+        }, animationSpec = tween(
+            easing = EaseInCirc,
+
+            )
+    )
+    return chipColor to textColor
+}
+
+
+@Preview
+@Composable
+fun CategoryActionBoxLightPreview() {
+    AppTheme {
+        CategoryActionBox(
+            state = AccountSetupState(
+                categoryState = AccountSetupCategoryState(
+                    categories = categoryList
+                )
+            ),
+            onChipSelected = {}
+        )
+
+    }
+}
+
+@Preview
+@Composable
+fun CategoryActionBoxDarkPreview() {
+    AppTheme(isDarkTheme = true) {
+        CategoryActionBox(
+            state = AccountSetupState(
+                categoryState = AccountSetupCategoryState(
+                    categories = categoryList
+                )
+            ),
+            onChipSelected = {}
+        )
     }
 }
