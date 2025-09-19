@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.categoryScreen.component
+package org.example.project.presentation.ui.screens.setupScreens.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,6 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AccountSetupTopBar(
     modifier: Modifier = Modifier,
+    currentPage: Int,
     onBackButtonClick: () -> Unit
 
 ) {
@@ -35,7 +36,7 @@ fun AccountSetupTopBar(
     {
         BackButton(onBackButtonClick = onBackButtonClick)
         ProgressIndicator(
-            currentPage = 2,
+            currentPage = currentPage,
             totalPage = 4,
             modifier = Modifier.fillMaxWidth(0.75f),
         )
@@ -70,7 +71,8 @@ private fun BackButton(
 fun AccCategoryLightPreview() {
     AppTheme {
         AccountSetupTopBar(
-            onBackButtonClick = {}
+            onBackButtonClick = {},
+            currentPage = 2
         )
 
     }
@@ -81,7 +83,9 @@ fun AccCategoryLightPreview() {
 fun AccCategoryDarkPreview() {
     AppTheme(isDarkTheme = true) {
         AccountSetupTopBar(
-            onBackButtonClick = {}
+            onBackButtonClick = {},
+            currentPage = 2
+
         )
     }
 }
