@@ -17,21 +17,27 @@ class AccountSetupViewModel(
     private fun fetchCategories() {
         viewModelScope.launch {
             val categories = getCategoriesUseCase()
-            updateState { it.copy(categories = categories) }
+            updateState {
+                it.copy(
+                    categoryState = it.categoryState.copy(categories = categories)
+                )
+            }
         }
     }
 
 
     override fun onCategorySelected(id: Int) {
         updateState {
-            val categories = it.categories.map { category ->
+            val categories = it.categoryState.categories.map { category ->
                 if (category.id == id) {
                     category.copy(isSelected = !category.isSelected)
                 } else {
                     category
                 }
             }
-            it.copy(categories = categories)
+            it.copy(
+                categoryState = it.categoryState.copy(categories = categories)
+            )
         }
 
     }
