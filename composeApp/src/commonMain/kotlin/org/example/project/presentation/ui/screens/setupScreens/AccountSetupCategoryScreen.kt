@@ -1,30 +1,16 @@
-package org.example.project.presentation.ui.screens.categoryScreen
+package org.example.project.presentation.ui.screens.setupScreens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.account_setup_customer_category_description
 import crafto.composeapp.generated.resources.account_setup_customer_category_title
-import org.example.project.presentation.designsystem.components.ButtonState
-import org.example.project.presentation.designsystem.components.PrimaryButton
-import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.presentation.ui.screens.categoryScreen.component.AccountSetupTopBar
-import org.example.project.presentation.ui.screens.categoryScreen.component.ActionBox
-import org.example.project.presentation.ui.screens.categoryScreen.component.TitleDescriptionBox
+import org.example.project.presentation.ui.screens.setupScreens.component.CategoryActionBox
+import org.example.project.presentation.ui.screens.setupScreens.component.SetupScreenScaffold
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupViewModel
 import org.jetbrains.compose.resources.stringResource
@@ -40,6 +26,7 @@ fun AccountSetupCategoryScreen(
     AccountSetupCategoryContent(
         state = state,
         isCustomer = true,
+        currentPageNumber = 2,
         onBackButtonClick = {},
         onNextButtonClick = {},
         onChipSelected = viewModel::onCategorySelected
@@ -51,37 +38,25 @@ fun AccountSetupCategoryContent(
     modifier: Modifier = Modifier,
     state: AccountSetupState,
     isCustomer: Boolean,
+    currentPageNumber: Int,
     onBackButtonClick: () -> Unit,
     onNextButtonClick: () -> Unit,
     onChipSelected: (id: Int) -> Unit,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(AppTheme.craftoColors.background.screen)
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(horizontal = 16.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(32.dp),
+    SetupScreenScaffold(
+        modifier = modifier,
+        currentPageNumber = currentPageNumber,
+        title = selectCustomerOrCraftsmanText(isCustomer).first,
+        description = selectCustomerOrCraftsmanText(isCustomer).second,
+        onBackButtonClick = onBackButtonClick,
+        onNextButtonClick = onNextButtonClick,
     ) {
-        AccountSetupTopBar(onBackButtonClick = onBackButtonClick)
-        TitleDescriptionBox(
-            modifier = Modifier.weight(7f),
-            title = selectCustomerOrCraftsmanText(isCustomer = isCustomer).first,
-            description = selectCustomerOrCraftsmanText(isCustomer = isCustomer).second,
-        )
-        ActionBox(
+        CategoryActionBox(
             state = state,
             onChipSelected = onChipSelected,
         )
-        PrimaryButton(
-            text = "Next",
-            enabled = true,
-            buttonState = ButtonState.Enable,
-            modifier = Modifier.fillMaxWidth(),
-            onClick = onNextButtonClick
-        )
-
     }
+
 }
 
 @Composable
