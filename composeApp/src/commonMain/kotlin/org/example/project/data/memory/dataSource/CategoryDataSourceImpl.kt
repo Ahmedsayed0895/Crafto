@@ -1,8 +1,8 @@
-package org.example.project.data.local.dataSource
+package org.example.project.data.memory.dataSource
 
 import androidx.compose.ui.graphics.Color
 import org.example.project.data.repository.dataSource.CategoryDataSource
-import org.example.project.data.repository.dataSource.local.dto.CategoryEntity
+import org.example.project.data.repository.dataSource.memory.dto.CategoryEntity
 import org.example.project.data.repository.mapper.toCategoryEntity
 import org.example.project.domain.entity.Category
 

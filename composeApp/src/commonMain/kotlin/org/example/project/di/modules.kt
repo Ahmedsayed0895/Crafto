@@ -1,6 +1,6 @@
 package org.example.project.di
 
-import org.example.project.data.local.dataSource.CategoryDataSourceImpl
+import org.example.project.data.memory.dataSource.CategoryDataSourceImpl
 import org.example.project.data.repository.CategoryRepositoryImpl
 import org.example.project.data.repository.dataSource.CategoryDataSource
 import org.example.project.domain.repository.CategoryRepository

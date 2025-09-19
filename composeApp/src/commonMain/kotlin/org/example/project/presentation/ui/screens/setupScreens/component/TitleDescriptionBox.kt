@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.categoryScreen.component
+package org.example.project.presentation.ui.screens.setupScreens.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
