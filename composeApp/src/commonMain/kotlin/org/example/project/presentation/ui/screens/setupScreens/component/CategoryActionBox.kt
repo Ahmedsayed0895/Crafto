@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.categoryScreen.component
+package org.example.project.presentation.ui.screens.setupScreens.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,7 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
 
 @Composable
-fun ActionBox(
+fun CategoryActionBox(
     modifier: Modifier = Modifier,
     state: AccountSetupState,
     onChipSelected: (id: Int) -> Unit,
@@ -34,7 +34,7 @@ fun ActionBox(
                             chipColorsChanger(isSelected = isSelected, category = category).second
                 Chip(
                     text = category.title,
-                    isSelected = category.isSelected,
+                    isSelected = isSelected,
                     onChipSelected = { onChipSelected(category.id) },
                     modifier = Modifier.background(
                         color = chipColor,
@@ -53,7 +53,5 @@ private fun chipColorsChanger(isSelected: Boolean, category: Category): Pair<Col
         category.color to AppTheme.craftoColors.background.card
     } else {
         AppTheme.craftoColors.background.card to AppTheme.craftoColors.shade.secondary
-
-
     }
 }
