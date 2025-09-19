@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.presentation.designsystem.components.Chip
@@ -46,7 +47,13 @@ fun CategoryActionBox(
                         .toAnimatedColor(
                             isSelected,
                             AppTheme.craftoColors.shade.secondary
-                        )
+                        ),
+                    borderColor = category.color.toAnimatedColor(
+                        condition = isSelected,
+                        falseConditionColor = Color.Transparent,
+                        duration = 100
+
+                    )
                 )
             }
         }
