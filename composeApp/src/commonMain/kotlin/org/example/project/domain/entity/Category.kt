@@ -7,5 +7,4 @@ data class Category(
     val title: String,
     val isSelected: Boolean,
     val color: Color,
-    val isCustomer: Boolean,
 )

@@ -5,6 +5,6 @@ import org.example.project.domain.repository.CategoryRepository
 
 class GetCategoriesUseCase(val repository: CategoryRepository) {
     suspend operator fun invoke(): List<Category> {
-        return repository.getCategories().filter { it.isCustomer }
+        return repository.getCategories()
     }
 }

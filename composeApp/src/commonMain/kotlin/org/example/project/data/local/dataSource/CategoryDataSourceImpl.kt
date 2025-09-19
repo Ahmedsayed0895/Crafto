@@ -18,90 +18,77 @@ private val categoryList = listOf(
         title = "Plumbing",
         isSelected = false,
         color = Color(0xFF9B59B6),
-        isCustomer = true
     ),         // Amethyst Purple
     Category(
         id = 2,
         title = "Electrical",
         isSelected = false,
         color = Color(0xFF1ABC9C),
-        isCustomer = true
     ),       // Turquoise
     Category(
         id = 3,
         title = "Cleaning",
         isSelected = false,
         color = Color(0xFF3498DB),
-        isCustomer = true
     ),         // Peter River Blue
     Category(
         id = 4,
         title = "AC Repair",
         isSelected = false,
         color = Color(0xFFF39C12),
-        isCustomer = true
     ),        // Orange
     Category(
         id = 5,
         title = "Furniture",
         isSelected = false,
         color = Color(0xFFD35400),
-        isCustomer = true
     ),        // Pumpkin Orange
     Category(
         id = 6,
         title = "Painting",
         isSelected = false,
         color = Color(0xFF34495E),
-        isCustomer = true
     ),         // Wet Asphalt
     Category(
         id = 7,
         title = "Carpentry",
         isSelected = false,
         color = Color(0xFFE67E22),
-        isCustomer = true
     ),        // Carrot Orange
     Category(
         id = 8,
         title = "Roofing",
         isSelected = false,
         color = Color(0xFF7F8C8D),
-        isCustomer = true
     ),          // Slate Gray
     Category(
         id = 9,
         title = "Landscaping",
         isSelected = false,
         color = Color(0xFF2ECC71),
-        isCustomer = true
     ),      // Emerald Green
     Category(
         id = 10,
         title = "Pest Control",
         isSelected = false,
         color = Color(0xFFC0392B),
-        isCustomer = true
     ),     // Pomegranate Red
     Category(
         id = 11,
         title = "Appliance Repair",
         isSelected = false,
         color = Color(0xFF00BCD4),
-        isCustomer = true
     ), // Cyan
     Category(
         id = 12,
         title = "Pool Maintenance",
         isSelected = false,
         color = Color(0xFF8E44AD),
-        isCustomer = true
     ), // Wisteria Purple
     Category(
         id = 13,
         title = "HVAC Maintenance",
         isSelected = false,
         color = Color(0xFF27AE60),
-        isCustomer = true
     ), // Nephritis Green
 )

@@ -9,7 +9,6 @@ fun Category.toCategoryEntity(): CategoryEntity {
         title = title,
         isSelected = isSelected,
         color = color,
-        isCustomer = isCustomer
     )
 }
 
@@ -19,6 +18,5 @@ fun CategoryEntity.toCategoryDomain(): Category {
         title = title,
         isSelected = isSelected,
         color = color,
-        isCustomer = isCustomer
     )
 }

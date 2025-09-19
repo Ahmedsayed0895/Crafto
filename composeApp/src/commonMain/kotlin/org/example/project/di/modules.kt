@@ -13,6 +13,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val sharedModules = module {
+    //account setup screens - category
     singleOf(::CategoryRepositoryImpl) { bind<CategoryRepository>() }
     singleOf(::CategoryDataSourceImpl) { bind<CategoryDataSource>() }
     singleOf(::GetCategoriesUseCase)
