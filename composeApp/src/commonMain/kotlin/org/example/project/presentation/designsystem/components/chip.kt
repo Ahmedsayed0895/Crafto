@@ -3,6 +3,7 @@ package org.example.project.presentation.designsystem.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -51,7 +52,9 @@ fun Chip(
 
             .clickable(
                 enabled = true,
-                onClick = { onChipSelected(text) }
+                onClick = { onChipSelected(text) },
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() }
             )
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
