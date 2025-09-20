@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,8 +31,8 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-actual fun SetupScreenScaffold(
-    modifier: Modifier,
+fun SetupScreenScaffold(
+    modifier: Modifier = Modifier,
     currentPageNumber: Int,
     title: String,
     description: String,
@@ -169,7 +170,8 @@ fun SetupScreenScaffoldLightPreview() {
         description = stringResource(Res.string.account_setup_craftsman_category_description),
         onBackButtonClick = {},
         onNextButtonClick = {},
-    )
+
+        )
     {
         CategoryActionBox(
             state = AccountSetupState(
