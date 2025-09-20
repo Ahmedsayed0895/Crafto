@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -33,16 +34,28 @@ kotlin {
     
     sourceSets {
         androidMain.dependencies {
+            //core
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlinx.serialization.json)
+
+            //firebase
             implementation(libs.firebase.analytics)
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.crashlytics.ktx)
+            implementation(libs.firebase.storage)
+            implementation(libs.firebase.auth)
+            implementation(libs.kotlinx.coroutines.play.services)
 
+            //koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+
+            //datastore
+            implementation(libs.androidx.datastore.preferences)
         }
         commonMain.dependencies {
+            //core
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -51,12 +64,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-
+            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.serialization.json)
+            
+            //koin
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.lifecycle.viewmodel)
-            implementation(libs.navigation.compose)
+
+            //coil
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
