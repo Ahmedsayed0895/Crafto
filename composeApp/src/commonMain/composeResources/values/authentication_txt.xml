@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <string name="privacy_policy_content">
-        We value your privacy. This Privacy Policy explains how San3a collects, uses, and protects your information.\n\n
-1. Information We Collect\n
-• Personal Data: Name, phone number, location, profile photo, ID (for craftsmen).\n
-• Usage Data: How you interact with the app, device type, IP address.\n
-• Photos and Files: Only those you upload voluntarily for service requests or profile verification.\n\n
-2. How We Use Your Information\n
-• To connect customers with suitable craftsmen.\n
-• To improve app performance and user experience.\n
-• To verify identities and prevent fraud.\n
-• To send important updates or notifications.\n\n
-3. Data Sharing\n
-• We do not sell or share your personal data with third parties except:\n
-• When required by law.\n
-• To enable in-app messaging and job assignment between users.\n
-• For payment processing (if integrated).\n\n
-4. Location Data\n
-• We collect your location to:\n
-• Show you nearby services or job requests.\n
-• Help you navigate to job locations.\n
-• You can disable location sharing at any time in your device settings.\n\n
-5. Security\n
-• We use encryption and secure storage methods to protect your data. However, no system is 100%% secure.\n\n
-6. Your Rights\n
-You can:\n
-• Access and edit your profile at any time.\n
-• Request deletion of your data by contacting us at [your support email].\n\n
-7. Policy Updates\n
-• We may revise this policy from time to time. You will be notified of significant changes.\n
-    </string>
     <string name="privacy_policy_header">🔒 Privacy Policy</string>
-    <string name="terms_conditions_header">📄 Terms and Conditions</string>
-    <string name="terms_conditions_content">Welcome to San3a! By using our mobile application, you agree to the following terms:\n\n
 
-1. Account Eligibility\n
-• You must be at least 18 years old to create an account and use San3a. You are responsible for keeping your login credentials secure.\n\n
+    <string name="privacy_policy_content_header">We value your privacy. This Privacy Policy explains how San3a collects, uses, and protects your information.</string>
 
-2. Account Types\n
-• Users may register as either a Customer or a Craftsman. You can switch between roles at any time, but must provide accurate information for each profile type.\n\n
-3. Service Requests and Offers\n
-• Customers can post service requests, including descriptions, photos, and locations.
-• Craftsmen can respond to requests by submitting offers with pricing and timing.
-• San3a is not a party to any agreement between customers and craftsmen.\n\n
-
-4. Payment and Pricing\n
-• San3a may offer in-app payment features or facilitate communication about payments. We are not responsible for pricing disputes or payment arrangements made outside the app.\n\n
-
-5. User Conduct\n
-• All users must:
-• Provide accurate and honest information.
-• Treat others respectfully and professionally.
-• Refrain from using the app for illegal, abusive, or deceptive purposes.\n\n
-
-6. Ratings and Reviews\n
-• Both customers and craftsmen can leave ratings after a job is completed. Reviews must be fair, respectful, and based on real interactions.\n\n
-
-7. Termination\n
-• We reserve the right to suspend or terminate any account that violates these terms.\n\n
-
-8. Changes to Terms\n
-• We may update these terms from time to time. Continued use of the app implies your acceptance of the updated terms.\n
+    <string name="privacy_policy_content_1_header">1. Information We Collect</string>
+    <string name="privacy_policy_content_1_steps">• Personal Data: Name, phone number, location, profile photo, ID (for craftsmen).
+• Usage Data: How you interact with the app, device type, IP address.
+• Photos and Files: Only those you upload voluntarily for service requests or profile verification.
     </string>
+
+    <string name="privacy_policy_content_2_header">2. How We Use Your Information</string>
+    <string name="privacy_policy_content_2_steps">• To connect customers with suitable craftsmen.
+• To improve app performance and user experience.
+• To verify identities and prevent fraud.
+• To send important updates or notifications.
+    </string>
+
+    <string name="privacy_policy_content_3_header">3. Data Sharing</string>
+    <string name="privacy_policy_content_3_description">We do not sell or share your personal data with third parties except:</string>
+    <string name="privacy_policy_content_3_steps">• When required by law.
+• To enable in-app messaging and job assignment between users.
+• For payment processing (if integrated).
+    </string>
+
+    <string name="privacy_policy_content_4_header">4. Location Data</string>
+    <string name="privacy_policy_content_4_description">We collect your location to:</string>
+    <string name="privacy_policy_content_4_steps">• Show you nearby services or job requests.
+• Help you navigate to job locations.
+• You can disable location sharing at any time in your device settings.
+    </string>
+
+    <string name="privacy_policy_content_5_header">5. Security</string>
+    <string name="privacy_policy_content_5_description">We use encryption and secure storage methods to protect your data. However, no system is 100%% secure.</string>
+
+    <string name="privacy_policy_content_6_header">6. Your Rights</string>
+    <string name="privacy_policy_content_6_description">You can:</string>
+    <string name="privacy_policy_content_6_steps">• Access and edit your profile at any time.
+• Request deletion of your data by contacting us at [your support email].
+    </string>
+
+    <string name="privacy_policy_content_7_header">7. Policy Updates</string>
+    <string name="privacy_policy_content_7_description">We may revise this policy from time to time. You will be notified of significant changes.</string>
+
+    <string name="terms_conditions_header">📄 Terms and Conditions</string>
+
+    <string name="terms_conditions_content_header">Welcome to San3a! By using our mobile application, you agree to the following terms:</string>
+
+    <string name="terms_conditions_content_1_header">1. Account Eligibility</string>
+    <string name="terms_conditions_content_1_description">You must be at least 18 years old to create an account and use San3a. You are responsible for keeping your login credentials secure.</string>
+
+    <string name="terms_conditions_content_2_header">2. Account Types</string>
+    <string name="terms_conditions_content_2_description">Users may register as either a Customer or a Craftsman. You can switch between roles at any time, but must provide accurate information for each profile type.</string>
+
+    <string name="terms_conditions_content_3_header">3. Service Requests and Offers</string>
+    <string name="terms_conditions_content_3_description">All users must:</string>
+    <string name="terms_conditions_content_3_steps">• Customers can post service requests, including descriptions, photos, and locations.
+• Craftsmen can respond to requests by submitting offers with pricing and timing.
+• San3a is not a party to any agreement between customers and craftsmen.
+    </string>
+
+    <string name="terms_conditions_content_4_header">4. Payment and Pricing</string>
+    <string name="terms_conditions_content_4_description">San3a may offer in-app payment features or facilitate communication about payments. We are not responsible for pricing disputes or payment arrangements made outside the app.</string>
+
+    <string name="terms_conditions_content_5_header">5. User Conduct</string>
+    <string name="terms_conditions_content_5_description">All users must:</string>
+    <string name="terms_conditions_content_5_steps">• Provide accurate and honest information.
+• Treat others respectfully and professionally.
+• Refrain from using the app for illegal, abusive, or deceptive purposes.
+    </string>
+
+    <string name="terms_conditions_content_6_header">6. Ratings and Reviews</string>
+    <string name="terms_conditions_content_6_description">Both customers and craftsmen can leave ratings after a job is completed. Reviews must be fair, respectful, and based on real interactions.</string>
+
+    <string name="terms_conditions_content_7_header">7. Termination</string>
+    <string name="terms_conditions_content_7_description">We reserve the right to suspend or terminate any account that violates these terms.</string>
+
+    <string name="terms_conditions_content_8_header">8. Changes to Terms</string>
+    <string name="terms_conditions_content_8_description">We may update these terms from time to time. Continued use of the app implies your acceptance of the updated terms.</string>
 </resources>
