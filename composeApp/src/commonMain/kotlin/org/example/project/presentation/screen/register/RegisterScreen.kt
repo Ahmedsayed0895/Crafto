@@ -32,11 +32,10 @@ import crafto.composeapp.generated.resources.privacy_agreement
 import crafto.composeapp.generated.resources.privacy_policy
 import crafto.composeapp.generated.resources.terms_and_conditions
 import crafto.composeapp.generated.resources.welcome_title
-
-import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.PrimaryButton
-import org.example.project.designSystem.components.TextField
-import org.example.project.designSystem.textStyle.AppTheme
+import org.example.project.presentation.designsystem.components.ButtonState
+import org.example.project.presentation.designsystem.components.PrimaryButton
+import org.example.project.presentation.designsystem.components.TextField
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
