@@ -31,10 +31,10 @@ import crafto.composeapp.generated.resources.privacy_policy_content_7_descriptio
 import crafto.composeapp.generated.resources.privacy_policy_content_7_header
 import crafto.composeapp.generated.resources.privacy_policy_content_header
 import crafto.composeapp.generated.resources.privacy_policy_header
-import org.example.project.designSystem.components.BottomSheet
-import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.PrimaryButton
-import org.example.project.designSystem.textStyle.AppTheme
+import org.example.project.presentation.designsystem.components.BottomSheet
+import org.example.project.presentation.designsystem.components.ButtonState
+import org.example.project.presentation.designsystem.components.PrimaryButton
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
