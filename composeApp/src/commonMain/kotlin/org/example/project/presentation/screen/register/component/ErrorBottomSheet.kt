@@ -50,7 +50,7 @@ fun ErrorBottomSheet(
                 color = AppTheme.craftoColors.shade.primary
             )
             Text(
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
                 text = stringResource(Res.string.error_bottom_sheet_content),
                 textAlign = TextAlign.Center,
                 style = AppTheme.textStyle.body.medium,
