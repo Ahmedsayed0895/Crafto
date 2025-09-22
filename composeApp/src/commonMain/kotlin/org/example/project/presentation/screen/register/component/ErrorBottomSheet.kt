@@ -17,10 +17,10 @@ import crafto.composeapp.generated.resources.error_bottom_sheet_content
 import crafto.composeapp.generated.resources.error_bottom_sheet_header
 import crafto.composeapp.generated.resources.ok_text
 import crafto.composeapp.generated.resources.authentication_error
-import org.example.project.designSystem.components.BottomSheet
-import org.example.project.designSystem.components.ButtonState
-import org.example.project.designSystem.components.PrimaryButton
-import org.example.project.designSystem.textStyle.AppTheme
+import org.example.project.presentation.designsystem.components.BottomSheet
+import org.example.project.presentation.designsystem.components.ButtonState
+import org.example.project.presentation.designsystem.components.PrimaryButton
+import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
