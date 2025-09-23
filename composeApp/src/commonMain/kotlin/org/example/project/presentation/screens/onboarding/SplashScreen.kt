@@ -1,4 +1,4 @@
-package org.example.project.onboarding
+package org.example.project.presentation.screens.onboarding
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

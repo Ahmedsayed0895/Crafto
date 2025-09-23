@@ -1,4 +1,4 @@
-package org.example.project.onboarding
+package org.example.project.presentation.screens.onboarding
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.spring
@@ -29,9 +29,9 @@ import crafto.composeapp.generated.resources.onboarding2
 import crafto.composeapp.generated.resources.onboarding3
 import crafto.composeapp.generated.resources.skip
 import kotlinx.coroutines.launch
-import org.example.project.onboarding.composable.OnBoardingIndicator
-import org.example.project.onboarding.composable.OnBoardingItem
-import org.example.project.onboarding.composable.OnBoardingPage
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingPage
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.components.SecondaryButton
