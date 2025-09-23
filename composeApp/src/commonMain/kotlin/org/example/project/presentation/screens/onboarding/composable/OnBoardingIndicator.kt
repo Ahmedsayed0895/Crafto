@@ -1,5 +1,9 @@
-package org.example.project.onboarding.composable
+package org.example.project.presentation.screens.onboarding.composable
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,14 +32,27 @@ fun OnBoardingIndicator(
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         repeat(totalPage) { index ->
+            val width = animateDpAsState(
+                targetValue = if (index == currentPage) 32.dp else 16.dp,
+                animationSpec = spring(
+                    dampingRatio = 0.70f,
+                    stiffness = 50f
+                ),
+                label = "indicatorWidth"
+            )
+
+            val color = animateColorAsState(
+                targetValue = if (index == currentPage) progressColor else trackColor,
+                animationSpec = tween(300),
+                label = "indicatorColor"
+            )
+
             Box(
                 modifier = Modifier
-                    .width(if (index  == currentPage) 32.dp else 16.dp)
+                    .width(width.value)
                     .height(8.dp)
                     .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
-                    .background(
-                        color = if (index  == currentPage) progressColor else trackColor
-                    )
+                    .background(color = color.value)
             )
         }
     }
