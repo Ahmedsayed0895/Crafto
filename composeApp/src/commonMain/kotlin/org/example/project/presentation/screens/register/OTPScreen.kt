@@ -45,6 +45,7 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.collections.set
 
 @Composable
 fun OTPScreen() {
@@ -65,11 +66,8 @@ private fun OTPContent(
     onBackButtonClick: () -> Unit
 ) {
 
-    var otp1 by remember { mutableStateOf("") }
-    var otp2 by remember { mutableStateOf("") }
-    var otp3 by remember { mutableStateOf("") }
-    var otp4 by remember { mutableStateOf("") }
-    var otp5 by remember { mutableStateOf("") }
+
+    var otpList by remember { mutableStateOf(List(5) { "" }) }
 
     Box(
         modifier = modifier.fillMaxSize().background(AppTheme.craftoColors.background.screen)
@@ -133,29 +131,54 @@ private fun OTPContent(
                         modifier = Modifier.padding(bottom = 24.dp)
                     ) {
                         OTPField(
-                            text = otp1,
+                            text = otpList[0],
                             modifier = Modifier.weight(1f),
-                            onTextChange = {if(it.length <= 1) otp1 = it },
+                            onTextChange = { value->
+                                if(value.length <= 1) {
+                                    otpList.toMutableList().also { list ->
+                                        list[0] = value
+                                    }
+                                }},
                         )
                         OTPField(
-                            text = otp2,
+                            text = otpList[1],
                             modifier = Modifier.weight(1f),
-                            onTextChange = {if(it.length <= 1) otp2 = it },
+                            onTextChange = { value->
+                                if(value.length <= 1) {
+                                    otpList.toMutableList().also { list ->
+                                        list[1] = value
+                                    }
+                                }},
                         )
                         OTPField(
-                            text = otp3,
+                            text = otpList[2],
                             modifier = Modifier.weight(1f),
-                            onTextChange = { if(it.length <= 1)otp3 = it },
+                            onTextChange = { value->
+                                if(value.length <= 1) {
+                                    otpList.toMutableList().also { list ->
+                                        list[2] = value
+                                    }
+                                }},
                         )
                         OTPField(
-                            text = otp4,
+                            text = otpList[3],
                             modifier = Modifier.weight(1f),
-                            onTextChange = { if(it.length <= 1)otp4 = it },
+                            onTextChange = { value->
+                                if(value.length <= 1) {
+                                    otpList.toMutableList().also { list ->
+                                        list[3] = value
+                                    }
+                                }},
                         )
                         OTPField(
-                            text = otp5,
+                            text = otpList[4],
                             modifier = Modifier.weight(1f),
-                            onTextChange = {if(it.length <= 1) otp5 = it },
+                            onTextChange = { value->
+                                if(value.length <= 1) {
+                                    otpList.toMutableList().also { list ->
+                                        list[4] = value
+                                    }
+                            }},
                         )
                     }
 
@@ -238,6 +261,7 @@ fun OTPField(
         )
     )
 }
+
 
 @Preview
 @Composable
