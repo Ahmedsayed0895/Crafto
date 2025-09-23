@@ -58,7 +58,7 @@ fun ErrorBottomSheet(
                 color = AppTheme.craftoColors.shade.secondary
             )
             PrimaryButton (
-                modifier = Modifier.heightIn(min = 48.dp).padding(top = 24.dp).fillMaxWidth(),
+                modifier = Modifier.heightIn(min = 48.dp).padding(vertical = 24.dp).fillMaxWidth(),
                 text = stringResource(Res.string.ok_text),
                 enabled = true,
                 buttonState = ButtonState.Enable,
