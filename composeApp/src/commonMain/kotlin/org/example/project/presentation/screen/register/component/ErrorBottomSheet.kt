@@ -2,6 +2,7 @@ package org.example.project.presentation.screen.register.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -61,6 +62,7 @@ fun ErrorBottomSheet(
                 text = stringResource(Res.string.ok_text),
                 enabled = true,
                 buttonState = ButtonState.Enable,
+                contentPadding = PaddingValues(14.dp),
                 onClick = onDismissRequest
             )
         }

@@ -1,6 +1,7 @@
 package org.example.project.presentation.screen.register.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -86,6 +87,7 @@ fun PoliciesAndConditionsBottomSheet(
                     .padding(top = 16.dp, bottom = 16.dp)
                     .fillMaxWidth(),
                 text = stringResource(Res.string.ok_text),
+                contentPadding = PaddingValues(14.dp),
                 enabled = true,
                 buttonState = ButtonState.Enable,
                 onClick = onDismissRequest
