@@ -2,12 +2,10 @@ package org.example.project.presentation.designsystem.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,8 +30,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomSheet(
     modifier: Modifier = Modifier,
-    title: String,
+    showCloseIcon: Boolean = false,
     onDismissRequest: () -> Unit = {},
+    headerContent: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
     ModalBottomSheet(
@@ -62,31 +61,30 @@ fun BottomSheet(
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = title,
-                    style = AppTheme.textStyle.title.small,
-                    color = AppTheme.craftoColors.shade.primary
-                )
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(shape = CircleShape)
-                        .clickable { onDismissRequest() }, contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = painterResource(Res.drawable.x),
-                        contentDescription = null,
-                        tint = AppTheme.craftoColors.shade.secondary,
+                Box(modifier = Modifier.align(Alignment.TopStart)){
+                    headerContent()
+                }
+                if (showCloseIcon){
+                    Box(
                         modifier = Modifier
-                            .size(20.dp)
-                    )
+                            .align(Alignment.CenterEnd)
+                            .size(40.dp)
+                            .clip(shape = CircleShape)
+                            .clickable { onDismissRequest() }, contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Res.drawable.x),
+                            contentDescription = "cancel button",
+                            tint = AppTheme.craftoColors.shade.secondary,
+                            modifier = Modifier
+                                .size(20.dp)
+                        )
+                    }
                 }
             }
             content()
@@ -99,7 +97,14 @@ fun BottomSheet(
 private fun BottomSheetPreview() {
     AppTheme {
         BottomSheet(
-            title = "title",
+            headerContent = {
+                Text(
+                    text = "title",
+                    style = AppTheme.textStyle.title.small,
+                    color = AppTheme.craftoColors.shade.primary
+                )
+            },
+            showCloseIcon = true,
             onDismissRequest = {},
             content = {}
         )

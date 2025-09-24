@@ -2,6 +2,9 @@
 <resources>
     <string name="chat">محادثة</string>
     <string name="accept_offer">قبول العرض</string>
+    <string name="error_bottom_sheet_header">للأسف, خطأ ما حدث</string>
+    <string name="error_bottom_sheet_content">الفريق يحاول حلها حاليا, جرب مرة اخرى.</string>
+    <string name="ok_text">حسناً</string>
 
     <string name="welcome_title">مرحبًا بك في صنعة 👋</string>
     <string name="enter_phone">أدخل رقم هاتفك للمتابعة</string>
