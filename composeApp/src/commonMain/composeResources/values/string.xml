@@ -6,7 +6,7 @@
     <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
     <string name="ok_text">Ok</string>
 
-    <!-- من RegisterScreen -->
+    <!--  RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint">+20  000 - 000 - 0000</string>
@@ -19,4 +19,10 @@
     <!-- ContentDescription -->
     <string name="logo_icon">logo icon</string>
     <string name="egypt_flag">egypt flag</string>
+
+
+    <!-- OnBoarding Screen -->
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
 </resources>
