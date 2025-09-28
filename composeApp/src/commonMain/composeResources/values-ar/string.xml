@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="chat">Chat</string>
-    <string name="accept_offer">Accept Offer</string>
-    <string name="error_bottom_sheet_header">Oops, Something Broke</string>
-    <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
-    <string name="ok_text">Ok</string>
+    <string name="chat">محادثة</string>
+    <string name="accept_offer">قبول العرض</string>
+    <string name="error_bottom_sheet_header">للأسف, خطأ ما حدث</string>
+    <string name="error_bottom_sheet_content">الفريق يحاول حلها حاليا, جرب مرة اخرى.</string>
+    <string name="ok_text">حسناً</string>
 
-    <!--  RegisterScreen -->
-    <string name="welcome_title">Welcome to San3a 👋</string>
-    <string name="enter_phone">Enter your phone number to\n continue</string>
-    <string name="phone_hint">+20  000 - 000 - 0000</string>
-    <string name="terms_and_conditions">Terms and Conditions</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_agreement">By continuing, you agree on our </string>
-    <string name="and_text">and </string>
-    <string name="continue_button">Continue</string>
+    <string name="welcome_title">مرحبًا بك في صنعة 👋</string>
+    <string name="enter_phone">أدخل رقم هاتفك للمتابعة</string>
+    <string name="phone_hint">+٢٠  ٠٠٠ - ٠٠٠ - ٠٠٠٠</string>
+    <string name="terms_and_conditions">الشروط والأحكام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="privacy_agreement">بالمتابعة فإنك توافق على </string>
+    <string name="and_text">و</string>
+    <string name="continue_button">متابعة</string>
 
     <!-- ContentDescription -->
-    <string name="logo_icon">logo icon</string>
-    <string name="egypt_flag">egypt flag</string>
-
+    <string name="logo_icon">شعار التطبيق</string>
+    <string name="egypt_flag">علم مصر</string>
 
     <!-- OnBoarding Screen -->
-    <string name="get_started">Get Started</string>
-    <string name="next">Next</string>
-    <string name="skip">Skip</string>
-
-
-    <!-- Account Setup Category Screen -->
-    <string name="account_setup_customer_category_title">What do you usually need help with?</string>
-    <string name="account_setup_customer_category_description">This helps us personalize your experience. You can change it anytime.</string>
-    <string name="account_setup_craftsman_category_title">What services do you offer?</string>
-    <string name="account_setup_craftsman_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
+    <string name="get_started">دعنا نبدأ</string>
+    <string name="next">التالى</string>
+    <string name="skip">تخطى</string>
 
 </resources>
