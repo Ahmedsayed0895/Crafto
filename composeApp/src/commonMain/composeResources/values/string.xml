@@ -2,8 +2,11 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+    <string name="error_bottom_sheet_header">Oops, Something Broke</string>
+    <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
+    <string name="ok_text">Ok</string>
 
-    <!-- من RegisterScreen -->
+    <!--  RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint">+20  000 - 000 - 0000</string>
@@ -17,8 +20,12 @@
     <string name="logo_icon">logo icon</string>
     <string name="egypt_flag">egypt flag</string>
 
-    <!-- Account Setup Screen -->
+
+    <!-- OnBoarding Screen -->
+    <string name="get_started">Get Started</string>
     <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
 
     <!-- Account Setup Category Screen -->
     <string name="account_setup_customer_category_title">What do you usually need help with?</string>
