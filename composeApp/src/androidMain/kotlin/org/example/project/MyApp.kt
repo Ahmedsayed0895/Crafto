@@ -2,6 +2,8 @@ package org.example.project
 
 import android.app.Application
 import org.example.project.di.initKoin
+import org.example.project.di.networkModule
+import org.example.project.di.platformModule
 import org.koin.android.ext.koin.androidContext
 
 class MyApp : Application() {
@@ -9,6 +11,7 @@ class MyApp : Application() {
         super.onCreate()
         initKoin {
             androidContext(this@MyApp)
+            modules(networkModule, platformModule)
         }
 
     }

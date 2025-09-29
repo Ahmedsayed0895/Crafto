@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -15,7 +17,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,12 +28,13 @@ kotlin {
             isStatic = true
         }
     }
-    
+    val ktorVersion = "2.3.12"  // Replace with your desired version
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
+            implementation("io.ktor:ktor-client-android:${ktorVersion}")
+// Android-specific engine (uses Android's HttpURLConnection)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
@@ -45,11 +48,23 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.koin.core)
+            implementation(libs.bundles.ktor)
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
+            implementation("io.ktor:ktor-client-core:${ktorVersion}")
+// Provides HttpTimeout and core plugins
+            implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
+// For JSON serialization
+            implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
+// For kotlinx.serialization
+// Add if needed: implementation("io.ktor:ktor-client-logging:$ktorVersion") for logging
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
