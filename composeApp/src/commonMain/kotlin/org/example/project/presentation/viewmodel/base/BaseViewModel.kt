@@ -40,7 +40,6 @@ abstract class BaseViewModel<SCREEN_STATE, SCREEN_EFFECT>(
 
 
     protected fun updateState(updater: (SCREEN_STATE) -> SCREEN_STATE) = _state.update(updater)
-
     protected fun sendNewEffect(newEffect: SCREEN_EFFECT) {
         viewModelScope.launch() {
             _effect.emit(newEffect)

@@ -11,9 +11,7 @@ import org.koin.compose.KoinContext
 fun App() {
     AppTheme {
         KoinContext {
-            LocationSetupScreen(
-            )
-
+            LocationSetupScreen()
         }
     }
 }

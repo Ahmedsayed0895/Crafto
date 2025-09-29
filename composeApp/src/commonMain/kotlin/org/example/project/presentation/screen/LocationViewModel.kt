@@ -4,7 +4,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.example.project.domain.entity.Governorates
 import org.example.project.domain.repository.LocationRepository
-import org.example.project.domain.util.Logger
 import org.example.project.presentation.viewmodel.base.BaseViewModel
 import kotlin.math.log
 
@@ -20,7 +19,6 @@ class LocationViewModel(
     private fun fetchGovernorates() {
         tryToCall(
             call = {
-
                 repository.getAllGovernorates() },
             onSuccess = { governorates ->
                 updateState { it.copy(governorates = governorates, isLoading = false, error = null) }
@@ -36,7 +34,6 @@ class LocationViewModel(
     fun fetchDistricts(governorateId: String) {
         tryToCall(
             call = {
-                println( repository.getDistrictsByGovernorateId(governorateId) )
                 repository.getDistrictsByGovernorateId(governorateId) },
             onSuccess = { districts ->
                 updateState {
@@ -55,7 +52,6 @@ class LocationViewModel(
             dispatcher = Dispatchers.IO
         )
     }
-
     fun selectGovernorate(governorate: Governorates) {
         updateState {
             it.copy(
