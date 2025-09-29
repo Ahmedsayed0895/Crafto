@@ -2,4 +2,11 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+    <string name="how_would_you_like_to_use_san3a">How would you like to use San3a?</string>
+    <string name="you_can_switch_roles_anytime">You can switch roles anytime from your profile.</string>
+    <string name="customer">Customer</string>
+    <string name="i_need_help_with_a_service">I need help with a service</string>
+    <string name="craftsman">Craftsman</string>
+    <string name="i_offer_services">I offer services</string>
+    <string name="next">Next</string>
 </resources>
