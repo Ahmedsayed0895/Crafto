@@ -28,13 +28,11 @@ kotlin {
             isStatic = true
         }
     }
-    val ktorVersion = "2.3.12"  // Replace with your desired version
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation("io.ktor:ktor-client-android:${ktorVersion}")
-// Android-specific engine (uses Android's HttpURLConnection)
+            implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
@@ -58,13 +56,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
-            implementation("io.ktor:ktor-client-core:${ktorVersion}")
-// Provides HttpTimeout and core plugins
-            implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
-// For JSON serialization
-            implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
-// For kotlinx.serialization
-// Add if needed: implementation("io.ktor:ktor-client-logging:$ktorVersion") for logging
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

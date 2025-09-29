@@ -1,4 +1,3 @@
-// di/AppModules.kt (new file)
 package org.example.project.di
 
 import LocationRepositoryImpl
