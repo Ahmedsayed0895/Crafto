@@ -1,4 +1,4 @@
-package org.example.project.register
+package org.example.project.presentation.screens.register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,10 +26,11 @@ import crafto.composeapp.generated.resources.and_text
 import crafto.composeapp.generated.resources.continue_button
 import crafto.composeapp.generated.resources.egypt_flag
 import crafto.composeapp.generated.resources.enter_phone
-import crafto.composeapp.generated.resources.logo
 import crafto.composeapp.generated.resources.logo_icon
+import crafto.composeapp.generated.resources.phone_hint
 import crafto.composeapp.generated.resources.privacy_agreement
 import crafto.composeapp.generated.resources.privacy_policy
+import crafto.composeapp.generated.resources.register_logo
 import crafto.composeapp.generated.resources.terms_and_conditions
 import crafto.composeapp.generated.resources.welcome_title
 import org.example.project.presentation.designsystem.components.ButtonState
@@ -75,8 +76,8 @@ private fun RegisterContent(
 
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.logo),
-                    contentDescription =stringResource(Res.string.logo_icon),
+                    painter = painterResource(Res.drawable.register_logo),
+                    contentDescription = stringResource(Res.string.logo_icon),
                     modifier = Modifier.align(Alignment.Center).offset(x = (-5).dp, y = (5).dp),
                     tint = AppTheme.craftoColors.brand.primary
                 )
@@ -107,7 +108,7 @@ private fun RegisterContent(
                     )
 
                     TextField(
-                        hint = "+20  000 - 000 - 0000",
+                        hint = stringResource(Res.string.phone_hint),
                         startIcon = {
                             Image(
                                 painter = painterResource(Res.drawable.egypt_flag),
@@ -131,7 +132,7 @@ private fun RegisterContent(
 
                     PrivacyAndTextSection(
                         normalText = stringResource(Res.string.and_text),
-                        specialText =stringResource(Res.string.privacy_policy),
+                        specialText = stringResource(Res.string.privacy_policy),
                         onClick = onPrivacyPolicyClick,
                         modifier = Modifier.padding(bottom = 24.dp).fillMaxWidth()
                     )
