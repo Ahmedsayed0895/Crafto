@@ -29,13 +29,13 @@ import crafto.composeapp.generated.resources.onboarding2
 import crafto.composeapp.generated.resources.onboarding3
 import crafto.composeapp.generated.resources.skip
 import kotlinx.coroutines.launch
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingPage
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.components.SecondaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingPage
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

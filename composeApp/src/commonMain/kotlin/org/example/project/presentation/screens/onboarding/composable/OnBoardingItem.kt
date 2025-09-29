@@ -36,9 +36,9 @@ fun OnBoardingItem(
         Box(
             modifier = Modifier
                 .background(
-                shape = RoundedCornerShape(AppTheme.craftoRadius.x5l),
-                color = Color.Transparent
-            ).padding(bottom = 32.dp).height(335.dp)
+                    shape = RoundedCornerShape(AppTheme.craftoRadius.x5l),
+                    color = Color.Transparent
+                ).padding(bottom = 32.dp).height(335.dp)
 
         ) {
             Image(

@@ -1,4 +1,4 @@
-package org.example.project.presentation.screen.register.component
+package org.example.project.presentation.screens.register.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

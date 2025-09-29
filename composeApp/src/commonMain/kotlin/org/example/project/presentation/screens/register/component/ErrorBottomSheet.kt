@@ -1,4 +1,4 @@
-package org.example.project.presentation.screen.register.component
+package org.example.project.presentation.screens.register.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
+import crafto.composeapp.generated.resources.authentication_error
 import crafto.composeapp.generated.resources.error_bottom_sheet_content
 import crafto.composeapp.generated.resources.error_bottom_sheet_header
 import crafto.composeapp.generated.resources.ok_text
-import crafto.composeapp.generated.resources.authentication_error
 import org.example.project.presentation.designsystem.components.BottomSheet
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
@@ -30,12 +30,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun ErrorBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-){
+) {
     BottomSheet(
         modifier = modifier,
         onDismissRequest = onDismissRequest,
-    ){
-        Column (modifier = Modifier.fillMaxWidth()) {
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             Image(
                 modifier = Modifier
                     .size(120.dp)
@@ -57,7 +57,7 @@ fun ErrorBottomSheet(
                 style = AppTheme.textStyle.body.medium,
                 color = AppTheme.craftoColors.shade.secondary
             )
-            PrimaryButton (
+            PrimaryButton(
                 modifier = Modifier.heightIn(min = 48.dp).padding(vertical = 24.dp).fillMaxWidth(),
                 text = stringResource(Res.string.ok_text),
                 enabled = true,
@@ -71,8 +71,8 @@ fun ErrorBottomSheet(
 
 @Preview
 @Composable
-private fun ErrorBottomSheetPreview(){
-    AppTheme{
+private fun ErrorBottomSheetPreview() {
+    AppTheme {
         ErrorBottomSheet(
             onDismissRequest = {},
         )
