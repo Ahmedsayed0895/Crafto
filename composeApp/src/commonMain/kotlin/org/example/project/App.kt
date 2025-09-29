@@ -2,6 +2,7 @@ package org.example.project
 
 import androidx.compose.runtime.Composable
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.ui.screens.setupScreens.AccountSetupCategoryScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 
@@ -10,7 +11,7 @@ import org.koin.compose.KoinContext
 fun App() {
     AppTheme {
         KoinContext {
-
+            AccountSetupCategoryScreen()
         }
     }
 }

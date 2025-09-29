@@ -66,10 +66,10 @@ fun BottomSheet(
                     .fillMaxWidth()
                     .padding(bottom = 20.dp),
             ) {
-                Box(modifier = Modifier.align(Alignment.TopStart)){
+                Box(modifier = Modifier.align(Alignment.TopStart)) {
                     headerContent()
                 }
-                if (showCloseIcon){
+                if (showCloseIcon) {
                     Box(
                         modifier = Modifier
                             .align(Alignment.CenterEnd)

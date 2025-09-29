@@ -25,4 +25,12 @@
     <string name="get_started">Get Started</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
+
+
+    <!-- Account Setup Category Screen -->
+    <string name="account_setup_customer_category_title">What do you usually need help with?</string>
+    <string name="account_setup_customer_category_description">This helps us personalize your experience. You can change it anytime.</string>
+    <string name="account_setup_craftsman_category_title">What services do you offer?</string>
+    <string name="account_setup_craftsman_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
+
 </resources>
