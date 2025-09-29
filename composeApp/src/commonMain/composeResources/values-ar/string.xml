@@ -16,4 +16,15 @@
     <string name="logo_icon">شعار التطبيق</string>
     <string name="egypt_flag">علم مصر</string>
 
+    <!-- LocationSetupScreen Strings -->
+    <string name="location_title">أين موقعك؟</string>
+    <string name="location_description">الموقع يساعد في تحسين الدقة، لكن لا تقلق، يمكنك تحديثه لاحقًا.</string>
+    <string name="location_hint">المحافظة، المنطقة</string>
+    <string name="choose_governorate">اختر المحافظة</string>
+    <string name="choose_district">اختر المنطقة</string>
+    <string name="next_button">التالي</string>
+    <string name="location_icon">أيقونة الموقع</string>
+    <string name="dropdown_icon">أيقونة القائمة المنسدلة</string>
+    <string name="arrow_icon">أيقونة السهم</string>
+    <string name="enter_detailed_location">أدخل موقعك بالتفصيل</string>
 </resources>

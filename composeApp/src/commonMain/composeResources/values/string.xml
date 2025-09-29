@@ -3,7 +3,6 @@
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
 
-    <!-- من RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint">+20  000 - 000 - 0000</string>
@@ -16,4 +15,16 @@
     <!-- ContentDescription -->
     <string name="logo_icon">logo icon</string>
     <string name="egypt_flag">egypt flag</string>
+
+    <!-- LocationSetupScreen Strings -->
+    <string name="location_title">Where are you located?</string>
+    <string name="location_description">Location helps improve accuracy, but don\'t worry, you can update it later.</string>
+    <string name="location_hint">Governorate, District</string>
+    <string name="choose_governorate">Choose Governorate</string>
+    <string name="choose_district">Choose District</string>
+    <string name="next_button">Next</string>
+    <string name="location_icon">Location icon</string>
+    <string name="dropdown_icon">Dropdown</string>
+    <string name="arrow_icon">Arrow</string>
+    <string name="enter_detailed_location">Enter your location in detail</string>
 </resources>

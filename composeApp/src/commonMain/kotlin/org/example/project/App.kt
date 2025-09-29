@@ -2,7 +2,7 @@ package org.example.project
 
 import androidx.compose.runtime.Composable
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.register.LocationSetupScreen
+import org.example.project.presentation.screen.LocationSetupScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 

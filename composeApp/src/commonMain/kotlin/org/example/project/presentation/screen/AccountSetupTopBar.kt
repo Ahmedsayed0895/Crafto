@@ -24,8 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AccountSetupTopBar(
     modifier: Modifier = Modifier,
-    currentPage: Int,
-
+    currentPage: Int
     ) {
     Row(
         modifier = modifier,
