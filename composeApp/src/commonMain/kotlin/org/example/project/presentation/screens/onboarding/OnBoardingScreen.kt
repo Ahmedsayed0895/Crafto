@@ -17,55 +17,54 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.get_started
 import crafto.composeapp.generated.resources.next
-import crafto.composeapp.generated.resources.onboarding1
-import crafto.composeapp.generated.resources.onboarding2
-import crafto.composeapp.generated.resources.onboarding3
 import crafto.composeapp.generated.resources.skip
 import kotlinx.coroutines.launch
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingPage
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.components.SecondaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
+import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
+import org.example.project.presentation.viewmodel.OnboardingViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun OnBoardingScreen(
-    onBoardingPagesContent: List<OnBoardingPage>
+    viewModel: OnboardingViewModel = koinViewModel()
+
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     OnBoardingContent(
-        onSkipButtonClick = {},
-        onGetStartButtonClick = {},
-        onBoardingPagesContent = onBoardingPagesContent
+        state = state,
+        interactions = viewModel
     )
 }
 
 @Composable
 fun OnBoardingContent(
-    onBoardingPagesContent: List<OnBoardingPage>,
-    onSkipButtonClick: () -> Unit,
-    onGetStartButtonClick: () -> Unit,
-    modifier: Modifier = Modifier
+    state : OnboardingScreenState,
+    interactions: OnboardingScreenInteractionListener,
 ) {
     val pagerState =
-        rememberPagerState(initialPage = 0, pageCount = { onBoardingPagesContent.size })
+        rememberPagerState(initialPage = 0, pageCount = { state.onboardingData.size })
     val coroutineScope = rememberCoroutineScope()
     val buttonText =
-        if (pagerState.currentPage == onBoardingPagesContent.size - 1) Res.string.get_started else Res.string.next
+        if (pagerState.currentPage == state.onboardingData.size - 1) Res.string.get_started else Res.string.next
 
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize()
             .background(AppTheme.craftoColors.background.screen)
             .padding(horizontal = 16.dp)
             .systemBarsPadding()
@@ -88,7 +87,7 @@ fun OnBoardingContent(
                             )
                         )
                     }
-                    onSkipButtonClick()
+                    interactions::onSkipClick
                 },
                 buttonState = ButtonState.Enable,
                 containerColor = AppTheme.craftoColors.button.secondary,
@@ -100,7 +99,7 @@ fun OnBoardingContent(
             state = pagerState,
             modifier = Modifier.padding(vertical = 32.dp)
         ) { page ->
-            OnBoardingItem(onBoardingPagesContent[page])
+            OnBoardingItem(state.onboardingData[page])
         }
 
         Row(
@@ -120,7 +119,7 @@ fun OnBoardingContent(
                 text = stringResource(buttonText),
                 enabled = true,
                 onClick = {
-                    if (pagerState.currentPage < onBoardingPagesContent.size - 1) {
+                    if (pagerState.currentPage < state.onboardingData.size - 1) {
                         val nextPage = pagerState.currentPage + 1
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(
@@ -132,7 +131,7 @@ fun OnBoardingContent(
                             )
                         }
                     } else {
-                        onGetStartButtonClick()
+                        interactions::onGetStartedClick
                     }
                 },
                 buttonState = ButtonState.Enable,
@@ -155,25 +154,14 @@ fun OnBoardingContent(
 private fun OnBoardingScreenPreview() {
     AppTheme(isDarkTheme = false) {
         OnBoardingContent(
-            onSkipButtonClick = {},
-            onGetStartButtonClick = {},
-            onBoardingPagesContent = listOf(
-                OnBoardingPage(
-                    imageRes = Res.drawable.onboarding1,
-                    title = "Relax, We’ve Got It Covered",
-                    description = "From the comfort of your couch, post your request and let trusted professionals come to you, no calls, no stress."
-                ),
-                OnBoardingPage(
-                    imageRes = Res.drawable.onboarding2,
-                    title = "Find What You Need in Seconds",
-                    description = "Browse dozens of home services — from quick fixes to big projects. Just tap a category and get started instantly."
-                ),
-                OnBoardingPage(
-                    imageRes = Res.drawable.onboarding3,
-                    title = "Post, Compare Offers and Choose!",
-                    description = "Receive multiple offers from nearby professionals, check their prices and ratings, then pick the one that suits you best."
-                ),
-            )
+            state = OnboardingScreenState(),
+            interactions = object : OnboardingScreenInteractionListener {
+                override fun onSkipClick() {}
+
+                override fun onNextClick() {}
+
+                override fun onGetStartedClick() {}
+            }
         )
     }
 }

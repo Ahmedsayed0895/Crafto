@@ -1,6 +1,5 @@
 package org.example.project.presentation.screens.onboarding.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,20 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
-
-data class OnBoardingPage(
-    val imageRes: DrawableResource,
-    val title: String,
-    val description: String
-)
+import org.example.project.presentation.screens.onboarding.model.OnboardingUiState
 
 
 @Composable
 fun OnBoardingItem(
-    page: OnBoardingPage,
+    page: OnboardingUiState,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -41,10 +34,10 @@ fun OnBoardingItem(
             ).padding(bottom = 32.dp).height(335.dp)
 
         ) {
-            Image(
-                painter = painterResource(page.imageRes),
+            AsyncImage(
+                model = page.imageRes,
                 contentDescription = "OnBoarding Image",
-                contentScale = ContentScale.FillBounds
+                contentScale =  ContentScale.FillBounds
             )
         }
 
