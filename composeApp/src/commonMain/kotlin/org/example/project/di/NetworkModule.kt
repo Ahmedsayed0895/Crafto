@@ -5,9 +5,9 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.client.plugins.logging.Logger
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
@@ -18,7 +18,7 @@ class NetworkModule {
     fun provideHttpClient(): HttpClient {
         return HttpClient {
             defaultRequest {
-                //   url("")     // TODO: add base url
+                   url("http://localhost:8085/")
             }
 
             install(Logging) {
