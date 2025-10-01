@@ -26,11 +26,6 @@ kotlinx-serialization = "1.6.3"
 koin-annotations = "2.1.0"
 
 
-kotlin = "2.2.20"
-koin = "4.1.1"
-koinComposeMultiplatform = "4.1.1"
-
-
 [libraries]
 adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
