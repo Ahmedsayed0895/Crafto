@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.extension
+package org.example.project.presentation.util.extension
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.EaseInCirc
