@@ -3,6 +3,7 @@ package org.example.project.presentation.designsystem.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +15,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,12 +44,10 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-private const val s = "Forgot Password?"
-
 @Composable
 fun TextField(
     labelText: String? = null,
-    showDividerLine : Boolean = false,
+    showDividerLine: Boolean = false,
     hint: String? = null,
     text: String,
     onTextChange: (String) -> Unit,
@@ -59,6 +66,7 @@ fun TextField(
     allowSingleLine: Boolean = true,
     textAppearance: TextStyle? = null,
     textTint: Color? = null,
+    showPhoneCode: Boolean = false,
     inputKeyboard: KeyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Done),
     inputActions: KeyboardActions = KeyboardActions.Default,
     forgotAction: (() -> Unit)? = null,
@@ -98,7 +106,7 @@ fun TextField(
                 .background(
                     AppTheme.craftoColors.background.card,
                     RoundedCornerShape(AppTheme.craftoRadius.lg)
-                ),
+                ).focusable(),
             textStyle = textAppearance ?: AppTheme.textStyle.body.medium,
             placeholder = hint?.let {
                 {
@@ -117,9 +125,20 @@ fun TextField(
             isError = errorState,
             enabled = enabledState,
             leadingIcon = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
                     startIcon?.invoke()
-                    if(showDividerLine) VerticalDivider()
+                    if (showDividerLine) VerticalDivider()
+
+                    if (showPhoneCode) {
+                        Text(
+                            text = "+20",
+                            style = AppTheme.textStyle.body.medium,
+                            color = AppTheme.craftoColors.shade.primary
+                        )
+                    }
                 }
             },
             trailingIcon = {

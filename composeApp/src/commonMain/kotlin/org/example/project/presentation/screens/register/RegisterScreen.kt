@@ -14,11 +14,18 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
@@ -28,6 +35,7 @@ import crafto.composeapp.generated.resources.egypt_flag
 import crafto.composeapp.generated.resources.enter_phone
 import crafto.composeapp.generated.resources.logo
 import crafto.composeapp.generated.resources.logo_icon
+import crafto.composeapp.generated.resources.phone_hint
 import crafto.composeapp.generated.resources.privacy_agreement
 import crafto.composeapp.generated.resources.privacy_policy
 import crafto.composeapp.generated.resources.terms_and_conditions
@@ -59,6 +67,7 @@ private fun RegisterContent(
     onTermsClick: () -> Unit,
     onButtonClick: () -> Unit
 ) {
+    var number by remember { mutableStateOf("") }
     Box(
         modifier = modifier.fillMaxSize().background(AppTheme.craftoColors.brand.primary)
     ) {
@@ -76,7 +85,7 @@ private fun RegisterContent(
             ) {
                 Icon(
                     painter = painterResource(Res.drawable.logo),
-                    contentDescription =stringResource(Res.string.logo_icon),
+                    contentDescription = stringResource(Res.string.logo_icon),
                     modifier = Modifier.align(Alignment.Center).offset(x = (-5).dp, y = (5).dp),
                     tint = AppTheme.craftoColors.brand.primary
                 )
@@ -107,18 +116,24 @@ private fun RegisterContent(
                     )
 
                     TextField(
-                        hint = "+20  000 - 000 - 0000",
+                        hint = stringResource(Res.string.phone_hint),
                         startIcon = {
                             Image(
                                 painter = painterResource(Res.drawable.egypt_flag),
-                                contentDescription = stringResource(Res.string.egypt_flag)
+                                contentDescription = stringResource(Res.string.egypt_flag),
+                                modifier = Modifier.padding(start = 18.dp)
                             )
                         },
                         showDividerLine = true,
                         maxLines = 1,
                         minLines = 1,
-                        text = "",
-                        onTextChange = {}
+                        showPhoneCode = true,
+                        text = number,
+                        onTextChange = { if (it.length <= 10) number = it },
+                        inputKeyboard = KeyboardOptions(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Default
+                        )
                     )
 
                     PrivacyAndTextSection(
@@ -131,7 +146,7 @@ private fun RegisterContent(
 
                     PrivacyAndTextSection(
                         normalText = stringResource(Res.string.and_text),
-                        specialText =stringResource(Res.string.privacy_policy),
+                        specialText = stringResource(Res.string.privacy_policy),
                         onClick = onPrivacyPolicyClick,
                         modifier = Modifier.padding(bottom = 24.dp).fillMaxWidth()
                     )

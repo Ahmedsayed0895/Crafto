@@ -6,7 +6,7 @@
     <!-- RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
-    <string name="phone_hint">+20  000 - 000 - 0000</string>
+    <string name="phone_hint"> 000 - 000 - 0000</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_agreement">By continuing, you agree on our </string>
