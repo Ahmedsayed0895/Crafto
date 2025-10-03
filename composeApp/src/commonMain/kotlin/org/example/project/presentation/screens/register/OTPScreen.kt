@@ -69,7 +69,6 @@ private fun OTPContent(
     onBackButtonClick: () -> Unit
 ) {
 
-
     var otpList by remember { mutableStateOf(List(6) { "" }) }
     val focusManager = LocalFocusManager.current
     val focusRequesters = List(otpList.size) { FocusRequester() }
@@ -141,10 +140,11 @@ private fun OTPContent(
                         repeat(otpList.size) { index ->
                             OTPField(
                                 text = otpList[index],
-                                modifier = Modifier.weight(1f).focusRequester(focusRequesters[index]),
+                                modifier = Modifier.weight(1f)
+                                    .focusRequester(focusRequesters[index]),
                                 onTextChange = { value ->
                                     val digit = value.filter { it.isDigit() }.take(1)
-                                    val updateList= otpList.toMutableList().also { list ->
+                                    val updateList = otpList.toMutableList().also { list ->
                                         list[index] = digit
                                     }
                                     otpList = updateList
@@ -194,7 +194,6 @@ private fun OTPContent(
                     )
                 }
             }
-
         }
     }
 }
