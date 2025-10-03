@@ -35,4 +35,12 @@
 
 
 
+    <!-- OTP Screen -->
+    <string name="enter_verification_code">أدخل رمز التحقق</string>
+    <string name="sent_message_to_phone">لقد أرسلنا رمزًا مكوّنًا من 4 أرقام إلى رقم هاتفك</string>
+    <string name="verify">تحقق</string>
+    <string name="do_not_receive_code">لم تستلم الرمز؟</string>
+    <string name="resent_after">إعادة إرسال الرمز بعد</string>
+    <string name="resent_code">إعادة إرسال الرمز</string>
+
 </resources>
