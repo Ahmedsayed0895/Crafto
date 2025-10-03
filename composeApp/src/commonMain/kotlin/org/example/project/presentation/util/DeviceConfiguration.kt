@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.util
+package org.example.project.presentation.util
 
 import androidx.window.core.layout.WindowSizeClass
 

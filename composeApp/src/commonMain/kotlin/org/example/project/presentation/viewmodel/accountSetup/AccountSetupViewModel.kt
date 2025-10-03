@@ -4,9 +4,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.example.project.domain.usecase.GetCategoriesUseCase
 import org.example.project.presentation.viewmodel.base.BaseViewModel
+import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 
+@KoinViewModel
 class AccountSetupViewModel(
-    private val getCategoriesUseCase: GetCategoriesUseCase,
+    @Provided private val getCategoriesUseCase : GetCategoriesUseCase
 ) : BaseViewModel<AccountSetupState, AccountSetupEffect>(AccountSetupState()),
     AccountSetupInterActionListener {
 
@@ -16,7 +19,7 @@ class AccountSetupViewModel(
 
     private fun fetchCategories() {
         viewModelScope.launch {
-            val categories = getCategoriesUseCase()
+            val categories = getCategoriesUseCase.invoke()
             updateState {
                 it.copy(
                     categoryState = it.categoryState.copy(categories = categories)
@@ -24,7 +27,6 @@ class AccountSetupViewModel(
             }
         }
     }
-
 
     override fun onCategorySelected(id: Int) {
         updateState {
@@ -39,6 +41,5 @@ class AccountSetupViewModel(
                 categoryState = it.categoryState.copy(categories = categories)
             )
         }
-
     }
 }
