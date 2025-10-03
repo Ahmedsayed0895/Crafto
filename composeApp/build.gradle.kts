@@ -111,6 +111,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.storage)
     debugImplementation(compose.uiTooling)
 }
 

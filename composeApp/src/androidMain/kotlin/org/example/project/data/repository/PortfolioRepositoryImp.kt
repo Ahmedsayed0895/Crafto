@@ -1,5 +1,6 @@
 package org.example.project.data.repository
 
+import android.net.Uri
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -13,29 +14,45 @@ import org.example.project.data.mapper.toLocalDto
 import org.example.project.domain.entity.CraftsmanPortfolio
 import org.example.project.domain.repository.PortfolioRepository
 import java.util.UUID
+import androidx.core.net.toUri
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 class PortfolioRepositoryImp(
     private val remoteDataSource: StorageRemoteDataSource,
     private val localDataSource: PortfolioLocalDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PortfolioRepository {
+
+    companion object {
+        private const val PORTFOLIO_FOLDER = "portfolio"
+        private const val MAX_PORTFOLIO_PHOTOS = 10
+    }
+
     override suspend fun uploadPortfolioPhotos(
         localPaths: List<String>,
         userId: String
     ): Result<List<String>> = withContext(ioDispatcher) {
-        try {
-            // Validate
-            if (localPaths.size > MAX_PORTFOLIO_PHOTOS) {
-                return@withContext Result.failure(
-                    IllegalArgumentException("Maximum $MAX_PORTFOLIO_PHOTOS photos allowed")
-                )
-            }
+        // Validate input
+        if (localPaths.isEmpty()) {
+            return@withContext Result.success(emptyList())
+        }
 
-            // Save draft before upload
+        if (localPaths.size > MAX_PORTFOLIO_PHOTOS) {
+            return@withContext Result.failure(
+                IllegalArgumentException("Maximum $MAX_PORTFOLIO_PHOTOS photos allowed")
+            )
+        }
+
+        // Save original state for potential rollback
+        val originalDraft = localDataSource.getPortfolioDraft(userId)?.toDomain()
+
+        try {
+            // Save draft with local paths
             val draft = CraftsmanPortfolio(photoPaths = localPaths)
             localDataSource.savePortfolioDraft(userId, draft.toLocalDto())
 
-            // Upload photos in parallel
+            // Upload photos in parallel for better performance
             val uploadedUrls = coroutineScope {
                 localPaths.mapIndexed { index, path ->
                     async {
@@ -49,22 +66,34 @@ class PortfolioRepositoryImp(
             // Update draft with uploaded URLs
             val updatedDraft = CraftsmanPortfolio(
                 photoUrls = uploadedUrls,
-                description = draft.description,
+                description = originalDraft?.description ?: "",
                 photoPaths = emptyList() // Clear local paths after successful upload
             )
             localDataSource.savePortfolioDraft(userId, updatedDraft.toLocalDto())
 
+            // TODO: Submit to Spring Boot API when ready
+            // apiDataSource.submitPortfolio(userId, uploadedUrls, description)
+
             Result.success(uploadedUrls)
+
         } catch (e: Exception) {
+            // Rollback to original state on failure
+            if (originalDraft != null) {
+                localDataSource.savePortfolioDraft(userId, originalDraft.toLocalDto())
+            } else {
+                // If no original draft, clear the failed attempt
+                localDataSource.clearPortfolioDraft(userId)
+            }
             Result.failure(e)
         }
     }
 
+    // No withContext needed - simple local operation
     override suspend fun updatePortfolioDescription(
         userId: String,
         description: String
-    ): Result<Unit>  = withContext(ioDispatcher) {
-        try {
+    ): Result<Unit> {
+        return try {
             val currentDraft = localDataSource.getPortfolioDraft(userId)?.toDomain()
                 ?: CraftsmanPortfolio()
 
@@ -77,14 +106,38 @@ class PortfolioRepositoryImp(
         }
     }
 
-    override suspend fun getPortfolio(userId: String): Result<CraftsmanPortfolio?> {
-        return try {
-            val dto = localDataSource.getPortfolioDraft(userId)
-            Result.success(dto?.toDomain())
-        } catch (e: Exception) {
-            Result.failure(e)
+    // TODO: Refactor to use Spring Boot API
+    override suspend fun getPortfolio(userId: String): Result<CraftsmanPortfolio?> =
+        withContext(ioDispatcher) {
+            try {
+                // TEMPORARY: Get directly from Firebase Storage
+                val folderPath = "craftsmen/$userId/$PORTFOLIO_FOLDER"
+                val files = remoteDataSource.listFiles(folderPath)
+
+                if (files.isEmpty()) {
+                    return@withContext Result.success(null)
+                }
+
+                // Get URLs from Firebase Storage
+                val photoUrls = files
+                    .sortedBy { it.name } // Ensure consistent ordering
+                    .map { it.url }
+
+                // For now, get description from local draft (if exists)
+                // In future, this will come from Spring Boot
+                val localDraft = localDataSource.getPortfolioDraft(userId)?.toDomain()
+
+                val portfolio = CraftsmanPortfolio(
+                    photoUrls = photoUrls,
+                    description = localDraft?.description ?: "",
+                    photoPaths = emptyList()
+                )
+
+                Result.success(portfolio)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
-    }
 
     override suspend fun deletePortfolioPhoto(
         photoUrl: String,
@@ -117,6 +170,7 @@ class PortfolioRepositoryImp(
         }
     }
 
+    // Simple local operations - no withContext needed
     override suspend fun saveDraft(
         userId: String,
         portfolio: CraftsmanPortfolio
@@ -147,17 +201,17 @@ class PortfolioRepositoryImp(
         }
     }
 
-    companion object {
-        private const val PORTFOLIO_FOLDER = "portfolio"
-        private const val MAX_PORTFOLIO_PHOTOS = 10
-    }
-
     private fun extractFirebaseStoragePath(url: String): String {
-        // Extract path from Firebase Storage URL
-        // Format: https://firebasestorage.googleapis.com/v0/b/bucket/o/path%2Fto%2Ffile?alt=media
-        val regex = """/o/(.+?)\?""".toRegex()
-        val match = regex.find(url)
-        return match?.groupValues?.get(1)?.replace("%2F", "/")
-            ?: throw IllegalArgumentException("Invalid Firebase Storage URL")
+        val uri = url.toUri()
+        val encodedPath = uri.path
+            ?: throw IllegalArgumentException("Invalid Firebase Storage URL: no path found")
+
+        val index = encodedPath.indexOf("/o/")
+        if (index == -1) {
+            throw IllegalArgumentException("Invalid Firebase Storage URL: missing /o/ segment")
+        }
+
+        val encodedPart = encodedPath.substring(index + 3)
+        return URLDecoder.decode(encodedPart, StandardCharsets.UTF_8.name())
     }
 }
