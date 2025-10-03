@@ -19,6 +19,8 @@ coil = "3.3.0"
 koinComposeMultiplatform = "4.1.1"
 ksp = "2.2.10-2.0.2"
 koin-annotations = "2.1.0"
+ktor = "2.3.5"
+kotlinx-serialization = "1.5.1"
 
 
 
