@@ -19,7 +19,7 @@
 
     <!-- OTP Screen -->
     <string name="enter_verification-code">Enter Verification Code</string>
-    <string name="sent_message_to_phone">We sent 4-digit code to your phone number </string>
+    <string name="sent_message_to_phone">We sent 6-digit code to your phone number </string>
     <string name="verify">Verify</string>
     <string name="do_not_receive_code">Didn't receive code?</string>
     <string name="resent_after">Resend Code after </string>

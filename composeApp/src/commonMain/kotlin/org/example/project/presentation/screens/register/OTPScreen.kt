@@ -27,6 +27,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,7 +49,6 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import kotlin.collections.set
 
 @Composable
 fun OTPScreen() {
@@ -67,7 +70,9 @@ private fun OTPContent(
 ) {
 
 
-    var otpList by remember { mutableStateOf(List(5) { "" }) }
+    var otpList by remember { mutableStateOf(List(6) { "" }) }
+    val focusManager = LocalFocusManager.current
+    val focusRequesters = List(otpList.size) { FocusRequester() }
 
     Box(
         modifier = modifier.fillMaxSize().background(AppTheme.craftoColors.background.screen)
@@ -76,10 +81,12 @@ private fun OTPContent(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(modifier = Modifier
-                .padding(start = 16.dp,top=16.dp)
-                .windowInsetsPadding(WindowInsets.statusBars)
-                .align(Alignment.Start))
+            Box(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp)
+                    .windowInsetsPadding(WindowInsets.statusBars)
+                    .align(Alignment.Start)
+            )
             {
                 BackButton(
                     modifier = Modifier.background(
@@ -130,56 +137,32 @@ private fun OTPContent(
                     Row(
                         modifier = Modifier.padding(bottom = 24.dp)
                     ) {
-                        OTPField(
-                            text = otpList[0],
-                            modifier = Modifier.weight(1f),
-                            onTextChange = { value->
-                                if(value.length <= 1) {
-                                    otpList.toMutableList().also { list ->
-                                        list[0] = value
+
+                        repeat(otpList.size) { index ->
+                            OTPField(
+                                text = otpList[index],
+                                modifier = Modifier.weight(1f).focusRequester(focusRequesters[index]),
+                                onTextChange = { value ->
+                                    val digit = value.filter { it.isDigit() }.take(1)
+                                    val updateList= otpList.toMutableList().also { list ->
+                                        list[index] = digit
                                     }
-                                }},
-                        )
-                        OTPField(
-                            text = otpList[1],
-                            modifier = Modifier.weight(1f),
-                            onTextChange = { value->
-                                if(value.length <= 1) {
-                                    otpList.toMutableList().also { list ->
-                                        list[1] = value
+                                    otpList = updateList
+
+                                    if (value.isNotEmpty()) {
+                                        if (index < otpList.size - 1) {
+                                            focusRequesters[index + 1].requestFocus()
+                                        } else {
+                                            focusManager.clearFocus()
+                                        }
+                                    } else {
+                                        if (index > 0) {
+                                            focusRequesters[index - 1].requestFocus()
+                                        }
                                     }
-                                }},
-                        )
-                        OTPField(
-                            text = otpList[2],
-                            modifier = Modifier.weight(1f),
-                            onTextChange = { value->
-                                if(value.length <= 1) {
-                                    otpList.toMutableList().also { list ->
-                                        list[2] = value
-                                    }
-                                }},
-                        )
-                        OTPField(
-                            text = otpList[3],
-                            modifier = Modifier.weight(1f),
-                            onTextChange = { value->
-                                if(value.length <= 1) {
-                                    otpList.toMutableList().also { list ->
-                                        list[3] = value
-                                    }
-                                }},
-                        )
-                        OTPField(
-                            text = otpList[4],
-                            modifier = Modifier.weight(1f),
-                            onTextChange = { value->
-                                if(value.length <= 1) {
-                                    otpList.toMutableList().also { list ->
-                                        list[4] = value
-                                    }
-                            }},
-                        )
+                                }
+                            )
+                        }
                     }
 
                     PrimaryButton(
@@ -216,19 +199,22 @@ private fun OTPContent(
     }
 }
 
-
 @Composable
-fun OTPField(
+private fun OTPField(
     text: String,
     hint: String = "0",
     modifier: Modifier,
     onTextChange: (String) -> Unit
 ) {
+    var isFocused by remember { mutableStateOf(false) }
+
     OutlinedTextField(
         value = text,
         onValueChange = onTextChange,
         modifier = modifier.background(AppTheme.craftoColors.background.card)
-            .padding(horizontal = 10.dp, vertical = 8.dp),
+            .padding(horizontal = 5.dp, vertical = 8.dp).onFocusChanged { focusState ->
+                isFocused = focusState.isFocused
+            },
         singleLine = true,
         textStyle = AppTheme.textStyle.title.large.copy(
             textAlign = TextAlign.Center,
@@ -236,12 +222,19 @@ fun OTPField(
         ),
         shape = RoundedCornerShape(AppTheme.craftoRadius.lg),
         placeholder = {
-            Text(
-                hint,
-                textAlign = TextAlign.Center,
-                style = AppTheme.textStyle.title.large,
-                color = AppTheme.craftoColors.shade.tertiary
-            )
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                if (text.isEmpty() && !isFocused) {
+                    Text(
+                        hint,
+                        textAlign = TextAlign.Center,
+                        style = AppTheme.textStyle.title.large,
+                        color = AppTheme.craftoColors.shade.tertiary
+                    )
+                }
+            }
         },
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = AppTheme.craftoColors.shade.primary,
