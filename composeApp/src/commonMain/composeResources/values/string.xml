@@ -2,8 +2,11 @@
 <resources>
     <string name="chat">Chat</string>
     <string name="accept_offer">Accept Offer</string>
+    <string name="error_bottom_sheet_header">Oops, Something Broke</string>
+    <string name="error_bottom_sheet_content">Our team is working on a fix. Please try again later.</string>
+    <string name="ok_text">Ok</string>
 
-    <!-- RegisterScreen -->
+    <!--  RegisterScreen -->
     <string name="welcome_title">Welcome to San3a 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint"> 000 - 000 - 0000</string>
@@ -26,5 +29,16 @@
     <string name="resent_code">Resend Code</string>
 
 
+    <!-- OnBoarding Screen -->
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
+
+    <!-- Account Setup Category Screen -->
+    <string name="account_setup_customer_category_title">What do you usually need help with?</string>
+    <string name="account_setup_customer_category_description">This helps us personalize your experience. You can change it anytime.</string>
+    <string name="account_setup_craftsman_category_title">What services do you offer?</string>
+    <string name="account_setup_craftsman_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
 
 </resources>
