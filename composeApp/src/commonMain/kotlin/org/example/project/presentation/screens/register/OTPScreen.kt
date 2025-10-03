@@ -149,13 +149,13 @@ private fun OTPContent(
                                     }
                                     otpList = updateList
 
-                                    if (value.isNotEmpty()) {
+                                    if (digit.isNotEmpty()) {
                                         if (index < otpList.size - 1) {
                                             focusRequesters[index + 1].requestFocus()
                                         } else {
                                             focusManager.clearFocus()
                                         }
-                                    } else {
+                                    } else if (otpList[index].isEmpty() && value.isEmpty()) {
                                         if (index > 0) {
                                             focusRequesters[index - 1].requestFocus()
                                         }
