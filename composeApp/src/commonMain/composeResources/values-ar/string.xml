@@ -24,4 +24,9 @@
     <string name="next">التالى</string>
     <string name="skip">تخطى</string>
 
+    <!-- customer request screen -->
+    <string name="ongoing">قيد التنفيذ</string>
+    <string name="cancel">تم الإلغاء</string>
+    <string name="complete">مكتمل</string>
+
 </resources>

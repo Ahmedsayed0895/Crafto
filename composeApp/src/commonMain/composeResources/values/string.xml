@@ -33,4 +33,8 @@
     <string name="account_setup_craftsman_category_title">What services do you offer?</string>
     <string name="account_setup_craftsman_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
 
+    <!-- customer request screen -->
+    <string name="ongoing">Ongoing</string>
+    <string name="cancel">Canceled</string>
+    <string name="complete">Completed</string>
 </resources>
