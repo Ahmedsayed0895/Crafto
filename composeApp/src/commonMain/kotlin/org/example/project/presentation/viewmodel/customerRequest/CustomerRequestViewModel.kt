@@ -1,12 +1,15 @@
 package org.example.project.presentation.viewmodel.customerRequest
 
 import org.example.project.presentation.viewmodel.base.BaseViewModel
+import org.koin.android.annotation.KoinViewModel
 
-class CustomerRequestViewModel ():
-    BaseViewModel<CustomerRequestUiState, CustomerInteractionListener>(
+@KoinViewModel
+class CustomerRequestViewModel (
+
+): BaseViewModel<CustomerRequestUiState, CustomerRequestInteractionListener>(
         CustomerRequestUiState()
-    ){
+){
 
 
 
-    }
+}
