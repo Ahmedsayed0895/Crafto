@@ -10,19 +10,21 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.get_started
 import crafto.composeapp.generated.resources.next
@@ -44,7 +46,7 @@ fun OnBoardingScreen(
     viewModel: OnboardingViewModel = koinViewModel()
 
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsState()
     OnBoardingContent(
         state = state,
         interactions = viewModel
@@ -53,7 +55,7 @@ fun OnBoardingScreen(
 
 @Composable
 fun OnBoardingContent(
-    state : OnboardingScreenState,
+    state: OnboardingScreenState,
     interactions: OnboardingScreenInteractionListener,
 ) {
     val pagerState =
@@ -62,7 +64,6 @@ fun OnBoardingContent(
     val buttonText =
         if (pagerState.currentPage == state.onboardingData.size - 1) Res.string.get_started else Res.string.next
 
-
     Column(
         modifier = Modifier.fillMaxSize()
             .background(AppTheme.craftoColors.background.screen)
@@ -70,80 +71,89 @@ fun OnBoardingContent(
             .systemBarsPadding()
             .verticalScroll(rememberScrollState())
     ) {
-        Box(
-            modifier = Modifier.padding(top = 24.dp).align(Alignment.End),
-        ) {
-            SecondaryButton(
-                text = stringResource(Res.string.skip),
-                enabled = true,
-                onClick = {
-                    val skipPage = pagerState.pageCount - 1
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(
-                            page = skipPage,
-                            animationSpec = spring(
-                                dampingRatio = 0.85f,
-                                stiffness = 44f
-                            )
-                        )
-                    }
-                    interactions::onSkipClick
-                },
-                buttonState = ButtonState.Enable,
-                containerColor = AppTheme.craftoColors.button.secondary,
-                contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
-            )
-        }
-
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier.padding(vertical = 32.dp)
-        ) { page ->
-            OnBoardingItem(state.onboardingData[page])
-        }
-
-        Row(
-            modifier = Modifier,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            OnBoardingIndicator(
-                currentPage = pagerState.currentPage,
-                totalPage = pagerState.pageCount,
-                progressColor = AppTheme.craftoColors.brand.primary,
-                trackColor = AppTheme.craftoColors.shade.quaternary,
-                modifier = Modifier.width(100.dp)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-
-            PrimaryButton(
-                text = stringResource(buttonText),
-                enabled = true,
-                onClick = {
-                    if (pagerState.currentPage < state.onboardingData.size - 1) {
-                        val nextPage = pagerState.currentPage + 1
+        if (state.loading) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp).padding(top=40.dp),
+                    color = AppTheme.craftoColors.brand.primary
+                )
+            }
+        } else {
+            Box(
+                modifier = Modifier.padding(top = 24.dp).align(Alignment.End),
+            ) {
+                SecondaryButton(
+                    text = stringResource(Res.string.skip),
+                    enabled = true,
+                    onClick = {
+                        val skipPage = pagerState.pageCount - 1
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(
-                                page = nextPage,
+                                page = skipPage,
                                 animationSpec = spring(
                                     dampingRatio = 0.85f,
-                                    stiffness = 440f
+                                    stiffness = 44f
                                 )
                             )
                         }
-                    } else {
-                        interactions::onGetStartedClick
-                    }
-                },
-                buttonState = ButtonState.Enable,
-                modifier = Modifier.animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = 0.85f,
-                        stiffness = 44f,
+                        interactions::onSkipClick
+                    },
+                    buttonState = ButtonState.Enable,
+                    containerColor = AppTheme.craftoColors.button.secondary,
+                    contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
+                )
+            }
+
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.padding(vertical = 32.dp)
+            ) { page ->
+                OnBoardingItem(state.onboardingData[page])
+            }
+
+            Row(
+                modifier = Modifier,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OnBoardingIndicator(
+                    currentPage = pagerState.currentPage,
+                    totalPage = pagerState.pageCount,
+                    progressColor = AppTheme.craftoColors.brand.primary,
+                    trackColor = AppTheme.craftoColors.shade.quaternary,
+                    modifier = Modifier.width(100.dp)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+
+                PrimaryButton(
+                    text = stringResource(buttonText),
+                    enabled = true,
+                    onClick = {
+                        if (pagerState.currentPage < state.onboardingData.size - 1) {
+                            val nextPage = pagerState.currentPage + 1
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(
+                                    page = nextPage,
+                                    animationSpec = spring(
+                                        dampingRatio = 0.85f,
+                                        stiffness = 440f
+                                    )
+                                )
+                            }
+                        } else {
+                            interactions::onGetStartedClick
+                        }
+                    },
+                    buttonState = ButtonState.Enable,
+                    modifier = Modifier.animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = 0.85f,
+                            stiffness = 44f,
+                        ),
+                        alignment = Alignment.BottomEnd
                     ),
-                    alignment = Alignment.BottomEnd
-                ),
-                contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
-            )
+                    contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
+                )
+            }
         }
     }
 }

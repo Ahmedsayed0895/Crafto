@@ -33,7 +33,7 @@ class OnboardingViewModel(
                 updateState { it.copy(loading = true) }
                 repository.getOnboardingData()
             },
-            onSuccess = { ::onLoadDataSuccess },
+            onSuccess =  ::onLoadDataSuccess ,
             onError = { errorState -> updateState { it.copy(errorMessage = errorState) } },
             dispatcher = ioDispatcher
         )
