@@ -16,9 +16,9 @@ import org.koin.core.annotation.Single
 class NetworkModule {
     @Single
     fun provideHttpClient(): HttpClient {
-        return HttpClient {
+        return HttpClient(engine = getHttpEngine()) {
             defaultRequest {
-                   url("http://localhost:8085/")
+                   url("http://10.0.2.2:8085/")
             }
 
             install(Logging) {
