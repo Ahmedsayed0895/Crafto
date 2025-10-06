@@ -19,7 +19,7 @@ coil = "3.3.0"
 koinComposeMultiplatform = "4.1.1"
 ksp = "2.2.10-2.0.2"
 koin-annotations = "2.1.0"
-ktor = "2.3.5"
+ktor = "3.2.3"
 kotlinx-serialization = "1.5.1"
 
 
@@ -28,6 +28,7 @@ google-services = "4.4.3"
 #newer version of firebase-bom causes gradle errors
 firebase-bom = "33.16.0"
 firebaseCrashlytics = "3.0.6"
+ktorClientCio = "3.3.0"
 
 
 [libraries]
@@ -57,6 +58,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 # ktor
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -64,6 +66,9 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+
+
 
 # Coil
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
@@ -82,6 +87,8 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlinx-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
 
 [bundles]
 coil = [
