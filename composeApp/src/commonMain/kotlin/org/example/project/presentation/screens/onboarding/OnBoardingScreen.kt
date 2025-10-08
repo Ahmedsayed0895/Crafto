@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,6 +30,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.get_started
 import crafto.composeapp.generated.resources.next
 import crafto.composeapp.generated.resources.skip
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
@@ -37,6 +39,7 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
 import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
 import org.example.project.presentation.viewmodel.OnboardingViewModel
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -54,27 +57,26 @@ fun OnBoardingScreen(
 }
 
 @Composable
-fun OnBoardingContent(
+private fun OnBoardingContent(
     state: OnboardingScreenState,
     interactions: OnboardingScreenInteractionListener,
 ) {
-    val pagerState =
-        rememberPagerState(initialPage = 0, pageCount = { state.onboardingData.size })
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.onboardingData.size })
     val coroutineScope = rememberCoroutineScope()
-    val buttonText =
-        if (pagerState.currentPage == state.onboardingData.size - 1) Res.string.get_started else Res.string.next
+    val buttonText = if (pagerState.currentPage == state.onboardingData.size - 1) Res.string.get_started else Res.string.next
 
     Column(
         modifier = Modifier.fillMaxSize()
             .background(AppTheme.craftoColors.background.screen)
             .padding(horizontal = 16.dp)
             .systemBarsPadding()
-            .verticalScroll(rememberScrollState())
-    ) {
+            .verticalScroll(rememberScrollState()),
+
+        ) {
         if (state.loading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp).padding(top=40.dp),
+                    modifier = Modifier.size(24.dp).padding(top = 40.dp),
                     color = AppTheme.craftoColors.brand.primary
                 )
             }
@@ -111,50 +113,71 @@ fun OnBoardingContent(
                 OnBoardingItem(state.onboardingData[page])
             }
 
-            Row(
-                modifier = Modifier,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                OnBoardingIndicator(
-                    currentPage = pagerState.currentPage,
-                    totalPage = pagerState.pageCount,
-                    progressColor = AppTheme.craftoColors.brand.primary,
-                    trackColor = AppTheme.craftoColors.shade.quaternary,
-                    modifier = Modifier.width(100.dp)
-                )
-                Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
 
-                PrimaryButton(
-                    text = stringResource(buttonText),
-                    enabled = true,
-                    onClick = {
-                        if (pagerState.currentPage < state.onboardingData.size - 1) {
-                            val nextPage = pagerState.currentPage + 1
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(
-                                    page = nextPage,
-                                    animationSpec = spring(
-                                        dampingRatio = 0.85f,
-                                        stiffness = 440f
-                                    )
-                                )
-                            }
-                        } else {
-                            interactions::onGetStartedClick
-                        }
-                    },
-                    buttonState = ButtonState.Enable,
-                    modifier = Modifier.animateContentSize(
-                        animationSpec = spring(
-                            dampingRatio = 0.85f,
-                            stiffness = 44f,
-                        ),
-                        alignment = Alignment.BottomEnd
-                    ),
-                    contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
-                )
-            }
+            OnboardingActionsRow(
+                pagerState = pagerState,
+                coroutineScope = coroutineScope,
+                state = state,
+                interactions = interactions,
+                buttonText = buttonText,
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
         }
+    }
+}
+
+@Composable
+private fun OnboardingActionsRow(
+    modifier: Modifier,
+    pagerState: PagerState,
+    coroutineScope: CoroutineScope,
+    state: OnboardingScreenState,
+    interactions: OnboardingScreenInteractionListener,
+    buttonText: StringResource
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        OnBoardingIndicator(
+            currentPage = pagerState.currentPage,
+            totalPage = pagerState.pageCount,
+            progressColor = AppTheme.craftoColors.brand.primary,
+            trackColor = AppTheme.craftoColors.shade.quaternary,
+            modifier = Modifier.width(100.dp)
+        )
+        Spacer(modifier = Modifier.weight(1f))
+
+        PrimaryButton(
+            text = stringResource(buttonText),
+            enabled = true,
+            onClick = {
+                if (pagerState.currentPage < state.onboardingData.size - 1) {
+                    val nextPage = pagerState.currentPage + 1
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(
+                            page = nextPage,
+                            animationSpec = spring(
+                                dampingRatio = 0.85f,
+                                stiffness = 440f
+                            )
+                        )
+                    }
+                } else {
+                    interactions::onGetStartedClick
+                }
+            },
+            buttonState = ButtonState.Enable,
+            modifier = Modifier.animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = 0.85f,
+                    stiffness = 44f,
+                ),
+                alignment = Alignment.BottomEnd
+            ),
+            contentPadding = PaddingValues(vertical = 14.dp, horizontal = 24.dp)
+        )
     }
 }
 

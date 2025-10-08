@@ -3,7 +3,7 @@ package org.example.project.presentation.screens.onboarding.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,35 +26,38 @@ fun OnBoardingItem(
     Column(
         modifier = modifier.background(AppTheme.craftoColors.background.screen)
     ) {
-
         Box(
             modifier = Modifier
                 .background(
                     shape = RoundedCornerShape(AppTheme.craftoRadius.x5l),
                     color = Color.Transparent
-                ).padding(bottom = 32.dp).height(335.dp)
-
+                ).height(335.dp)
         ) {
             AsyncImage(
                 model = page.imageRes,
                 contentDescription = "OnBoarding Image",
-                modifier= Modifier.fillMaxWidth(),
-                contentScale =  ContentScale.FillBounds
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds,
+                onError = { println("Image Load : ${it.result.throwable}") },
             )
         }
 
-        Text(
-            text = page.title,
-            style = AppTheme.textStyle.display,
-            color = AppTheme.craftoColors.shade.primary,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Column(
+            modifier = Modifier.padding(top = 32.dp).height(185.dp),
+        ) {
+            Text(
+                text = page.title,
+                style = AppTheme.textStyle.display,
+                color = AppTheme.craftoColors.shade.primary,
+                modifier = Modifier.padding(bottom = 16.dp, top = 19.dp),
+            )
 
-        Text(
-            text = page.description,
-            style = AppTheme.textStyle.body.largeRegular,
-            color = AppTheme.craftoColors.shade.secondary,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
+            Text(
+                text = page.description,
+                style = AppTheme.textStyle.body.largeRegular,
+                color = AppTheme.craftoColors.shade.secondary,
+                modifier = Modifier.padding(bottom = 19.dp)
+            )
+        }
     }
 }
