@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.onboarding
+package org.example.project.presentation.screens.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

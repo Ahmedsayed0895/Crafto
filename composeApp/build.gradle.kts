@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
@@ -11,6 +10,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -41,6 +41,11 @@ kotlin {
             implementation(libs.firebase.analytics)
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.crashlytics.ktx)
+
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.android)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -60,15 +65,29 @@ kotlin {
             api(libs.koin.annotations)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.logging)
+
+            implementation(libs.bundles.coil)
+
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 
     sourceSets.named("commonMain").configure {
         kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
     }
+
 }
 
 ksp {
@@ -107,11 +126,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 dependencies {
     debugImplementation(compose.uiTooling)
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-
 }
 

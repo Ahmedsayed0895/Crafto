@@ -10,13 +10,17 @@ androidx-core = "1.17.0"
 androidx-espresso = "3.7.0"
 androidx-lifecycle = "2.9.3"
 androidx-testExt = "1.3.0"
+coilComposeVersion = "3.3.0"
 composeMultiplatform = "1.8.2"
 junit = "4.13.2"
 kotlin = "2.2.20"
 koin = "4.1.1"
+coil = "3.3.0"
 koinComposeMultiplatform = "4.1.1"
 ksp = "2.2.10-2.0.2"
 koin-annotations = "2.1.0"
+ktor = "3.2.3"
+kotlinx-serialization = "1.5.1"
 
 
 
@@ -24,12 +28,14 @@ google-services = "4.4.3"
 #newer version of firebase-bom causes gradle errors
 firebase-bom = "33.16.0"
 firebaseCrashlytics = "3.0.6"
+ktorClientCio = "3.3.0"
 
 
 [libraries]
 adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
 adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "adaptive" }
+coil3-coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilComposeVersion" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -51,6 +57,27 @@ koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
+# ktor
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+
+
+
+# Coil
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
+
+
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -60,3 +87,13 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlinx-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+
+[bundles]
+coil = [
+    "coil",
+    "coil-compose-core",
+    "coil-compose",
+    "coil-network-ktor3",
+]
