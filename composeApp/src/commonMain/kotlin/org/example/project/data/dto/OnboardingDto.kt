@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OnBoardingDto(
+data class OnboardingDto(
     @SerialName("id")
     val id : String,
     @SerialName("title")

@@ -12,6 +12,7 @@ import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
+//192.168.1.15
 @Module
 class NetworkModule {
     @Single
@@ -47,6 +48,6 @@ class NetworkModule {
     }
 
     private companion object {
-        const val TIME_OUT_INTERVAL_MILLI = 15_000L
+        const val TIME_OUT_INTERVAL_MILLI = 10_000L
     }
 }

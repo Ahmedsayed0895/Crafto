@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 
 @Composable
-fun OnBoardingIndicator(
+fun OnboardingIndicator(
     currentPage: Int,
     totalPage: Int,
     modifier: Modifier = Modifier,

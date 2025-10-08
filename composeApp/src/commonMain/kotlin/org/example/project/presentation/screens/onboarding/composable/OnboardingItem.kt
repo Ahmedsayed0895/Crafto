@@ -19,7 +19,7 @@ import org.example.project.presentation.screens.onboarding.model.OnboardingUiSta
 
 
 @Composable
-fun OnBoardingItem(
+fun OnboardingItem(
     page: OnboardingUiState,
     modifier: Modifier = Modifier
 ) {

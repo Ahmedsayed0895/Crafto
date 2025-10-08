@@ -36,8 +36,8 @@ import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.components.SecondaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingIndicator
-import org.example.project.presentation.screens.onboarding.composable.OnBoardingItem
+import org.example.project.presentation.screens.onboarding.composable.OnboardingIndicator
+import org.example.project.presentation.screens.onboarding.composable.OnboardingItem
 import org.example.project.presentation.viewmodel.OnboardingViewModel
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -45,19 +45,19 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun OnBoardingScreen(
+fun OnboardingScreen(
     viewModel: OnboardingViewModel = koinViewModel()
 
 ) {
     val state by viewModel.state.collectAsState()
-    OnBoardingContent(
+    OnboardingContent(
         state = state,
         interactions = viewModel
     )
 }
 
 @Composable
-private fun OnBoardingContent(
+private fun OnboardingContent(
     state: OnboardingScreenState,
     interactions: OnboardingScreenInteractionListener,
 ) {
@@ -110,7 +110,7 @@ private fun OnBoardingContent(
                 state = pagerState,
                 modifier = Modifier.padding(vertical = 32.dp)
             ) { page ->
-                OnBoardingItem(state.onboardingData[page])
+                OnboardingItem(state.onboardingData[page])
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -140,7 +140,7 @@ private fun OnboardingActionsRow(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        OnBoardingIndicator(
+        OnboardingIndicator(
             currentPage = pagerState.currentPage,
             totalPage = pagerState.pageCount,
             progressColor = AppTheme.craftoColors.brand.primary,
@@ -186,7 +186,7 @@ private fun OnboardingActionsRow(
 @Composable
 private fun OnBoardingScreenPreview() {
     AppTheme(isDarkTheme = false) {
-        OnBoardingContent(
+        OnboardingContent(
             state = OnboardingScreenState(),
             interactions = object : OnboardingScreenInteractionListener {
                 override fun onSkipClick() {}

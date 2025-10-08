@@ -6,5 +6,5 @@ import org.example.project.presentation.viewmodel.base.ErrorUiState
 data class OnboardingScreenState(
     val onboardingData: List<OnboardingUiState> = emptyList(),
     val loading: Boolean = false,
-    val errorMessage : ErrorUiState = ErrorUiState("")
+    val errorMessage : ErrorUiState?= null
 )
