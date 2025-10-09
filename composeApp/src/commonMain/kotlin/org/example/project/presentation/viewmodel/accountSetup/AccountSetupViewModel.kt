@@ -29,17 +29,17 @@ class AccountSetupViewModel(
     }
 
     override fun onCategorySelected(id: Int) {
-        updateState {
-            val categories = it.categoryState.categories.map { category ->
-                if (category.id == id) {
-                    category.copy(isSelected = !category.isSelected)
-                } else {
-                    category
-                }
-            }
-            it.copy(
-                categoryState = it.categoryState.copy(categories = categories)
-            )
-        }
+//        updateState {
+//            val categories = it.categoryState.categories.map { category ->
+//                if (category.id == id) {
+//                    category.copy(isSelected = !category.isSelected)
+//                } else {
+//                    category
+//                }
+//            }
+//            it.copy(
+//                categoryState = it.categoryState.copy(categories = categories)
+//            )
+//        }
     }
 }

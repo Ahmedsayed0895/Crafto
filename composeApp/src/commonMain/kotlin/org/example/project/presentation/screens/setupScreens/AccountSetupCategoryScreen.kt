@@ -9,7 +9,7 @@ import crafto.composeapp.generated.resources.account_setup_craftsman_category_de
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.account_setup_customer_category_description
 import crafto.composeapp.generated.resources.account_setup_customer_category_title
-import org.example.project.presentation.ui.screens.setupScreens.component.CategoryActionBox
+//import org.example.project.presentation.ui.screens.setupScreens.component.CategoryActionBox
 import org.example.project.presentation.ui.screens.setupScreens.component.SetupScreenScaffold
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
 import org.example.project.presentation.viewmodel.accountSetup.AccountSetupViewModel
@@ -51,10 +51,10 @@ fun AccountSetupCategoryContent(
         onBackButtonClick = onBackButtonClick,
         onNextButtonClick = onNextButtonClick,
     ) {
-        CategoryActionBox(
-            state = state,
-            onChipSelected = onChipSelected,
-        )
+//        CategoryActionBox(
+//            state = state,
+//            onChipSelected = onChipSelected,
+//        )
     }
 
 }

@@ -20,7 +20,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.next
-import org.example.project.data.memory.dataSource.categoryList
+//import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
@@ -173,14 +173,14 @@ fun SetupScreenScaffoldLightPreview() {
 
         )
     {
-        CategoryActionBox(
-            state = AccountSetupState(
-                categoryState = AccountSetupCategoryState(
-                    categories = categoryList
-                )
-            ),
-            onChipSelected = {}
-        )
+//        CategoryActionBox(
+//            state = AccountSetupState(
+//                categoryState = AccountSetupCategoryState(
+//                    categories = categoryList
+//                )
+//            ),
+//            onChipSelected = {}
+//        )
     }
 
 
