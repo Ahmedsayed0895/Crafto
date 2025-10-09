@@ -8,8 +8,15 @@ class CustomerRequestViewModel (
 
 ): BaseViewModel<CustomerRequestUiState, CustomerRequestInteractionListener>(
         CustomerRequestUiState()
-){
+), CustomerRequestInteractionListener {
+        override fun onTabClicked(tabs: Tabs) {
+        }
 
+        override fun onRateClicked() {
+        }
+
+        override fun onDismissBottomSheet() {
+        }
 
 
 }
