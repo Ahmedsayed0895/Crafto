@@ -1,7 +1,7 @@
 package org.example.project.data.repository.dataSource
 
-import org.example.project.data.repository.dataSource.memory.dto.CategoryEntity
+import org.example.project.data.dto.Category
 
 interface CategoryDataSource {
-    suspend fun getCategories(): List<CategoryEntity>
+    suspend fun getCategories(): List<Category>
 }
