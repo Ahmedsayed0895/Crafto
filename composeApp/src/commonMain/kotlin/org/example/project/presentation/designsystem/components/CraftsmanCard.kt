@@ -1,5 +1,4 @@
-package org.example.project.presentation.designsystem.components
-
+package org.example.project.designSystem.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,16 +32,16 @@ import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.check_mark
 import crafto.composeapp.generated.resources.clipboard_text
+import crafto.composeapp.generated.resources.customer
 import crafto.composeapp.generated.resources.dialog
-import crafto.composeapp.generated.resources.selection_card_img
 import crafto.composeapp.generated.resources.star
 import crafto.composeapp.generated.resources.star_1
 import crafto.composeapp.generated.resources.user_rounded
 import crafto.composeapp.generated.resources.verified_check_1
+import org.example.project.presentation.designsystem.components.DefaultButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
 @Composable
 fun CraftsmanCard(
     modifier: Modifier = Modifier,
@@ -57,31 +56,25 @@ fun CraftsmanCard(
     onButtonClick: () -> Unit = {}
 ) {
     val craftsmanIcon = craftsmanImage ?: painterResource(Res.drawable.user_rounded)
-
     val (textStyle, textColor) =
         if (craftsmanImage != null)
             AppTheme.textStyle.body.medium to AppTheme.craftoColors.shade.primary
         else
             AppTheme.textStyle.body.smallMedium to AppTheme.craftoColors.shade.secondary
-
     val (secondaryIcon, secondaryIconTint) =
         if (showOffers)
             painterResource(Res.drawable.clipboard_text) to AppTheme.craftoColors.brand.primary
         else
             painterResource(Res.drawable.star_1) to AppTheme.craftoColors.additional.primaryYellow
-
     val (secondaryText, secondaryTextColor) =
         if (showOffers)
             "$numberOfOffers Offers" to AppTheme.craftoColors.brand.primary
         else
             "$rating Rating" to AppTheme.craftoColors.shade.secondary
-
-
     Row(
         modifier = modifier.fillMaxWidth().background(AppTheme.craftoColors.background.card),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-
         if (craftsmanImage == null) {
             DashedCircle(
                 modifier = Modifier.clip(RoundedCornerShape(AppTheme.craftoRadius.full))
@@ -94,7 +87,7 @@ fun CraftsmanCard(
             CircleAvatar(
                 modifier = Modifier.clip(RoundedCornerShape(AppTheme.craftoRadius.full))
                     .size(40.dp),
-                image = painterResource(Res.drawable.selection_card_img)
+                image = painterResource(Res.drawable.customer)
             )
         }
 
@@ -117,7 +110,6 @@ fun CraftsmanCard(
                     modifier = Modifier.size(16.dp),
                     tint = secondaryIconTint
                 )
-
                 Text(
                     text = secondaryText,
                     color = secondaryTextColor,
@@ -125,9 +117,7 @@ fun CraftsmanCard(
                 )
             }
         }
-
         Spacer(modifier = Modifier.weight(1f))
-
         DefaultButton(
             text = buttonText,
             enabled = true,
@@ -138,7 +128,6 @@ fun CraftsmanCard(
         )
     }
 }
-
 @Composable
 private fun CircleAvatar(
     image: Painter,
@@ -157,14 +146,12 @@ private fun CircleAvatar(
                 contentScale = ContentScale.Crop,
             )
         }
-
         Icon(
             painter = painterResource(Res.drawable.verified_check_1),
             contentDescription = "Verified",
             modifier = Modifier.size(16.dp).align(Alignment.BottomCenter),
             tint = AppTheme.craftoColors.additional.primarySuccess
         )
-
         Icon(
             painter = painterResource(Res.drawable.check_mark),
             contentDescription = "check mark",
@@ -173,7 +160,6 @@ private fun CircleAvatar(
         )
     }
 }
-
 @Composable
 private fun DashedCircle(
     icon: Painter,
@@ -202,8 +188,6 @@ private fun DashedCircle(
         )
     }
 }
-
-
 @Preview
 @Composable
 private fun CraftsmanCardPreview() {
@@ -217,7 +201,7 @@ private fun CraftsmanCardPreview() {
                 craftsmanName = "Hend",
                 rating = 4.5,
                 showOffers = false,
-                craftsmanImage = painterResource(Res.drawable.selection_card_img),
+                craftsmanImage = painterResource(Res.drawable.customer),
                 buttonText = "Rate",
                 buttonIcon = painterResource(Res.drawable.star),
                 buttonColors = ButtonDefaults.buttonColors(
@@ -225,7 +209,6 @@ private fun CraftsmanCardPreview() {
                     contentColor = AppTheme.craftoColors.button.onSecondary
                 )
             )
-
             CraftsmanCard(
                 modifier = Modifier.padding(16.dp),
                 craftsmanName = "Craftsman Not Chosen",
@@ -242,7 +225,7 @@ private fun CraftsmanCardPreview() {
                 craftsmanName = "Hend",
                 rating = 4.5,
                 showOffers = false,
-                craftsmanImage = painterResource(Res.drawable.selection_card_img),
+                craftsmanImage = painterResource(Res.drawable.customer),
                 buttonText = "Chat",
                 buttonIcon = painterResource(Res.drawable.dialog),
                 buttonColors = ButtonDefaults.buttonColors(
