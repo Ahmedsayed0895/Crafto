@@ -24,4 +24,12 @@
     <string name="next">التالى</string>
     <string name="skip">تخطى</string>
 
+    <!-- Account Setup UserTypeSelectionScreen  -->
+    <string name="how_would_you_like_to_use_san3a">كيف ترغب في استخدام صُنع؟</string>
+    <string name="you_can_switch_roles_anytime">يمكنك تبديل الأدوار في أي وقت من ملفك الشخصي.</string>
+    <string name="customer">عميل</string>
+    <string name="i_need_help_with_a_service">أحتاج إلى مساعدة بخدمة</string>
+    <string name="craftsman">حرفي</string>
+    <string name="i_offer_services">أقدم خدمات</string>
+
 </resources>
