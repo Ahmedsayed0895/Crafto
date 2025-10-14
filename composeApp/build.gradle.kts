@@ -65,6 +65,7 @@ kotlin {
             api(libs.koin.annotations)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.annotations)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.serialization.kotlinx.json)
@@ -73,10 +74,18 @@ kotlin {
 
             implementation(libs.bundles.coil)
 
+            implementation(libs.kotlinx.datetime)
+
+            implementation(libs.androidx.datastore.preferences)
+
 
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.koin.test)
         }
 
         iosMain.dependencies {

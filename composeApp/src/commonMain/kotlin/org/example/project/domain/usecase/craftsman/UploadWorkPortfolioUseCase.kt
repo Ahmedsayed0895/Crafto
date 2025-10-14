@@ -1,0 +1,53 @@
+package org.example.project.domain.usecase.craftsman
+
+import org.example.project.data.remote.network.ApiConstants
+import org.example.project.domain.exception.ValidationException
+import org.example.project.domain.model.WorkImage
+import org.example.project.domain.repository.CraftsmanRepository
+import org.koin.core.annotation.Factory
+
+@Factory
+class UploadWorkPortfolioUseCase(
+    private val repository: CraftsmanRepository
+) {
+    suspend operator fun invoke(
+        craftsmanId: String,
+        workImages: List<WorkImage>
+    ): List<String> {
+        // Business validation
+        if (craftsmanId.isBlank()) {
+            throw ValidationException("Craftsman ID is required")
+        }
+
+        if (workImages.isEmpty()) {
+            throw ValidationException("Please select at least one work image")
+        }
+
+        if (workImages.size > ApiConstants.FileUpload.MAX_PORTFOLIO_IMAGES) {
+            throw ValidationException(
+                "You can upload maximum ${ApiConstants.FileUpload.MAX_PORTFOLIO_IMAGES} images"
+            )
+        }
+
+        // Validate each image
+        workImages.forEachIndexed { index, image ->
+            if (image.data.isEmpty()) {
+                throw ValidationException("Image ${index + 1} is empty")
+            }
+
+            if (image.data.size > ApiConstants.FileUpload.MAX_FILE_SIZE) {
+                throw ValidationException("Image ${index + 1} size must be less than 4MB")
+            }
+
+            val extension = image.fileName.substringAfterLast('.', "").lowercase()
+            if (extension !in ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
+                throw ValidationException(
+                    "Image ${index + 1} must be JPEG or PNG"
+                )
+            }
+        }
+
+        // Direct repository call
+        return repository.uploadWorkPortfolio(craftsmanId, workImages)
+    }
+}

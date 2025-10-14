@@ -18,3 +18,7 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # Project exclude paths
+
+### Google Service ###
+**/google-service.json
+google-service.json
