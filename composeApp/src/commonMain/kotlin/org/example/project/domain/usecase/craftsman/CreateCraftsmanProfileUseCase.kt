@@ -3,9 +3,8 @@ package org.example.project.domain.usecase.craftsman
 import org.example.project.domain.entity.PersonalInfo
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.repository.CraftsmanRepository
-import org.koin.core.annotation.Factory
 
-@Factory
+
 class CreateCraftsmanProfileUseCase(
     private val repository: CraftsmanRepository
 ) {

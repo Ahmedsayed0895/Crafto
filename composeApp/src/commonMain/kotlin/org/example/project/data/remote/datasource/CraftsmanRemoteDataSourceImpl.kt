@@ -20,23 +20,20 @@ import org.example.project.data.dto.DeleteAccountResponseDto
 import org.example.project.data.dto.IdCardUploadResponseDto
 import org.example.project.data.dto.WorkPortfolioResponseDto
 import org.example.project.data.remote.network.ApiConstants
-import org.example.project.data.remote.network.ApiConstants.BASE_URL
 import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
 import org.example.project.data.remote.network.wrapApiCall
 import org.example.project.domain.model.WorkImage
 import org.koin.core.annotation.Single
 
-@Single
 class CraftsmanRemoteDataSourceImpl(
     private val httpClient: HttpClient,
 ) : CraftsmanRemoteDataSource {
-    private val baseUrl: String = BASE_URL
     override suspend fun createCraftsmanProfile(
         userId: String,
         request: CreateCraftsmanRequest
     ): CraftsmanSetupResponseDto {
         return wrapApiCall {
-            httpClient.post(baseUrl + ApiConstants.Endpoints.CRAFTSMAN_SETUP) {
+            httpClient.post(ApiConstants.Endpoints.CRAFTSMAN_SETUP) {
                 header(ApiConstants.Headers.USER_ID, userId)
                 contentType(ContentType.Application.Json)
                 setBody(request)
@@ -54,7 +51,7 @@ class CraftsmanRemoteDataSourceImpl(
     ): IdCardUploadResponseDto {
         return wrapApiCall {
             httpClient.submitFormWithBinaryData(
-                url = baseUrl + ApiConstants.Endpoints.craftsmanIdCards(craftsmanId),
+                url = ApiConstants.Endpoints.craftsmanIdCards(craftsmanId),
                 formData = formData {
                     append("idCardFront", idCardFront, Headers.build {
                         append(HttpHeaders.ContentType, "image/*")
@@ -78,7 +75,7 @@ class CraftsmanRemoteDataSourceImpl(
     ): WorkPortfolioResponseDto {
         return wrapApiCall {
             httpClient.submitFormWithBinaryData(
-                url = baseUrl + ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId),
+                url = ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId),
                 formData = formData {
                     workImages.forEach { image ->
                         append("workImages", image.data, Headers.build {
@@ -95,7 +92,7 @@ class CraftsmanRemoteDataSourceImpl(
 
     override suspend fun getCraftsmanProfile(userId: String): CraftsmanProfileResponseDto {
         return wrapApiCall {
-            httpClient.get(baseUrl + ApiConstants.Endpoints.CRAFTSMAN_PROFILE) {
+            httpClient.get(ApiConstants.Endpoints.CRAFTSMAN_PROFILE) {
                 header(ApiConstants.Headers.USER_ID, userId)
             }
         }
@@ -103,7 +100,7 @@ class CraftsmanRemoteDataSourceImpl(
 
     override suspend fun getCraftsmanStatus(craftsmanId: String): CraftsmanStatusResponseDto {
         return wrapApiCall {
-            httpClient.get(baseUrl + ApiConstants.Endpoints.craftsmanStatus(craftsmanId))
+            httpClient.get(ApiConstants.Endpoints.craftsmanStatus(craftsmanId))
         }
     }
 
@@ -112,7 +109,7 @@ class CraftsmanRemoteDataSourceImpl(
         craftsmanId: String
     ): DeleteAccountResponseDto {
         return wrapApiCall {
-            httpClient.delete(baseUrl + ApiConstants.Endpoints.deleteCraftsman(craftsmanId)) {
+            httpClient.delete(ApiConstants.Endpoints.deleteCraftsman(craftsmanId)) {
                 header(USER_ID, userId)
             }
         }

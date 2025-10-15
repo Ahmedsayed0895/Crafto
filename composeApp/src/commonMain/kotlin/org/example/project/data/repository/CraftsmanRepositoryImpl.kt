@@ -15,7 +15,6 @@ import org.example.project.domain.model.WorkImage
 import org.example.project.domain.repository.CraftsmanRepository
 import org.koin.core.annotation.Single
 
-@Single
 class CraftsmanRepositoryImpl (
     private val remoteDataSource: CraftsmanRemoteDataSource,
     private val userPreferences: UserPreferences

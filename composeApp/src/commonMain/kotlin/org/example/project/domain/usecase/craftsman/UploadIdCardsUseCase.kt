@@ -4,9 +4,9 @@ import org.example.project.data.remote.network.ApiConstants
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.repository.CraftsmanRepository
-import org.koin.core.annotation.Factory
 
-@Factory
+
+
 class UploadIdCardsUseCase(
     private val repository: CraftsmanRepository
 ) {

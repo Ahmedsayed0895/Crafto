@@ -14,16 +14,16 @@ coilComposeVersion = "3.3.0"
 composeMultiplatform = "1.9.0"
 datastorePreferences = "1.1.7"
 junit = "4.13.2"
-koinAnnotations = "2.2.0"
-koinTest = "4.1.1"
 kotlin = "2.2.20"
+ksp = "2.2.20-2.0.4"
+koinTest = "4.1.1"
 koin = "4.1.1"
+koinAnnotations = "2.2.0"
+ktor = "3.3.1"
 coil = "3.3.0"
 koinComposeMultiplatform = "4.1.1"
 kotlinxCoroutinesTest = "1.10.2"
 kotlinxDatetime = "0.7.1"
-ksp = "2.2.10-2.0.2"
-ktor = "3.3.1"
 kotlinx-serialization = "1.9.0"
 
 google-services = "4.4.4"
@@ -60,6 +60,7 @@ koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref =
 koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
 
 # ktor
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }

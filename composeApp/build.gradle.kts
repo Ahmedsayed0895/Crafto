@@ -34,6 +34,28 @@ kotlin {
     }
 
     sourceSets {
+
+//        val commonMain by getting  {
+//            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+//        }
+//
+//        // Android
+//        val androidMain by getting {
+//            kotlin.srcDir("build/generated/ksp/android/androidDebug/kotlin")
+//            kotlin.srcDir("build/generated/ksp/android/androidRelease/kotlin")
+//        }
+//
+//        // iOS
+//        val iosX64Main by getting {
+//            kotlin.srcDir("build/generated/ksp/iosX64/iosX64Main/kotlin")
+//        }
+//        val iosArm64Main by getting {
+//            kotlin.srcDir("build/generated/ksp/iosArm64/iosArm64Main/kotlin")
+//        }
+//        val iosSimulatorArm64Main by getting {
+//            kotlin.srcDir("build/generated/ksp/iosSimulatorArm64/iosSimulatorArm64Main/kotlin")
+//        }
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -60,12 +82,13 @@ kotlin {
             implementation(libs.adaptive)
             implementation(libs.adaptive.layout)
             implementation(libs.adaptive.navigation)
+
             //koin
-            api(libs.koin.core)
-            api(libs.koin.annotations)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.koin.annotations)
+            implementation(libs.koin.compose.viewmodel.navigation)
+            api(libs.koin.annotations)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.serialization.kotlinx.json)
@@ -92,22 +115,22 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
     }
-
-    sourceSets.named("commonMain").configure {
-        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-    }
-
 }
 
 ksp {
+    //arg("KOIN_USE_COMPOSE_VIEWMODEL","true")
     arg("KOIN_CONFIG_CHECK","true")
 }
 
-project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
-}
+//tasks.withType<KotlinCompilationTask<*>>().configureEach {
+//    if (name != "kspCommonMainKotlinMetadata") {
+//        dependsOn("kspCommonMainKotlinMetadata")
+//    }
+//}
+//
+//kotlin.sourceSets.getByName("commonMain") {
+//    kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+//}
 
 
 android {
@@ -141,5 +164,13 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+
+    //Android
+    add("kspAndroid", libs.koin.ksp.compiler)
+
+    // iOS (all targets you use)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
 }
 

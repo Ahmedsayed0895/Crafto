@@ -1,9 +1,12 @@
 package org.example.project.di
 
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
+import org.example.project.data.local.datasource.StorageLocalDataSource
+import org.example.project.data.local.datasource.StorageLocalDataSourceImpl
+import org.koin.dsl.module
 
-@Module
-@ComponentScan("org.example.project.data.datasource.local")
-class IosModule
+val iosModule = module {
+    single<StorageLocalDataSource> {
+        StorageLocalDataSourceImpl()
+    }
+}

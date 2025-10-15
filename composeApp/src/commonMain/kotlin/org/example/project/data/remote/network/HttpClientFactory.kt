@@ -1,6 +1,7 @@
 package org.example.project.data.remote.network
 
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -13,8 +14,8 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-fun createHttpClient(): HttpClient {
-    return HttpClient {
+fun createHttpClient(engine: HttpClientEngine): HttpClient {
+    return HttpClient(engine) {
         install(ContentNegotiation) {
             json(Json {
                 prettyPrint = true
@@ -36,6 +37,7 @@ fun createHttpClient(): HttpClient {
         }
 
         defaultRequest {
+            url(ApiConstants.BASE_URL)
             header(ApiConstants.Headers.ACCEPT, ContentType.Application.Json)
         }
     }

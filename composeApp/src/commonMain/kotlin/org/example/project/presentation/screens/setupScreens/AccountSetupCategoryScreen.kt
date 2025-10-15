@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.setupScreens
+package org.example.project.presentation.screens.setupScreens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

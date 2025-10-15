@@ -1,8 +1,6 @@
 package org.example.project.data.local.datasource
 
-import org.koin.core.annotation.Single
 
-@Single
 class UserPreferencesImpl(
     private val storage: StorageLocalDataSource
 ) : UserPreferences {

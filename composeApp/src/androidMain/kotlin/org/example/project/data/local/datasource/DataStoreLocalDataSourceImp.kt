@@ -6,14 +6,13 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import org.koin.core.annotation.Single
+
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = "crafto_preferences"
 )
 
-@Single
-class StorageLocalDataSourceImpl(
+class DataStoreLocalDataSourceImp(
     private val context: Context
 ) : StorageLocalDataSource {
 

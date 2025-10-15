@@ -1,8 +1,12 @@
 package org.example.project.di
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
+import org.example.project.data.local.datasource.StorageLocalDataSource
+import org.example.project.data.local.datasource.DataStoreLocalDataSourceImp
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-@Module
-@ComponentScan("org.example.project.data.datasource.local")
-class AndroidModule
+val androidModule = module {
+    single<StorageLocalDataSource> {
+        DataStoreLocalDataSourceImp(androidContext())
+    }
+}

@@ -4,9 +4,8 @@ import org.example.project.data.remote.network.ApiConstants
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.model.WorkImage
 import org.example.project.domain.repository.CraftsmanRepository
-import org.koin.core.annotation.Factory
 
-@Factory
+
 class UploadWorkPortfolioUseCase(
     private val repository: CraftsmanRepository
 ) {
