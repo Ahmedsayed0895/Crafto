@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.accountSetup
+package org.example.project.presentation.screens.setupScreens
 
 import org.example.project.domain.entity.Category
 

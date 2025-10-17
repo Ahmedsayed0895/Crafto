@@ -14,8 +14,8 @@ import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.presentation.designsystem.components.Chip
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.util.extension.toAnimatedColor
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupCategoryState
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
+import org.example.project.presentation.screens.setupScreens.AccountSetupCategoryState
+import org.example.project.presentation.screens.setupScreens.AccountSetupState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
