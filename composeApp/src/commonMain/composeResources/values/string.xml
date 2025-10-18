@@ -33,4 +33,17 @@
     <string name="account_setup_craftsman_category_title">What services do you offer?</string>
     <string name="account_setup_craftsman_category_description">Choose your specialties to get relevant job requests. You can change this later.</string>
 
+
+    <!-- LocationSetupScreen Strings -->
+    <string name="location_title">Where are you located?</string>
+    <string name="location_description">Location helps improve accuracy, but don\'t worry, you can update it later.</string>
+    <string name="location_hint">Governorate, District</string>
+    <string name="choose_governorate">Choose Governorate</string>
+    <string name="choose_district">Choose District</string>
+    <string name="next_button">Next</string>
+    <string name="location_icon">Location icon</string>
+    <string name="dropdown_icon">Dropdown</string>
+    <string name="arrow_icon">Arrow</string>
+    <string name="enter_detailed_location">Enter your location in detail</string>
+
 </resources>

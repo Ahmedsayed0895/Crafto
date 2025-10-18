@@ -1,0 +1,16 @@
+package org.example.project.presentation.screens.setupScreens.location
+
+import org.example.project.domain.entity.District
+import org.example.project.domain.entity.Governorates
+
+data class LocationUiState(
+    val governorates: List<Governorates> = emptyList(),
+    val districts: List<District> = emptyList(),
+    val selectedGovernorate: String = "",
+    val selectedDistrict: String = "",
+    val detailLocation: String = "",
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val showGovernorateSheet: Boolean = false,
+    val showDistrictSheet: Boolean = false
+)
