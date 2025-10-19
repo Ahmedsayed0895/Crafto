@@ -10,15 +10,13 @@ class LocationViewModel(
     private val repository: LocationRepository
 ) : BaseViewModel<LocationUiState, LocationEffect>(initialState = LocationUiState()) {
 
-
     init {
         fetchGovernorates()
     }
 
     private fun fetchGovernorates() {
         tryToCall(
-            call = {
-                repository.getAllGovernorates() },
+            call = { repository.getAllGovernorates() },
             onSuccess = { governorates ->
                 updateState { it.copy(governorates = governorates, isLoading = false, error = null) }
             },
@@ -32,8 +30,7 @@ class LocationViewModel(
 
     fun fetchDistricts(governorateId: String) {
         tryToCall(
-            call = {
-                repository.getDistrictsByGovernorateId(governorateId) },
+            call = { repository.getDistrictsByGovernorateId(governorateId) },
             onSuccess = { districts ->
                 updateState {
                     it.copy(
@@ -51,10 +48,12 @@ class LocationViewModel(
             dispatcher = Dispatchers.IO
         )
     }
+
     fun selectGovernorate(governorate: Governorates) {
         updateState {
             it.copy(
                 selectedGovernorate = governorate.name,
+                selectedGovernorateId = governorate.id, // Store governorate ID
                 selectedDistrict = "",
                 showGovernorateSheet = false
             )

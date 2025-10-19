@@ -7,6 +7,7 @@ data class LocationUiState(
     val governorates: List<Governorates> = emptyList(),
     val districts: List<District> = emptyList(),
     val selectedGovernorate: String = "",
+    val selectedGovernorateId: String = "",
     val selectedDistrict: String = "",
     val detailLocation: String = "",
     val isLoading: Boolean = false,

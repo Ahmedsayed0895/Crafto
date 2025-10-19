@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,10 +27,11 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.*
 import org.example.project.domain.entity.District
 import org.example.project.domain.entity.Governorates
+import org.example.project.presentation.components.DetailLocationInput
+import org.example.project.presentation.components.GovernorateSelector
 import org.example.project.presentation.designsystem.components.BottomSheet
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
-import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -40,8 +39,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-private val FieldHeight = 48.dp
-private val DefaultPadding = 16.dp
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -55,7 +52,7 @@ fun LocationSetupScreen(
     val displayText by remember(state.selectedGovernorate, state.selectedDistrict) {
         derivedStateOf {
             val parts = listOf(state.selectedGovernorate, state.selectedDistrict).filter { it.isNotBlank() }
-            if (parts.isEmpty())"Governorate, District" else parts.joinToString(", ")
+            if (parts.isEmpty()) "Governorate, District" else parts.joinToString(", ")
         }
     }
 
@@ -64,9 +61,9 @@ fun LocationSetupScreen(
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeDrawing)
             .background(AppTheme.craftoColors.background.screen)
-            .padding(DefaultPadding),
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(DefaultPadding)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         AccountSetupTopBar(
             modifier = Modifier.fillMaxWidth(),
@@ -88,7 +85,10 @@ fun LocationSetupScreen(
 
         ErrorMessage(error = state.error)
 
-        NextButton(onClick = viewModel::onNextClick)
+        NextButton(
+            onClick = viewModel::onNextClick,
+            enabled = state.selectedGovernorate.isNotBlank() && state.selectedDistrict.isNotBlank()
+        )
     }
 
     GovernorateBottomSheet(
@@ -132,7 +132,7 @@ private fun LocationHeader(modifier: Modifier = Modifier) {
             text = stringResource(Res.string.location_title),
             style = AppTheme.textStyle.display,
             color = AppTheme.craftoColors.shade.primary,
-            modifier = Modifier.padding(bottom = DefaultPadding)
+            modifier = Modifier.padding(bottom = 16.dp)
         )
 
         Text(
@@ -143,59 +143,7 @@ private fun LocationHeader(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-private fun GovernorateSelector(
-    displayText: String,
-    hasSelection: Boolean,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(FieldHeight)
-            .background(
-                color = AppTheme.craftoColors.background.card,
-                shape = RoundedCornerShape(AppTheme.craftoRadius.lg)
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        TextField(
-            hint = stringResource(Res.string.location_hint),
-            text = displayText,
-            onTextChange = {},
-            modifier = Modifier.fillMaxWidth(),
-            startIcon = {
-                Icon(
-                    painter = painterResource(Res.drawable.location),
-                    contentDescription = stringResource(Res.string.location_icon),
-                    tint = if (hasSelection) AppTheme.craftoColors.shade.primary else AppTheme.craftoColors.shade.tertiary
-                )
-            },
-            endIcon = {
-                Icon(
-                    painter = painterResource(Res.drawable.alt_arrow_down),
-                    contentDescription = stringResource(Res.string.dropdown_icon),
-                    tint = if (hasSelection) AppTheme.craftoColors.shade.primary else AppTheme.craftoColors.shade.tertiary,
-                    modifier = Modifier.clickable(onClick = onClick)
-                )
-            }
-        )
-    }
-}
 
-@Composable
-private fun DetailLocationInput(
-    text: String,
-    onTextChange: (String) -> Unit
-) {
-    TextField(
-        hint = stringResource(Res.string.enter_detailed_location),
-        text = text,
-        onTextChange = onTextChange,
-        modifier = Modifier.fillMaxWidth()
-    )
-}
 
 @Composable
 private fun ErrorMessage(error: String?) {
@@ -210,12 +158,15 @@ private fun ErrorMessage(error: String?) {
 }
 
 @Composable
-private fun NextButton(onClick: () -> Unit) {
+private fun NextButton(
+    onClick: () -> Unit,
+    enabled: Boolean
+) {
     PrimaryButton(
         text = stringResource(Res.string.next_button),
-        enabled = true,
+        enabled = enabled,
         onClick = onClick,
-        buttonState = ButtonState.Enable,
+        buttonState = if (enabled) ButtonState.Enable else ButtonState.DISABLED,
         modifier = Modifier.fillMaxWidth()
     )
 }
@@ -238,7 +189,7 @@ private fun GovernorateBottomSheet(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onSelect(governorate) }
-                            .padding(DefaultPadding),
+                            .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
@@ -278,7 +229,7 @@ private fun DistrictBottomSheet(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onSelect(district.name) }
-                            .padding(DefaultPadding),
+                            .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {

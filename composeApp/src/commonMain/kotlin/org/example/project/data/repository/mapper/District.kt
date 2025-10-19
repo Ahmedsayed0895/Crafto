@@ -7,7 +7,8 @@ fun List<DistrictDto>.toDistrict(): List<District> {
     return map { dto ->
         District(
             id = dto.id,
-            name = dto.name
+            name = dto.name,
+            governorateId = dto.governorateId
         )
     }
 }

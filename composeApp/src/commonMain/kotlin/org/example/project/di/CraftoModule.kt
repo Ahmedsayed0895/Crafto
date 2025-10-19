@@ -1,3 +1,4 @@
+import org.example.project.data.repository.LocationRepositoryImpl
 import org.example.project.domain.repository.LocationRepository
 import org.koin.core.annotation.Module
 import org.koin.dsl.module
