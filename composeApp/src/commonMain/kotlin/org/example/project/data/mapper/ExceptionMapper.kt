@@ -1,6 +1,6 @@
 package org.example.project.data.mapper
 
-import org.example.project.data.dto.ErrorResponseDto
+import org.example.project.data.remote.dto.ErrorResponseDto
 import org.example.project.domain.exception.*
 
 fun Exception.toDomainException(): CraftoException {

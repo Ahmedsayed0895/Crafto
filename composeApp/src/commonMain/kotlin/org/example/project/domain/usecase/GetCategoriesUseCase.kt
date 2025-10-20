@@ -6,9 +6,8 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Provided
 
 
-@Factory
 class GetCategoriesUseCase(
-    @Provided val repository: CategoryRepository) {
+    val repository: CategoryRepository) {
     suspend operator fun invoke(): List<Category> {
         return repository.getCategories()
     }

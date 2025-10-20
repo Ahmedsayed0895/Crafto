@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.setupScreens.component
+package org.example.project.presentation.screens.setupScreens.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -27,6 +28,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AccountSetupTopBar(
     modifier: Modifier = Modifier,
     currentPage: Int,
+    totalPages: Int=4,
+    animatedDuration: Int = 300,
+    showBackButton: Boolean = true,
     onBackButtonClick: () -> Unit
 
 ) {
@@ -36,10 +40,15 @@ fun AccountSetupTopBar(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     )
     {
-        BackButton(onBackButtonClick = onBackButtonClick)
+        if (showBackButton) {
+            BackButton(onBackButtonClick = onBackButtonClick)
+        } else {
+            Spacer(modifier = Modifier.size(48.dp))
+        }
         ProgressIndicator(
             currentPage = currentPage,
-            totalPage = 4,
+            totalPage = totalPages,
+            animationDuration = animatedDuration,
             modifier = Modifier.fillMaxWidth(0.75f),
         )
     }
@@ -90,7 +99,7 @@ fun AccountSetupTopBarDarkPreview() {
     AppTheme(isDarkTheme = true) {
         AccountSetupTopBar(
             onBackButtonClick = {},
-            currentPage = 2
+            currentPage = 3
 
         )
     }

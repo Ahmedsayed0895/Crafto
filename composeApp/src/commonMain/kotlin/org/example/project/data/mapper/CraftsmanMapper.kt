@@ -1,8 +1,10 @@
 package org.example.project.data.mapper
 
-import org.example.project.data.dto.CraftsmanProfileResponseDto
-import org.example.project.data.dto.PersonalInfoDto
-import org.example.project.data.dto.VerificationInfoDto
+import org.example.project.data.remote.dto.CategoryDto
+import org.example.project.data.remote.dto.CraftsmanProfileResponseDto
+import org.example.project.data.remote.dto.PersonalInfoDto
+import org.example.project.data.remote.dto.VerificationInfoDto
+import org.example.project.domain.entity.Category
 import org.example.project.domain.entity.Craftsman
 import org.example.project.domain.entity.CraftsmanStatus
 import org.example.project.domain.entity.PersonalInfo
@@ -66,3 +68,8 @@ fun String.toVerificationStatus(): VerificationStatus {
     }
 }
 
+fun CategoryDto.toDomain(): Category = Category(
+    id = id,
+    title = title,
+    colorHex = colorHex
+)

@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import org.example.project.presentation.designsystem.colors.Background
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -26,7 +27,10 @@ fun Chip(
     modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean,
+    isBordered: Boolean = false,
     textColor: Color,
+    selectedBackgroundColor: Color = AppTheme.craftoColors.brand.tertiary,
+    unselectedBackgroundColor: Color = AppTheme.craftoColors.shade.quinary,
     borderColor: Color = AppTheme.craftoColors.brand.secondary,
     onChipSelected: (String) -> Unit = {},
 ) {
@@ -35,13 +39,13 @@ fun Chip(
             .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
             .background(
                 if (isSelected)
-                    AppTheme.craftoColors.brand.tertiary
+                    selectedBackgroundColor
                 else
-                    AppTheme.craftoColors.shade.quinary,
+                    unselectedBackgroundColor,
                 shape = RoundedCornerShape(AppTheme.craftoRadius.full)
             )
             .then(
-                if (isSelected) modifier.border(
+                if (isSelected && isBordered) modifier.border(
                     1.dp, borderColor,
                     RoundedCornerShape(
                         AppTheme.craftoRadius.full

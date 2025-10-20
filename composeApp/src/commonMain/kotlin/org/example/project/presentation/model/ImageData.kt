@@ -1,9 +1,9 @@
 package org.example.project.presentation.model
 
 data class ImageData(
-    val uri: String,          // For displaying in UI
-    val fileName: String,     // Original file name
-    val byteArray: ByteArray  // Actual data to upload
+    val uri: String,
+    val fileName: String,
+    val byteArray: ByteArray
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

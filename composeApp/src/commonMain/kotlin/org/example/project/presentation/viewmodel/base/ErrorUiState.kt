@@ -12,6 +12,3 @@ data class ErrorUiState (
         UNKNOWN
     }
 }
-
-
-

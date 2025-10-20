@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.setupScreens.component
+package org.example.project.presentation.screens.setupScreens.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,7 +27,6 @@ fun TitleDescriptionBox(
             title = title,
             description = description
         )
-
     }
 }
 

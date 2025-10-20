@@ -1,10 +1,10 @@
 package org.example.project.data.repository
 
-import org.example.project.data.dto.CreateCraftsmanRequest
-import org.example.project.data.local.datasource.UserPreferences
+import org.example.project.data.remote.dto.CreateCraftsmanRequest
+import org.example.project.data.datasource.local.UserPreferences
 import org.example.project.data.mapper.toDomain
 import org.example.project.data.mapper.toDto
-import org.example.project.data.remote.datasource.CraftsmanRemoteDataSource
+import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
 import org.example.project.domain.entity.Craftsman
 import org.example.project.domain.entity.CraftsmanStatus
 import org.example.project.domain.entity.PersonalInfo
@@ -13,18 +13,26 @@ import org.example.project.domain.exception.ApiException
 import org.example.project.domain.exception.UnauthorizedException
 import org.example.project.domain.model.WorkImage
 import org.example.project.domain.repository.CraftsmanRepository
-import org.koin.core.annotation.Single
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 class CraftsmanRepositoryImpl (
     private val remoteDataSource: CraftsmanRemoteDataSource,
     private val userPreferences: UserPreferences
 ) : CraftsmanRepository {
+    @OptIn(ExperimentalTime::class)
     override suspend fun createCraftsmanProfile(
         personalInfo: PersonalInfo,
         categories: List<String>
     ): String {
-        val userId = userPreferences.getUserId()
-            ?: throw UnauthorizedException("User must be logged in to create craftsman profile")
+        var userId = userPreferences.getUserId()
+            //?: throw UnauthorizedException("Session must be created to create craftsman profile")
+
+        if (userId.isNullOrBlank()) {
+            userId = "temp-user-${Clock.System.now()}"
+            println("⚠️ Using temporary userId: $userId (remove after OTP integration)")
+            userPreferences.setUserId(userId)
+        }
 
         val request = CreateCraftsmanRequest(
             personalInfo = personalInfo.toDto(),

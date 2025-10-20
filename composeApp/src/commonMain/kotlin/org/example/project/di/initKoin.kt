@@ -11,7 +11,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             //CraftoModule().module,
             networkModule,
             dataModule,
-            domainModule
+            domainModule,
+            presentationModule
         )
     }
 }

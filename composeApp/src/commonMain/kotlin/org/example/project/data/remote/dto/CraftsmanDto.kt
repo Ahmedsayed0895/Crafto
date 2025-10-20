@@ -1,4 +1,4 @@
-package org.example.project.data.dto
+package org.example.project.data.remote.dto
 
 import kotlinx.serialization.Serializable
 
@@ -77,4 +77,11 @@ data class ErrorResponseDto(
     val code: String,
     val message: String,
     val timestamp: String
+)
+
+
+data class CategoryDto(
+    val id: Int,
+    val title: String,
+    val colorHex: Long
 )

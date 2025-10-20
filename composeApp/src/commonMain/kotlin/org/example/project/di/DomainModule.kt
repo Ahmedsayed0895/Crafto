@@ -1,5 +1,6 @@
 package org.example.project.di
 
+import org.example.project.domain.usecase.GetCategoriesUseCase
 import org.example.project.domain.usecase.craftsman.CreateCraftsmanProfileUseCase
 import org.example.project.domain.usecase.craftsman.DeleteCraftsmanAccountUseCase
 import org.example.project.domain.usecase.craftsman.GetCraftsmanProfileUseCase
@@ -15,4 +16,5 @@ val domainModule = module {
     factory { GetCraftsmanProfileUseCase(get()) }
     factory { GetCraftsmanStatusUseCase(get()) }
     factory { DeleteCraftsmanAccountUseCase(get()) }
+    factory { GetCategoriesUseCase(get())}
 }

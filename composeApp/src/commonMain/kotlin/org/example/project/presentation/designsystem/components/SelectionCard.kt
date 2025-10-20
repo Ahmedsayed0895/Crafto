@@ -3,6 +3,8 @@ package org.example.project.presentation.designsystem.components
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -14,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.selection_card_img
+import crafto.composeapp.generated.resources.selection_craftsman
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -42,7 +46,10 @@ fun SelectionCard(
 
     Card(
         onClick = onCardClick,
-        modifier.border(1.dp, strokeColor, RoundedCornerShape(AppTheme.craftoRadius.xl)),
+        modifier=modifier
+            .fillMaxSize()
+            .border(1.dp, strokeColor, RoundedCornerShape(AppTheme.craftoRadius.xl))
+            ,
         shape = RoundedCornerShape(AppTheme.craftoRadius.xl),
         colors = CardDefaults.cardColors(
             background
@@ -50,8 +57,13 @@ fun SelectionCard(
     ) {
         Image(
             painter = img,
+            alignment =  Alignment.Center,
             contentDescription = null,
-            modifier = Modifier.padding(12.dp)
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(12.dp),
         )
 
         Text(
@@ -75,7 +87,7 @@ fun SelectionCard(
 @Composable
 private fun SelectionCardPreview() {
     SelectionCard(
-        img = painterResource(Res.drawable.selection_card_img),
+        img = painterResource(Res.drawable.selection_craftsman),
         title = "Title",
         caption = "Caption",
         isSelected = true,

@@ -12,18 +12,18 @@ import io.ktor.http.ContentType
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
-import org.example.project.data.dto.CraftsmanProfileResponseDto
-import org.example.project.data.dto.CraftsmanSetupResponseDto
-import org.example.project.data.dto.CraftsmanStatusResponseDto
-import org.example.project.data.dto.CreateCraftsmanRequest
-import org.example.project.data.dto.DeleteAccountResponseDto
-import org.example.project.data.dto.IdCardUploadResponseDto
-import org.example.project.data.dto.WorkPortfolioResponseDto
+import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
+import org.example.project.data.remote.dto.CraftsmanProfileResponseDto
+import org.example.project.data.remote.dto.CraftsmanSetupResponseDto
+import org.example.project.data.remote.dto.CraftsmanStatusResponseDto
+import org.example.project.data.remote.dto.CreateCraftsmanRequest
+import org.example.project.data.remote.dto.DeleteAccountResponseDto
+import org.example.project.data.remote.dto.IdCardUploadResponseDto
+import org.example.project.data.remote.dto.WorkPortfolioResponseDto
 import org.example.project.data.remote.network.ApiConstants
 import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
 import org.example.project.data.remote.network.wrapApiCall
 import org.example.project.domain.model.WorkImage
-import org.koin.core.annotation.Single
 
 class CraftsmanRemoteDataSourceImpl(
     private val httpClient: HttpClient,

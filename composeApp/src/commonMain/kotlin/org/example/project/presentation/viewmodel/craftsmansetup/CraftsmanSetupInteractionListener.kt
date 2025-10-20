@@ -7,8 +7,8 @@ interface CraftsmanSetupInteractionListener {
     fun onUserTypeSelected(userType: UserType)
 
     // Service Selection
-    fun onServiceToggled(service: String)
-    fun onServicesNextClicked(personalInfo: PersonalInfoUiModel)
+    fun onCategoryToggled(categoryId: Int)
+    fun onPersonalInfoChanged(personalInfo: PersonalInfoUiModel)
 
     // Identity Verification
     fun onIdCardSelected(isFront: Boolean, imageData: ImageData)
@@ -20,7 +20,4 @@ interface CraftsmanSetupInteractionListener {
     fun onPortfolioImageRemoved(index: Int)
     fun onWorkDescriptionChanged(description: String)
     fun onUploadPortfolio()
-
-    // Common
-    fun onBackPressed()
 }

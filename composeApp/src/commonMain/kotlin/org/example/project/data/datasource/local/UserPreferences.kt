@@ -1,4 +1,4 @@
-package org.example.project.data.local.datasource
+package org.example.project.data.datasource.local
 
 interface UserPreferences {
     suspend fun getUserId(): String?

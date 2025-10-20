@@ -1,4 +1,4 @@
-package org.example.project.presentation.ui.screens.setupScreens.component
+package org.example.project.presentation.screens.setupScreens.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +20,6 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
 import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.next
-import org.example.project.data.memory.dataSource.categoryList
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
@@ -34,6 +33,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SetupScreenScaffold(
     modifier: Modifier = Modifier,
     currentPageNumber: Int,
+    totalPages: Int = 4,
+    nextButtonText: String = stringResource(Res.string.next),
+    nextButtonEnabled: Boolean = true,
+    nextButtonState: ButtonState = ButtonState.Enable,
     title: String,
     description: String,
     onBackButtonClick: () -> Unit,
@@ -51,10 +54,14 @@ fun SetupScreenScaffold(
                 modifier = modifier,
                 currentPageNumber = currentPageNumber,
                 title = title,
+                totalPages = totalPages,
+                nextButtonText = nextButtonText,
+                nextButtonEnabled = nextButtonEnabled,
+                nextButtonState = nextButtonState,
                 description = description,
                 onBackButtonClick = onBackButtonClick,
                 onNextButtonClick = onNextButtonClick,
-                content = content
+                content = content,
             )
         }
 
@@ -63,6 +70,10 @@ fun SetupScreenScaffold(
             LandscapeLayout(
                 modifier = modifier,
                 currentPageNumber = currentPageNumber,
+                totalPages = totalPages,
+                nextButtonText = nextButtonText,
+                nextButtonEnabled = nextButtonEnabled,
+                nextButtonState = nextButtonState,
                 title = title,
                 description = description,
                 onBackButtonClick = onBackButtonClick,
@@ -80,6 +91,10 @@ private fun PortraitLayout(
     modifier: Modifier = Modifier,
     currentPageNumber: Int,
     title: String,
+    totalPages: Int,
+    nextButtonText: String,
+    nextButtonEnabled: Boolean,
+    nextButtonState: ButtonState,
     description: String,
     onBackButtonClick: () -> Unit,
     onNextButtonClick: () -> Unit,
@@ -94,21 +109,32 @@ private fun PortraitLayout(
         verticalArrangement = Arrangement.spacedBy(32.dp),
     )
     {
-        AccountSetupTopBar(onBackButtonClick = onBackButtonClick, currentPage = currentPageNumber)
+        AccountSetupTopBar(
+            onBackButtonClick = onBackButtonClick,
+            currentPage = currentPageNumber,
+            totalPages = totalPages )
+
         TitleDescriptionBox(
             modifier = Modifier.weight(1f),
             title = title,
             description = description,
         )
-        content()
+
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            content()
+        }
+
         PrimaryButton(
-            text = stringResource(Res.string.next),
-            enabled = true,
-            buttonState = ButtonState.Enable,
+            text = nextButtonText,
+            enabled = nextButtonEnabled,
+            buttonState = nextButtonState,
             modifier = Modifier.fillMaxWidth(),
             onClick = onNextButtonClick
         )
-
     }
 }
 
@@ -116,6 +142,10 @@ private fun PortraitLayout(
 private fun LandscapeLayout(
     modifier: Modifier = Modifier,
     currentPageNumber: Int,
+    totalPages: Int,
+    nextButtonText: String,
+    nextButtonEnabled: Boolean,
+    nextButtonState: ButtonState,
     title: String,
     description: String,
     onBackButtonClick: () -> Unit,
@@ -131,7 +161,10 @@ private fun LandscapeLayout(
         verticalArrangement = Arrangement.spacedBy(32.dp),
     )
     {
-        AccountSetupTopBar(onBackButtonClick = onBackButtonClick, currentPage = currentPageNumber)
+        AccountSetupTopBar(
+            onBackButtonClick = onBackButtonClick,
+            currentPage = currentPageNumber,
+            totalPages = totalPages)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -149,9 +182,9 @@ private fun LandscapeLayout(
         }
 
         PrimaryButton(
-            text = stringResource(Res.string.next),
-            enabled = true,
-            buttonState = ButtonState.Enable,
+            text = nextButtonText,
+            enabled = nextButtonEnabled,
+            buttonState = nextButtonState,
             modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .align(Alignment.End),
@@ -161,35 +194,35 @@ private fun LandscapeLayout(
     }
 }
 
-@Preview
-@Composable
-fun SetupScreenScaffoldLightPreview() {
-    SetupScreenScaffold(
-        currentPageNumber = 2,
-        title = stringResource(Res.string.account_setup_craftsman_category_title),
-        description = stringResource(Res.string.account_setup_craftsman_category_description),
-        onBackButtonClick = {},
-        onNextButtonClick = {},
+//@Preview
+//@Composable
+//fun SetupScreenScaffoldLightPreview() {
+//    SetupScreenScaffold(
+//        currentPageNumber = 2,
+//        title = stringResource(Res.string.account_setup_craftsman_category_title),
+//        description = stringResource(Res.string.account_setup_craftsman_category_description),
+//        onBackButtonClick = {},
+//        onNextButtonClick = {},
+//
+//        )
+//    {
+//        CategoryActionBox(
+//            state = AccountSetupState(
+//                categoryState = AccountSetupCategoryState(
+//                    categories = categorySeed
+//                )
+//            ),
+//            onChipSelected = {}
+//        )
+//    }
+//
+//
+//}
 
-        )
-    {
-        CategoryActionBox(
-            state = AccountSetupState(
-                categoryState = AccountSetupCategoryState(
-                    categories = categoryList
-                )
-            ),
-            onChipSelected = {}
-        )
-    }
-
-
-}
-
-@Preview
-@Composable
-fun SetupScreenScaffoldDarkPreview() {
-    AppTheme(isDarkTheme = true) {
-        SetupScreenScaffoldLightPreview()
-    }
-}
+//@Preview
+//@Composable
+//fun SetupScreenScaffoldDarkPreview() {
+//    AppTheme(isDarkTheme = true) {
+//        SetupScreenScaffoldLightPreview()
+//    }
+//}

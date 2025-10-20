@@ -3,7 +3,7 @@ package org.example.project.data.remote.network
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
-import org.example.project.data.dto.ErrorResponseDto
+import org.example.project.data.remote.dto.ErrorResponseDto
 import org.example.project.domain.exception.AlreadyExistsException
 import org.example.project.domain.exception.ApiException
 import org.example.project.domain.exception.CraftoException
