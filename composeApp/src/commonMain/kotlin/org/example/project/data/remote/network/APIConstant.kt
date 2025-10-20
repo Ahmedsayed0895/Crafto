@@ -18,18 +18,12 @@ object ApiConstants {
         const val SOCKET = 30_000L  // 30 seconds
     }
 
-    // File Upload
-    object FileUpload {
-        const val MAX_FILE_SIZE = 4 * 1024 * 1024 // 4MB
-        val ALLOWED_IMAGE_TYPES = listOf("jpg", "jpeg", "png")
-        const val MAX_PORTFOLIO_IMAGES = 4
-    }
-
     // API Endpoints
     object Endpoints {
         // Craftsman endpoints
         const val CRAFTSMAN_SETUP = "/craftsman/setup"
         const val CRAFTSMAN_PROFILE = "/craftsman/profile"
+        const val ONBOARDING_END_POINT = "/onboarding"
 
         fun craftsmanIdCards(craftsmanId: String) = "/craftsman/$craftsmanId/verify/id-cards"
         fun craftsmanWorkPortfolio(craftsmanId: String) = "/craftsman/$craftsmanId/verify/work-portfolio"

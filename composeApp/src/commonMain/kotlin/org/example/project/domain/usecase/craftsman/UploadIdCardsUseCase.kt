@@ -1,6 +1,5 @@
 package org.example.project.domain.usecase.craftsman
 
-import org.example.project.data.remote.network.ApiConstants
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.repository.CraftsmanRepository
@@ -31,11 +30,11 @@ class UploadIdCardsUseCase(
             throw ValidationException("Please select back ID card image")
         }
 
-        if (idCardFront.size > ApiConstants.FileUpload.MAX_FILE_SIZE) {
+        if (idCardFront.size > org.example.project.util.ApiConstants.FileUpload.MAX_FILE_SIZE) {
             throw ValidationException("Front ID card image size must be less than 4MB")
         }
 
-        if (idCardBack.size > ApiConstants.FileUpload.MAX_FILE_SIZE) {
+        if (idCardBack.size > org.example.project.util.ApiConstants.FileUpload.MAX_FILE_SIZE) {
             throw ValidationException("Back ID card image size must be less than 4MB")
         }
 
@@ -52,15 +51,15 @@ class UploadIdCardsUseCase(
         val frontExtension = idCardFrontFileName.substringAfterLast('.', "").lowercase()
         val backExtension = idCardBackFileName.substringAfterLast('.', "").lowercase()
 
-        if (frontExtension !in ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
+        if (frontExtension !in org.example.project.util.ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
             throw ValidationException(
-                "Front ID card must be one of: ${ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
+                "Front ID card must be one of: ${org.example.project.util.ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
             )
         }
 
-        if (backExtension !in ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
+        if (backExtension !in org.example.project.util.ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
             throw ValidationException(
-                "Back ID card must be one of: ${ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
+                "Back ID card must be one of: ${org.example.project.util.ApiConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
             )
         }
 
