@@ -28,6 +28,7 @@ import crafto.composeapp.generated.resources.camera
 import crafto.composeapp.generated.resources.plus
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
+import org.example.project.presentation.util.rememberImagePicker
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -36,7 +37,8 @@ fun IdentityVerificationPage(
     idCardBack: ImageData?,
     onIdCardSelected: (isFront: Boolean, imageData: ImageData) -> Unit,
     onUploadClick: () -> Unit,
-    onSkip: () -> Unit
+    onSkip: () -> Unit,
+    onErrorMessage: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -48,13 +50,15 @@ fun IdentityVerificationPage(
         UploadBox(
             title = "Upload Front of National ID",
             image = idCardFront,
-            onSelect = { img -> onIdCardSelected(true, img) }
+            onSelect = { img -> onIdCardSelected(true, img) },
+            onError = onErrorMessage
         )
 
         UploadBox(
             title = "Upload Back of National ID",
             image = idCardBack,
-            onSelect = { img -> onIdCardSelected(false, img) }
+            onSelect = { img -> onIdCardSelected(false, img) },
+            onError = onErrorMessage
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -70,8 +74,17 @@ fun IdentityVerificationPage(
 private fun UploadBox(
     title: String,
     image: ImageData?,
-    onSelect: (ImageData) -> Unit
+    onSelect: (ImageData) -> Unit,
+    onError: (String) -> Unit
 ) {
+    val imagePicker = rememberImagePicker(
+        singleSelection = true,
+        onImagesSelected = { images ->
+            images.firstOrNull()?.let(onSelect)
+        },
+        onError = onError
+    )
+
     Column(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -86,7 +99,7 @@ private fun UploadBox(
                     RoundedCornerShape(12.dp)
                 )
                 .clickable {
-                    // TODO: implement image picker
+                    imagePicker.launch()
                 },
             contentAlignment = Alignment.Center
         ) {
@@ -94,7 +107,7 @@ private fun UploadBox(
                 Icon(painterResource(Res.drawable.camera), contentDescription = "upload image")
             else {
                 AsyncImage(
-                    model = image.uri,
+                    model = image.byteArray,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp))

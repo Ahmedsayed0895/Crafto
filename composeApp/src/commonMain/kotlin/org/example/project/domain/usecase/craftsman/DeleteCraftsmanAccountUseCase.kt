@@ -11,7 +11,6 @@ class DeleteCraftsmanAccountUseCase(
         craftsmanId: String,
         confirmDelete: Boolean = false
     ) {
-        // Business validation
         if (craftsmanId.isBlank()) {
             throw ValidationException("Craftsman ID is required")
         }
@@ -20,7 +19,6 @@ class DeleteCraftsmanAccountUseCase(
             throw ValidationException("Please confirm account deletion")
         }
 
-        // Direct repository call
         repository.deleteCraftsmanAccount(craftsmanId)
     }
 }

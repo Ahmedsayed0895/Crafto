@@ -65,11 +65,11 @@ data class CraftsmanSetupUiState(
 }
 
 enum class RegistrationStep(val index: Int) {
-    USER_TYPE(0),              // Choose Customer/Craftsman
-    SERVICE_SELECTION(1),      // What services do you offer
-    PERSONAL_INFO(2),          // Collect personal information
-    PORTFOLIO_UPLOAD(3),       // Show your work
-    IDENTITY_VERIFICATION(4);  // Upload ID (Optional)
+    USER_TYPE(0),
+    SERVICE_SELECTION(1),
+    PERSONAL_INFO(2),
+    PORTFOLIO_UPLOAD(3),
+    IDENTITY_VERIFICATION(4);
 
     companion object {
         fun fromIndex(index: Int): RegistrationStep =

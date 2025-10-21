@@ -1,7 +1,7 @@
 package org.example.project.data.remote.network
 
 object ApiConstants {
-    const val BASE_URL = "http://192.168.1.52:8085"
+    const val BASE_URL = "http://192.168.1.53:8085"
 
     // Headers
     object Headers {

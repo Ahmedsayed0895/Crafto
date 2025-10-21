@@ -7,6 +7,7 @@ import org.example.project.domain.exception.NetworkException
 import org.example.project.domain.exception.UnauthorizedException
 import org.example.project.domain.exception.ValidationException
 import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.util.AppLogger
 
 fun Throwable.toErrorUiState(): ErrorUiState {
     return when (this) {
@@ -32,9 +33,13 @@ fun Throwable.toErrorUiState(): ErrorUiState {
             errorType = ErrorUiState.ErrorType.AUTHENTICATION
         )
 
-        else -> ErrorUiState(
-            message = "Something went wrong. Please try again later.",
-            errorType = ErrorUiState.ErrorType.UNKNOWN
-        )
+        else -> {
+            AppLogger.e("ThrowableEX",this.message?:"Unknown error")
+            println("⚠️ Unexpected error: ${this::class.simpleName} - ${this.message}")
+            ErrorUiState(
+                message = "Something went wrong. Please try again later.",
+                errorType = ErrorUiState.ErrorType.UNKNOWN
+            )
+        }
     }
 }

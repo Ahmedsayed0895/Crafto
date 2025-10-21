@@ -30,7 +30,11 @@ import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.TextButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.setupScreens.composable.SetupScreenScaffold
+import org.example.project.presentation.screens.setupScreens.composable.page.IdentityVerificationPage
+import org.example.project.presentation.screens.setupScreens.composable.page.PersonalInfoPage
 import org.example.project.presentation.screens.setupScreens.composable.page.PortfolioUploadPage
+import org.example.project.presentation.screens.setupScreens.composable.page.ServiceSelectionPage
+import org.example.project.presentation.screens.setupScreens.composable.page.UserTypeSelectionPage
 import org.example.project.presentation.viewmodel.base.ErrorUiState
 import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanRegistrationEffect
 import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanSetupUiState
@@ -154,30 +158,30 @@ fun CraftsmanSetupContent(
                 state = pagerState,
                 userScrollEnabled = state.isSwipeEnabled && state.canNavigateNext
             ) { page ->
-//                when (RegistrationStep.fromIndex(page)) {
-//                    RegistrationStep.USER_TYPE -> {
-//                        UserTypeSelectionPage(
-//                            selectedType = state.userType,
-//                            onTypeSelected = viewModel::onUserTypeSelected,
-//                        )
-//                    }
-//                    RegistrationStep.SERVICE_SELECTION -> {
-//                        ServiceSelectionPage(
-//                            availableCategories = state.availableCategories,
-//                            onCategoryToggled = viewModel::onCategoryToggled,
-//                            selectedServiceIds = state.selectedCategoryIds,
-//                        )
-//                    }
-//
-//                    RegistrationStep.PERSONAL_INFO -> {
-//                        PersonalInfoPage(
-//                            personalInfo = state.personalInfo,
-//                            onPersonalInfoChanged = viewModel::onPersonalInfoChanged,
-//                            isLoading = state.isLoading,
-//                        )
-//                    }
+                when (RegistrationStep.fromIndex(page)) {
+                    RegistrationStep.USER_TYPE -> {
+                        UserTypeSelectionPage(
+                            selectedType = state.userType,
+                            onTypeSelected = viewModel::onUserTypeSelected,
+                        )
+                    }
+                    RegistrationStep.SERVICE_SELECTION -> {
+                        ServiceSelectionPage(
+                            availableCategories = state.availableCategories,
+                            onCategoryToggled = viewModel::onCategoryToggled,
+                            selectedServiceIds = state.selectedCategoryIds,
+                        )
+                    }
 
-                    //RegistrationStep.PORTFOLIO_UPLOAD -> {
+                    RegistrationStep.PERSONAL_INFO -> {
+                        PersonalInfoPage(
+                            personalInfo = state.personalInfo,
+                            onPersonalInfoChanged = viewModel::onPersonalInfoChanged,
+                            isLoading = state.isLoading,
+                        )
+                    }
+
+                    RegistrationStep.PORTFOLIO_UPLOAD -> {
                         PortfolioUploadPage(
                             images = state.portfolioImages,
                             workDescription = state.workDescription,
@@ -186,18 +190,19 @@ fun CraftsmanSetupContent(
                             onImageRemoved = viewModel::onPortfolioImageRemoved,
                             onDescriptionChanged = viewModel::onWorkDescriptionChanged,
                         )
-                    //}
+                    }
 
-                    //RegistrationStep.IDENTITY_VERIFICATION -> {
-//                        IdentityVerificationPage(
-//                            idCardFront = state.idCardFront,
-//                            idCardBack = state.idCardBack,
-//                            onIdCardSelected = viewModel::onIdCardSelected,
-//                            onUploadClick = viewModel::onUploadIdCards,
-//                            onSkip = {},
-//                        )
-                    //}
-                //}
+                    RegistrationStep.IDENTITY_VERIFICATION -> {
+                        IdentityVerificationPage(
+                            idCardFront = state.idCardFront,
+                            idCardBack = state.idCardBack,
+                            onIdCardSelected = viewModel::onIdCardSelected,
+                            onUploadClick = viewModel::onUploadIdCards,
+                            onSkip = {},
+                            onErrorMessage = {} ,
+                        )
+                    }
+                }
             }
         }
     }

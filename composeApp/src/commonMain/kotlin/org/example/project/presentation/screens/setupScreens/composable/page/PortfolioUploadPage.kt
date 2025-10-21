@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
+import org.example.project.presentation.util.rememberImagePicker
 import org.jetbrains.compose.resources.painterResource
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -56,31 +57,41 @@ fun PortfolioUploadPage(
     val scope = rememberCoroutineScope()
     val context = LocalPlatformContext.current
 
-    val imagePicker = rememberFilePickerLauncher(
-        type = FilePickerFileType.Image,
-        selectionMode = FilePickerSelectionMode.Multiple,
-    ) { files ->
-        scope.launch {
-            val imageDataList = files.take(4 - images.size).mapNotNull { file ->
-                try {
-                    val fileName = file.getName(context) ?: "image_${Clock.System.now()}.jpg"
-                    val byteArray = file.readByteArray(context)
-
-                    ImageData(
-                        uri = fileName,
-                        byteArray = byteArray,
-                        fileName = fileName
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    null
-                }
-            }
-            if (imageDataList.isNotEmpty()) {
-                onAddPhotosClicked(imageDataList)
-            }
+    val imagePicker = rememberImagePicker(
+        singleSelection = false,
+        onImagesSelected = { newImages ->
+            onAddPhotosClicked(newImages)
+        },
+        onError = { errorMessage ->
+            // Handle error - show snackbar/toast
         }
-    }
+    )
+
+//    val imagePicker = rememberFilePickerLauncher(
+//        type = FilePickerFileType.Image,
+//        selectionMode = FilePickerSelectionMode.Multiple,
+//    ) { files ->
+//        scope.launch {
+//            val imageDataList = files.take(4 - images.size).mapNotNull { file ->
+//                try {
+//                    val fileName = file.getName(context) ?: "image_${Clock.System.now()}.jpg"
+//                    val byteArray = file.readByteArray(context)
+//
+//                    ImageData(
+//                        uri = fileName,
+//                        byteArray = byteArray,
+//                        fileName = fileName
+//                    )
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                    null
+//                }
+//            }
+//            if (imageDataList.isNotEmpty()) {
+//                onAddPhotosClicked(imageDataList)
+//            }
+//        }
+//    }
 
 
     Column(

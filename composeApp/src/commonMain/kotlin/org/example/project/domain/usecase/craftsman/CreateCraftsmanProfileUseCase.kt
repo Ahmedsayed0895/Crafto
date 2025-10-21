@@ -12,14 +12,10 @@ class CreateCraftsmanProfileUseCase(
         personalInfo: PersonalInfo,
         categories: List<String>
     ): String {
-        // Business validation - throw ValidationException for any invalid input
-
-        // Validate categories
         if (categories.isEmpty()) {
             throw ValidationException("Please select at least one service category")
         }
 
-        // Validate personal info
         if (personalInfo.firstName.isBlank()) {
             throw ValidationException("First name is required")
         }
@@ -40,13 +36,10 @@ class CreateCraftsmanProfileUseCase(
             throw ValidationException("Address is required")
         }
 
-        // All validation passed - call repository
-        // No try-catch needed - let exceptions propagate to ViewModel
         return repository.createCraftsmanProfile(personalInfo, categories)
     }
 
     private fun isValidPhoneNumber(phone: String): Boolean {
-        // Basic phone validation - accepts international format
         return phone.matches(Regex("^\\+?[1-9]\\d{1,14}$"))
     }
 }

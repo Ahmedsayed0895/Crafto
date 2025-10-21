@@ -20,4 +20,5 @@ interface CraftsmanSetupInteractionListener {
     fun onPortfolioImageRemoved(index: Int)
     fun onWorkDescriptionChanged(description: String)
     fun onUploadPortfolio()
+
 }

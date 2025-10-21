@@ -23,6 +23,7 @@ class CraftsmanSetupViewModel(
 ) : BaseViewModel<CraftsmanSetupUiState, CraftsmanRegistrationEffect>(
     CraftsmanSetupUiState()
 ), CraftsmanSetupInteractionListener {
+
     override fun onUserTypeSelected(userType: UserType) {
         when (userType) {
             UserType.CRAFTSMAN -> {
@@ -42,7 +43,6 @@ class CraftsmanSetupViewModel(
     init {
         validateCurrentPage()
         fetchCategories()
-
         viewModelScope.launch {
             isLoading.collect { loading ->
                 updateState { it.copy(isLoading = loading) }
@@ -73,10 +73,21 @@ class CraftsmanSetupViewModel(
         }
     }
 
-    override fun onIdCardSelected(
-        isFront: Boolean,
-        imageData: ImageData
-    ) {
+    override fun onIdCardSelected(isFront: Boolean, imageData: ImageData) {
+        AppLogger.d("IDCard", " ID Card selected")
+        AppLogger.d("IDCard", "   Front: $isFront")
+        AppLogger.d("IDCard", "   FileName: ${imageData.fileName}")
+        AppLogger.d("IDCard", "   URI: ${imageData.uri}")
+        AppLogger.d("IDCard", "   Size: ${imageData.byteArray.size} bytes")
+
+        // Extract and validate extension
+        val extension = imageData.fileName.substringAfterLast('.', "").lowercase()
+        AppLogger.d("IDCard", "   Extension: '$extension'")
+
+        if (extension.isEmpty()) {
+            AppLogger.e("IDCard", " No extension found in filename!")
+        }
+
         updateState { state ->
             if (isFront) {
                 state.copy(
@@ -93,9 +104,34 @@ class CraftsmanSetupViewModel(
     }
 
     override fun onUploadIdCards() {
-        val craftsmanId = state.value.craftsmanId ?: return
-        val frontCard = state.value.idCardFront ?: return
-        val backCard = state.value.idCardBack ?: return
+        val craftsmanId = state.value.craftsmanId
+        val frontCard = state.value.idCardFront
+        val backCard = state.value.idCardBack
+
+        AppLogger.d("IDCard", " onUploadIdCards() called")
+        AppLogger.d("IDCard", "   CraftsmanId: $craftsmanId")
+
+        if (craftsmanId == null) {
+            AppLogger.e("IDCard", " CraftsmanId is null!")
+            updateState { it.copy(error = ErrorUiState("Profile not created yet")) }
+            return
+        }
+
+        if (frontCard == null || backCard == null) {
+            AppLogger.e("IDCard", " Missing ID cards!")
+            updateState { it.copy(error = ErrorUiState("Please upload both ID card images")) }
+            return
+        }
+
+        AppLogger.d("IDCard", "   Front card:")
+        AppLogger.d("IDCard", "     - FileName: ${frontCard.fileName}")
+        AppLogger.d("IDCard", "     - Size: ${frontCard.byteArray.size} bytes")
+        AppLogger.d("IDCard", "     - Extension: ${frontCard.fileName.substringAfterLast('.', "")}")
+
+        AppLogger.d("IDCard", "   Back card:")
+        AppLogger.d("IDCard", "     - FileName: ${backCard.fileName}")
+        AppLogger.d("IDCard", "     - Size: ${backCard.byteArray.size} bytes")
+        AppLogger.d("IDCard", "     - Extension: ${backCard.fileName.substringAfterLast('.', "")}")
 
         updateState { it.copy(isSwipeEnabled = false) }
 
@@ -110,12 +146,12 @@ class CraftsmanSetupViewModel(
                 )
             },
             onSuccess = { verificationDocs ->
-                updateState {
-                    it.copy(isSwipeEnabled = true)
-                }
+                AppLogger.d("IDCard", " ID Cards uploaded successfully!")
+                updateState { it.copy(isSwipeEnabled = true) }
                 sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
             },
             onError = { error ->
+                AppLogger.e("IDCard", " Upload failed: ${error.message}")
                 updateState {
                     it.copy(
                         error = error,
@@ -137,6 +173,13 @@ class CraftsmanSetupViewModel(
             val totalImages = currentImages + images
             val limitedImages = totalImages.take(4)
 
+            AppLogger.d("Portfolio", "Added ${images.size} images. Total: ${limitedImages.size}")
+
+            // Log each image details
+            limitedImages.forEachIndexed { index, img ->
+                AppLogger.d("Portfolio", "Image $index: ${img.fileName}, ${img.byteArray.size} bytes")
+            }
+
             state.copy(
                 portfolioImages = limitedImages,
                 canAddMoreImages = limitedImages.size < 4,
@@ -147,7 +190,9 @@ class CraftsmanSetupViewModel(
 
     override fun onPortfolioImageRemoved(index: Int) {
         updateState { state ->
-            val newImages = state.portfolioImages.toMutableList().apply { removeAt(index) }
+            val newImages = state.portfolioImages.toMutableList().apply {
+                removeAt(index)
+            }
             state.copy(
                 portfolioImages = newImages,
                 canAddMoreImages = true,
@@ -165,34 +210,64 @@ class CraftsmanSetupViewModel(
     override fun onUploadPortfolio() {
         val craftsmanId = state.value.craftsmanId
         if (craftsmanId == null) {
+            AppLogger.e("Portfolio", "CraftsmanId is null!")
             updateState { it.copy(error = ErrorUiState("Profile not created yet")) }
             return
         }
 
-        updateState { it.copy(isSwipeEnabled = false) }
+        val portfolioImages = state.value.portfolioImages
+        if (portfolioImages.isEmpty()) {
+            AppLogger.d("Portfolio", "No images to upload, skipping to next page")
+            updateState { it.copy(currentPageIndex = it.currentPageIndex + 1) }
+            return
+        }
+
+        // Check if already uploaded
+        if (state.value.uploadedPortfolioUrls.isNotEmpty()) {
+            AppLogger.d("Portfolio", "Portfolio already uploaded, skipping")
+            updateState { it.copy(currentPageIndex = it.currentPageIndex + 1) }
+            return
+        }
+
+        AppLogger.d("Portfolio", "Starting upload of ${portfolioImages.size} images for craftsman $craftsmanId")
+
+        portfolioImages.forEachIndexed { index, image ->
+            AppLogger.d("Portfolio", "Image $index: fileName=${image.fileName}, size=${image.byteArray.size} bytes")
+        }
+
+        updateState { it.copy(isSwipeEnabled = false, isUploadingPortfolio = true) }
 
         tryToCall(
             call = {
+                val workImages = portfolioImages.toWorkImages()
+                AppLogger.d("Portfolio", "Converted to ${workImages.size} WorkImage objects - calling API")
                 uploadWorkPortfolioUseCase(
                     craftsmanId = craftsmanId,
-                    workImages = state.value.portfolioImages.toWorkImages()
+                    workImages = workImages
                 )
             },
             onSuccess = { uploadedUrls ->
+                AppLogger.d("Portfolio", " SUCCESS! Received ${uploadedUrls.size} URLs")
+                uploadedUrls.forEach { url ->
+                    AppLogger.d("Portfolio", "   - $url")
+                }
+
                 updateState {
                     it.copy(
                         isSwipeEnabled = true,
-                        // Store uploaded URLs if needed
+                        isUploadingPortfolio = false,
+                        uploadedPortfolioUrls = uploadedUrls,
+                        currentPageIndex = it.currentPageIndex + 1
                     )
                 }
-                // Navigate to ID verification
-                navigateNext()
             },
             onError = { error ->
+                AppLogger.e("Portfolio", " FAILED: ${error.message}")
                 updateState {
                     it.copy(
                         error = error,
-                        isSwipeEnabled = true
+                        isSwipeEnabled = true,
+                        isUploadingPortfolio = false
                     )
                 }
             },
@@ -206,25 +281,41 @@ class CraftsmanSetupViewModel(
 
     fun navigateNext() {
         val currentIndex = state.value.currentPageIndex
+
         when (state.value.currentStep) {
             RegistrationStep.PERSONAL_INFO -> {
                 if (!state.value.isProfileCreated) {
-                    AppLogger.d("CraftsmanSetupViewModel", "Creating profile")
+                    AppLogger.d("Navigation", "Creating profile before proceeding")
                     createCraftsmanProfile()
-                    return
+                    return // createCraftsmanProfile will navigate on success
                 }
             }
             RegistrationStep.PORTFOLIO_UPLOAD -> {
-                if (state.value.portfolioImages.isNotEmpty()) {
-                    onUploadPortfolio()
-                    return // Don't navigate yet, wait for success
+                val hasImages = state.value.portfolioImages.isNotEmpty()
+                val alreadyUploaded = state.value.uploadedPortfolioUrls.isNotEmpty()
+                val isCurrentlyUploading = state.value.isUploadingPortfolio
+
+                if (isCurrentlyUploading) {
+                    AppLogger.d("Navigation", "Upload already in progress, ignoring navigation")
+                    return
                 }
+
+                if (hasImages && !alreadyUploaded) {
+                    AppLogger.d("Navigation", "Portfolio needs to be uploaded")
+                    onUploadPortfolio()
+                    return // onUploadPortfolio will navigate on success
+                }
+
+                AppLogger.d("Navigation", "Portfolio already uploaded or no images, proceeding")
             }
             else -> {
                 // Normal navigation for other steps
             }
         }
+
+        // Normal navigation
         if (currentIndex < state.value.totalPages - 1 && state.value.canNavigateNext) {
+            AppLogger.d("Navigation", "Navigating from page $currentIndex to ${currentIndex + 1}")
             updateState { it.copy(currentPageIndex = currentIndex + 1) }
         }
     }
@@ -282,30 +373,31 @@ class CraftsmanSetupViewModel(
         val selectedCategoryTitles = state.value.availableCategories
             .filter { it.id in state.value.selectedCategoryIds }
             .map { it.title }
+
         updateState { it.copy(isSwipeEnabled = false) }
 
         tryToCall(
             call = {
-                AppLogger.d("CraftsmanSetupViewModel", "call createCraftsmanUseCase")
+                AppLogger.d("CraftsmanSetupViewModel", "Calling createCraftsmanUseCase")
                 createCraftsmanUseCase(
                     personalInfo = state.value.personalInfo.toDomain(),
                     categories = selectedCategoryTitles
                 )
             },
             onSuccess = { craftsmanId ->
-                AppLogger.d("CraftsmanSetupViewModel", "call onSuccess")
+                AppLogger.d("CraftsmanSetupViewModel", "Profile created successfully: $craftsmanId")
                 updateState {
                     it.copy(
                         craftsmanId = craftsmanId,
                         isProfileCreated = true,
-                        isSwipeEnabled = true
+                        isSwipeEnabled = true,
+                        // Navigate to portfolio page
+                        currentPageIndex = it.currentPageIndex + 1
                     )
                 }
-                // Auto navigate to portfolio after successful creation
-                navigateNext()
             },
             onError = { error ->
-                AppLogger.d("CraftsmanSetupViewModel", error.message)
+                AppLogger.e("CraftsmanSetupViewModel", "Profile creation failed: ${error.message}")
                 updateState {
                     it.copy(
                         error = error,
@@ -316,14 +408,13 @@ class CraftsmanSetupViewModel(
             showLoading = true
         )
     }
-}
 
-
-private fun validatePersonalInfo(info: PersonalInfoUiModel): Boolean {
-    return info.firstName.length>=3 &&
-            info.lastName.length>=3 &&
-            info.phoneNumber.length>=10 &&
-            info.phoneNumber.matches(Regex("^\\+?[1-9]\\d{1,14}$")) &&
-            info.address.isNotBlank()
+    private fun validatePersonalInfo(info: PersonalInfoUiModel): Boolean {
+        return info.firstName.length >= 3 &&
+                info.lastName.length >= 3 &&
+                info.phoneNumber.length >= 10 &&
+                info.phoneNumber.matches(Regex("^\\+?[1-9]\\d{1,14}$")) &&
+                info.address.isNotBlank()
+    }
 }
 

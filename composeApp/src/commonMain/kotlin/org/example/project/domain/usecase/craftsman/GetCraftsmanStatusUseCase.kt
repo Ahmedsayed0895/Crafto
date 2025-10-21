@@ -9,12 +9,10 @@ class GetCraftsmanStatusUseCase(
     private val repository: CraftsmanRepository
 ) {
     suspend operator fun invoke(craftsmanId: String): CraftsmanStatus {
-        // Business validation
         if (craftsmanId.isBlank()) {
             throw ValidationException("Craftsman ID is required")
         }
 
-        // Direct repository call
         return repository.getCraftsmanStatus(craftsmanId)
     }
 }
