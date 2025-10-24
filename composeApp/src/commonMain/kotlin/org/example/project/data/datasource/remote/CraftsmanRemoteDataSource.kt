@@ -6,6 +6,7 @@ import org.example.project.data.remote.dto.CraftsmanStatusResponseDto
 import org.example.project.data.remote.dto.CreateCraftsmanRequest
 import org.example.project.data.remote.dto.DeleteAccountResponseDto
 import org.example.project.data.remote.dto.IdCardUploadResponseDto
+import org.example.project.data.remote.dto.ProfilePictureUploadResponseDto
 import org.example.project.data.remote.dto.WorkPortfolioResponseDto
 import org.example.project.domain.model.WorkImage
 
@@ -23,6 +24,13 @@ interface CraftsmanRemoteDataSource {
         idCardBack: ByteArray,
         idCardBackFileName: String
     ): IdCardUploadResponseDto
+
+    suspend fun uploadProfilePicture(
+        userId: String,
+        craftsmanId: String,
+        profilePicture: ByteArray,
+        profilePictureFileName: String
+    ): ProfilePictureUploadResponseDto
 
     suspend fun uploadWorkPortfolio(
         userId: String,

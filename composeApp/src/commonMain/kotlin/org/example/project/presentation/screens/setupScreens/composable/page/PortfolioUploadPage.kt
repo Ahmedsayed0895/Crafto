@@ -67,33 +67,6 @@ fun PortfolioUploadPage(
         }
     )
 
-//    val imagePicker = rememberFilePickerLauncher(
-//        type = FilePickerFileType.Image,
-//        selectionMode = FilePickerSelectionMode.Multiple,
-//    ) { files ->
-//        scope.launch {
-//            val imageDataList = files.take(4 - images.size).mapNotNull { file ->
-//                try {
-//                    val fileName = file.getName(context) ?: "image_${Clock.System.now()}.jpg"
-//                    val byteArray = file.readByteArray(context)
-//
-//                    ImageData(
-//                        uri = fileName,
-//                        byteArray = byteArray,
-//                        fileName = fileName
-//                    )
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                    null
-//                }
-//            }
-//            if (imageDataList.isNotEmpty()) {
-//                onAddPhotosClicked(imageDataList)
-//            }
-//        }
-//    }
-
-
     Column(
         modifier = Modifier
             .fillMaxSize()

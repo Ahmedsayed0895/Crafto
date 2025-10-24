@@ -1,8 +1,7 @@
-package org.example.project.data.local.datasource
+package org.example.project.data.repository
 
 import org.example.project.data.datasource.local.StorageLocalDataSource
-import org.example.project.data.datasource.local.UserPreferences
-
+import org.example.project.domain.repository.UserPreferences
 
 class UserPreferencesImpl(
     private val storage: StorageLocalDataSource

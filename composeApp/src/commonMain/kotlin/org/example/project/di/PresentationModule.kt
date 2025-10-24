@@ -11,6 +11,7 @@ val presentationModule = module {
             uploadIdCardsUseCase = get(),
             uploadWorkPortfolioUseCase = get(),
             getCategoriesUseCase = get(),
+            uploadProfilePictureUseCase = get(),
         )
     }
 }

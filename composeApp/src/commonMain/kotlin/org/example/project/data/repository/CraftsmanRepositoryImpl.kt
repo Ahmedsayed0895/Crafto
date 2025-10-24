@@ -1,7 +1,7 @@
 package org.example.project.data.repository
 
 import org.example.project.data.remote.dto.CreateCraftsmanRequest
-import org.example.project.data.datasource.local.UserPreferences
+import org.example.project.domain.repository.UserPreferences
 import org.example.project.data.mapper.toDomain
 import org.example.project.data.mapper.toDto
 import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
@@ -68,6 +68,23 @@ class CraftsmanRepositoryImpl (
             idCardBackUrl = response.idCardBackUrl,
             workPortfolioUrls = emptyList()
         )
+    }
+
+    override suspend fun uploadProfilePicture(
+        craftsmanId: String,
+        profilePicture: ByteArray,
+        profilePictureFileName: String
+    ): String {
+        val userId = userPreferences.getUserId()
+            ?: throw UnauthorizedException("User must be logged in to upload profile picture")
+
+        val response = remoteDataSource.uploadProfilePicture(
+            userId = userId,
+            craftsmanId = craftsmanId,
+            profilePicture = profilePicture,
+            profilePictureFileName = profilePictureFileName
+        )
+        return response.profilePictureUrl
     }
 
     override suspend fun uploadWorkPortfolio(

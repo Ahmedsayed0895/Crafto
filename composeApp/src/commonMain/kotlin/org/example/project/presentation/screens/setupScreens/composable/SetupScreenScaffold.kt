@@ -17,17 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
-import crafto.composeapp.generated.resources.account_setup_craftsman_category_description
-import crafto.composeapp.generated.resources.account_setup_craftsman_category_title
 import crafto.composeapp.generated.resources.next
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.util.DeviceConfiguration
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupCategoryState
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SetupScreenScaffold(

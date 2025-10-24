@@ -37,6 +37,7 @@ data class CraftsmanProfileResponseDto(
     val craftsmanId: String,
     val personalInfo: PersonalInfoDto,
     val categories: List<String>,
+    val profilePictureUrl: String? = null,
     val status: String,
     val verificationInfo: VerificationInfoDto,
     val createdAt: String
@@ -46,7 +47,15 @@ data class CraftsmanProfileResponseDto(
 data class CraftsmanStatusResponseDto(
     val craftsmanId: String,
     val status: String,
+    val profilePictureUrl: String? = null,
     val verificationStatus: String,
+    val message: String
+)
+
+@Serializable
+data class ProfilePictureUploadResponseDto(
+    val craftsmanId: String,
+    val profilePictureUrl: String,
     val message: String
 )
 

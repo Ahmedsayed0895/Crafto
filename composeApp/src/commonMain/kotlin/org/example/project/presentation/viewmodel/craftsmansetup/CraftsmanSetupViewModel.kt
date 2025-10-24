@@ -6,6 +6,7 @@ import org.example.project.util.AppLogger
 import org.example.project.domain.usecase.GetCategoriesUseCase
 import org.example.project.domain.usecase.craftsman.CreateCraftsmanProfileUseCase
 import org.example.project.domain.usecase.craftsman.UploadIdCardsUseCase
+import org.example.project.domain.usecase.craftsman.UploadProfilePictureUseCase
 import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
@@ -19,7 +20,8 @@ class CraftsmanSetupViewModel(
     private val createCraftsmanUseCase: CreateCraftsmanProfileUseCase,
     private val uploadIdCardsUseCase: UploadIdCardsUseCase,
     private val uploadWorkPortfolioUseCase: UploadWorkPortfolioUseCase,
-    private val getCategoriesUseCase: GetCategoriesUseCase
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val uploadProfilePictureUseCase: UploadProfilePictureUseCase,
 ) : BaseViewModel<CraftsmanSetupUiState, CraftsmanRegistrationEffect>(
     CraftsmanSetupUiState()
 ), CraftsmanSetupInteractionListener {
@@ -275,6 +277,80 @@ class CraftsmanSetupViewModel(
         )
     }
 
+    override fun onProfilePictureSelected(imageData: ImageData) {
+        AppLogger.d("ProfilePicture", "Profile picture selected")
+        AppLogger.d("ProfilePicture", "   FileName: ${imageData.fileName}")
+        AppLogger.d("ProfilePicture", "   Size: ${imageData.byteArray.size} bytes")
+
+        updateState { state ->
+            state.copy(profilePicture = imageData)
+        }
+    }
+
+    override fun onImagePickerError(error: ErrorUiState) {
+        AppLogger.e("ImagePicker", "Image picker error: ${error.message}")
+        updateState { it.copy(error = error) }
+    }
+
+    private fun uploadProfilePicture(craftsmanId: String, profilePicture: ImageData) {
+        AppLogger.d("ProfilePicture", "Starting profile picture upload")
+        AppLogger.d("ProfilePicture", "   CraftsmanId: $craftsmanId")
+        AppLogger.d("ProfilePicture", "   FileName: ${profilePicture.fileName}")
+        AppLogger.d("ProfilePicture", "   Size: ${profilePicture.byteArray.size} bytes")
+
+        updateState { it.copy(isUploadingProfilePicture = true) }
+
+        tryToCall(
+            call = {
+                uploadProfilePictureUseCase(
+                    craftsmanId = craftsmanId,
+                    profilePicture = profilePicture.byteArray,
+                    profilePictureFileName = profilePicture.fileName
+                )
+            },
+            onSuccess = { profilePictureUrl ->
+                AppLogger.d("ProfilePicture", "✅ Profile picture uploaded successfully!")
+                AppLogger.d("ProfilePicture", "   URL: $profilePictureUrl")
+
+                updateState {
+                    it.copy(
+                        profilePictureUrl = profilePictureUrl,
+                        isUploadingProfilePicture = false
+                    )
+                }
+
+                // Continue to next page after profile picture upload
+                AppLogger.d("Navigation", "Profile creation complete, navigating to portfolio page")
+                updateState {
+                    it.copy(
+                        isSwipeEnabled = true,
+                        currentPageIndex = it.currentPageIndex + 1
+                    )
+                }
+            },
+            onError = { error ->
+                AppLogger.e("ProfilePicture", "❌ Profile picture upload failed: ${error.message}")
+                updateState {
+                    it.copy(
+                        error = error,
+                        isUploadingProfilePicture = false
+                    )
+                }
+
+                // Even if profile picture fails, allow user to continue
+                // They can upload it later from settings
+                AppLogger.d("Navigation", "Profile creation complete, navigating to portfolio page")
+                updateState {
+                    it.copy(
+                        isSwipeEnabled = true,
+                        currentPageIndex = it.currentPageIndex + 1
+                    )
+                }
+            },
+            showLoading = false // Don't show loading since we're already showing it for profile creation
+        )
+    }
+
     fun clearError() {
         updateState { it.copy(error = null) }
     }
@@ -378,26 +454,39 @@ class CraftsmanSetupViewModel(
 
         tryToCall(
             call = {
-                AppLogger.d("CraftsmanSetupViewModel", "Calling createCraftsmanUseCase")
+                AppLogger.d("CraftsmanSetup", "Calling createCraftsmanUseCase")
                 createCraftsmanUseCase(
                     personalInfo = state.value.personalInfo.toDomain(),
                     categories = selectedCategoryTitles
                 )
             },
             onSuccess = { craftsmanId ->
-                AppLogger.d("CraftsmanSetupViewModel", "Profile created successfully: $craftsmanId")
+                AppLogger.d("CraftsmanSetup", "✅ Profile created successfully: $craftsmanId")
+
                 updateState {
                     it.copy(
                         craftsmanId = craftsmanId,
-                        isProfileCreated = true,
-                        isSwipeEnabled = true,
-                        // Navigate to portfolio page
-                        currentPageIndex = it.currentPageIndex + 1
+                        isProfileCreated = true
                     )
+                }
+
+                // Check if profile picture was selected
+                val profilePicture = state.value.profilePicture
+                if (profilePicture != null) {
+                    AppLogger.d("CraftsmanSetup", "Profile picture selected, uploading...")
+                    uploadProfilePicture(craftsmanId, profilePicture)
+                } else {
+                    AppLogger.d("CraftsmanSetup", "No profile picture selected, skipping upload")
+                    updateState {
+                        it.copy(
+                            isSwipeEnabled = true,
+                            currentPageIndex = it.currentPageIndex + 1
+                        )
+                    }
                 }
             },
             onError = { error ->
-                AppLogger.e("CraftsmanSetupViewModel", "Profile creation failed: ${error.message}")
+                AppLogger.e("CraftsmanSetup", "❌ Profile creation failed: ${error.message}")
                 updateState {
                     it.copy(
                         error = error,

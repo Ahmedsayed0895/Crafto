@@ -1,11 +1,11 @@
 package org.example.project.di
 
 
-import org.example.project.data.datasource.local.UserPreferences
+import org.example.project.domain.repository.UserPreferences
 import org.example.project.data.datasource.remote.CategoryDataSource
 import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
 import org.example.project.data.local.datasource.CategoryMemoryDataSource
-import org.example.project.data.local.datasource.UserPreferencesImpl
+import org.example.project.data.repository.UserPreferencesImpl
 import org.example.project.data.memory.categorySeed
 import org.example.project.data.remote.datasource.CraftsmanRemoteDataSourceImpl
 import org.example.project.data.repository.CategoryRepositoryImpl

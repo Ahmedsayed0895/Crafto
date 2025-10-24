@@ -176,8 +176,14 @@ fun CraftsmanSetupContent(
                     RegistrationStep.PERSONAL_INFO -> {
                         PersonalInfoPage(
                             personalInfo = state.personalInfo,
+                            profilePicture = state.profilePicture,
                             onPersonalInfoChanged = viewModel::onPersonalInfoChanged,
+                            onProfilePictureSelected = viewModel::onProfilePictureSelected,
+                            onImagePickerError = { errorMessage ->
+                                viewModel.onImagePickerError(ErrorUiState(errorMessage))
+                            },
                             isLoading = state.isLoading,
+                            isUploadingProfilePicture = state.isUploadingProfilePicture
                         )
                     }
 

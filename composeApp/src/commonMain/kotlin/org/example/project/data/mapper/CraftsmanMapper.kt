@@ -19,6 +19,7 @@ fun CraftsmanProfileResponseDto.toDomain(): Craftsman {
         craftsmanId = craftsmanId,
         personalInfo = personalInfo.toDomain(),
         categories = categories,
+        profilePictureUrl = profilePictureUrl,
         status = CraftsmanStatus.valueOf(status),
         verificationStatus = VerificationStatus.valueOf(verificationInfo.status),
         verification = verificationInfo.toVerificationDocuments(),

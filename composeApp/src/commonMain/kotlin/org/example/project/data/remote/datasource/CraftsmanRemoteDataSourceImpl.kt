@@ -19,6 +19,7 @@ import org.example.project.data.remote.dto.CraftsmanStatusResponseDto
 import org.example.project.data.remote.dto.CreateCraftsmanRequest
 import org.example.project.data.remote.dto.DeleteAccountResponseDto
 import org.example.project.data.remote.dto.IdCardUploadResponseDto
+import org.example.project.data.remote.dto.ProfilePictureUploadResponseDto
 import org.example.project.data.remote.dto.WorkPortfolioResponseDto
 import org.example.project.data.remote.network.ApiConstants
 import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
@@ -80,6 +81,36 @@ class CraftsmanRemoteDataSourceImpl(
             ) {
                 header(USER_ID, userId)
                 AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanIdCards(craftsmanId)}")
+            }
+        }
+    }
+
+    override suspend fun uploadProfilePicture(
+        userId: String,
+        craftsmanId: String,
+        profilePicture: ByteArray,
+        profilePictureFileName: String
+    ): ProfilePictureUploadResponseDto {
+        AppLogger.d("API", "=== Starting Profile Picture Upload ===")
+        AppLogger.d("API", "UserId: $userId")
+        AppLogger.d("API", "CraftsmanId: $craftsmanId")
+        AppLogger.d("API", "File: $profilePictureFileName (${profilePicture.size} bytes)")
+
+        return wrapApiCall {
+            httpClient.submitFormWithBinaryData(
+                url = ApiConstants.Endpoints.craftsmanProfilePicture(craftsmanId),
+                formData = formData {
+                    val mimeType = getMimeType(profilePictureFileName)
+                    AppLogger.d("API", "Profile picture MIME type: $mimeType")
+
+                    append("profilePicture", profilePicture, Headers.build {
+                        append(HttpHeaders.ContentType, mimeType)
+                        append(HttpHeaders.ContentDisposition, "filename=\"$profilePictureFileName\"")
+                    })
+                }
+            ) {
+                header(USER_ID, userId)
+                AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanProfilePicture(craftsmanId)}")
             }
         }
     }

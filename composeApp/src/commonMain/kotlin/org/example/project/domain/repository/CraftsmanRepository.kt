@@ -20,6 +20,12 @@ interface CraftsmanRepository {
         idCardBackFileName: String
     ): VerificationDocuments
 
+    suspend fun uploadProfilePicture(
+        craftsmanId: String,
+        profilePicture: ByteArray,
+        profilePictureFileName: String
+    ): String
+
     suspend fun uploadWorkPortfolio(
         craftsmanId: String,
         workImages: List<WorkImage>

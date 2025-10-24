@@ -11,7 +11,6 @@ data class CraftsmanSetupUiState(
     override val isLoading: Boolean = false,
     override val error: ErrorUiState? = null,
 
-    // Pager state
     val currentPageIndex: Int = 0,
     val totalPages: Int = 5,
     val canNavigateNext: Boolean = false,
@@ -24,26 +23,24 @@ data class CraftsmanSetupUiState(
     val uploadedPortfolioUrls: List<String> = emptyList(),
     val verificationDocuments: VerificationDocuments? = null,
 
-    // User type selection
     val userType: UserType? = null,
 
-    // Service selection
     val availableCategories: List<CategoryUi> = emptyList(),
     val selectedCategoryIds: Set<Int> = emptySet(),
 
-    // Personal info
     val personalInfo: PersonalInfoUiModel = PersonalInfoUiModel("", "", "", ""),
 
-    // Portfolio
     val portfolioImages: List<ImageData> = emptyList(),
     val workDescription: String = "",
     val canAddMoreImages: Boolean = true,
 
-    // Identity verification
     val idCardFront: ImageData? = null,
     val idCardBack: ImageData? = null,
 
-    // Flow state
+    val profilePicture: ImageData? = null,
+    val isUploadingProfilePicture: Boolean = false,
+    val profilePictureUrl: String? = null,
+
     val craftsmanId: String? = null,
     val isProfileCreated: Boolean = false,
 ): BaseScreenState {
