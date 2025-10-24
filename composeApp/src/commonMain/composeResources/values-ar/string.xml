@@ -34,7 +34,10 @@
     <string name="next_button">التالي</string>
     <string name="location_icon">أيقونة الموقع</string>
     <string name="dropdown_icon">أيقونة القائمة المنسدلة</string>
-    <string name="arrow_icon">أيقونة السهم</string>
     <string name="enter_detailed_location">أدخل موقعك بالتفصيل</string>
+    <string name="back_arrow">العوده</string>
+    <string name="down_arrow">السهم لأسفل</string>
+
+
 
 </resources>

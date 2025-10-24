@@ -13,5 +13,6 @@ data class LocationUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val showGovernorateSheet: Boolean = false,
-    val showDistrictSheet: Boolean = false
+    val showDistrictSheet: Boolean = false,
+    val locationDisplayText: String = "Governorate, District"
 )

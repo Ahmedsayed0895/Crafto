@@ -43,7 +43,11 @@
     <string name="next_button">Next</string>
     <string name="location_icon">Location icon</string>
     <string name="dropdown_icon">Dropdown</string>
-    <string name="arrow_icon">Arrow</string>
     <string name="enter_detailed_location">Enter your location in detail</string>
+    <string name="back_arrow">back arrow</string>
+    <string name="down_arrow">back arrow</string>
+
+
+
 
 </resources>

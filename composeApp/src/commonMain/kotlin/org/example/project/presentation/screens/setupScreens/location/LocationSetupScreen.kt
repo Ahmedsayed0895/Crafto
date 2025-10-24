@@ -1,60 +1,43 @@
 package org.example.project.presentation.screens.setupScreens.location
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.*
-import org.example.project.domain.entity.District
-import org.example.project.domain.entity.Governorates
 import org.example.project.presentation.components.DetailLocationInput
-import org.example.project.presentation.components.GovernorateSelector
-import org.example.project.presentation.designsystem.components.BottomSheet
+import org.example.project.presentation.components.DropdownBottomSheet
+import org.example.project.presentation.components.DropdownSelector
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun LocationSetupScreen(
-    viewModel: LocationViewModel = koinViewModel(),
+    viewModel: LocationViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 
     HandleEffects(viewModel)
-
-    val displayText by remember(state.selectedGovernorate, state.selectedDistrict) {
-        derivedStateOf {
-            val parts = listOf(state.selectedGovernorate, state.selectedDistrict).filter { it.isNotBlank() }
-            if (parts.isEmpty()) "Governorate, District" else parts.joinToString(", ")
-        }
-    }
 
     Column(
         modifier = Modifier
@@ -65,17 +48,17 @@ fun LocationSetupScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        AccountSetupTopBar(
-            modifier = Modifier.fillMaxWidth(),
-            currentPage = 2
-        )
-
+        AccountSetupTopBar(modifier = Modifier.fillMaxWidth(), currentPage = 2)
         LocationHeader(modifier = Modifier.weight(1f))
 
-        GovernorateSelector(
-            displayText = displayText,
-            hasSelection = displayText != stringResource(Res.string.location_hint),
-            onClick = viewModel::openGovernorateSheet
+        DropdownSelector(
+            text = state.locationDisplayText,
+            hint = stringResource(Res.string.location_hint),
+            icon = Res.drawable.location,
+            hasSelection = state.selectedGovernorate.isNotBlank() && state.selectedDistrict.isNotBlank(),
+            onClick = {
+                viewModel.openGovernorateSheet()
+            }
         )
 
         DetailLocationInput(
@@ -91,18 +74,20 @@ fun LocationSetupScreen(
         )
     }
 
-    GovernorateBottomSheet(
+    DropdownBottomSheet(
         show = state.showGovernorateSheet,
-        governorates = state.governorates,
+        items = state.governorates,
+        itemLabel = { it.name },
         onDismiss = viewModel::closeGovernorateSheet,
         onSelect = viewModel::selectGovernorate
     )
 
-    DistrictBottomSheet(
+    DropdownBottomSheet(
         show = state.showDistrictSheet,
-        districts = state.districts,
+        items = state.districts,
+        itemLabel = { it.name },
         onDismiss = viewModel::closeDistrictSheet,
-        onSelect = viewModel::selectDistrict
+        onSelect = { viewModel.selectDistrict(it.name) }
     )
 }
 
@@ -171,80 +156,6 @@ private fun NextButton(
     )
 }
 
-@Composable
-private fun GovernorateBottomSheet(
-    show: Boolean,
-    governorates: List<Governorates>,
-    onDismiss: () -> Unit,
-    onSelect: (Governorates) -> Unit
-) {
-    if (show) {
-        BottomSheet(
-            onDismissRequest = onDismiss
-        ) {
-            LazyColumn {
-                items(governorates.size) { index ->
-                    val governorate = governorates[index]
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onSelect(governorate) }
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = governorate.name,
-                            style = AppTheme.textStyle.body.medium,
-                            color = AppTheme.craftoColors.shade.primary,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Icon(
-                            painter = painterResource(Res.drawable.alt_arrow_down),
-                            contentDescription = stringResource(Res.string.arrow_icon),
-                            tint = AppTheme.craftoColors.shade.secondary
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun DistrictBottomSheet(
-    show: Boolean,
-    districts: List<District>,
-    onDismiss: () -> Unit,
-    onSelect: (String) -> Unit
-) {
-    if (show) {
-        BottomSheet(
-            onDismissRequest = onDismiss
-        ) {
-            LazyColumn {
-                items(districts.size) { index ->
-                    val district = districts[index]
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onSelect(district.name) }
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = district.name,
-                            style = AppTheme.textStyle.body.medium,
-                            color = AppTheme.craftoColors.shade.primary,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
 
 @Preview
 @Composable

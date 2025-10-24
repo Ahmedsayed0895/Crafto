@@ -12,7 +12,9 @@ class LocationViewModel(
 
     init {
         fetchGovernorates()
+        updateLocationDisplay()
     }
+
 
     private fun fetchGovernorates() {
         tryToCall(
@@ -48,17 +50,20 @@ class LocationViewModel(
             dispatcher = Dispatchers.IO
         )
     }
-
+    fun updateDetailLocation(text: String) {
+        updateState { it.copy(detailLocation = text) }
+    }
     fun selectGovernorate(governorate: Governorates) {
         updateState {
             it.copy(
                 selectedGovernorate = governorate.name,
-                selectedGovernorateId = governorate.id, // Store governorate ID
+                selectedGovernorateId = governorate.id,
                 selectedDistrict = "",
                 showGovernorateSheet = false
             )
         }
         fetchDistricts(governorate.id)
+        updateLocationDisplay()
     }
 
     fun selectDistrict(district: String) {
@@ -68,10 +73,19 @@ class LocationViewModel(
                 showDistrictSheet = false
             )
         }
+        updateLocationDisplay()
     }
 
-    fun updateDetailLocation(text: String) {
-        updateState { it.copy(detailLocation = text) }
+    private fun updateLocationDisplay() {
+        updateState { currentState ->
+            val parts = listOfNotNull(
+                currentState.selectedGovernorate.takeIf { it.isNotBlank() },
+                currentState.selectedDistrict.takeIf { it.isNotBlank() }
+            )
+            val displayText = parts.joinToString(", ")
+
+            currentState.copy(locationDisplayText = displayText)
+        }
     }
 
     fun openGovernorateSheet() {

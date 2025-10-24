@@ -60,16 +60,3 @@ fun GovernorateSelector(
         )
     }
 }
-
-@Composable
-fun DetailLocationInput(
-    text: String,
-    onTextChange: (String) -> Unit
-) {
-    TextField(
-        hint = stringResource(Res.string.enter_detailed_location),
-        text = text,
-        onTextChange = onTextChange,
-        modifier = Modifier.fillMaxWidth()
-    )
-}
