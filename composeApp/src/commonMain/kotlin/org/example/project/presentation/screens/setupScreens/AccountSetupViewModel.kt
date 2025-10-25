@@ -1,9 +1,9 @@
-package org.example.project.presentation.viewmodel.accountSetup
+package org.example.project.presentation.screens.setupScreens
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.example.project.domain.usecase.GetCategoriesUseCase
-import org.example.project.presentation.viewmodel.base.BaseViewModel
+import org.example.project.presentation.shared.base.BaseViewModel
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
 

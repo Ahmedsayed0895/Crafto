@@ -11,8 +11,8 @@ import crafto.composeapp.generated.resources.account_setup_customer_category_des
 import crafto.composeapp.generated.resources.account_setup_customer_category_title
 //import org.example.project.presentation.ui.screens.setupScreens.component.CategoryActionBox
 import org.example.project.presentation.ui.screens.setupScreens.component.SetupScreenScaffold
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupViewModel
+import org.example.project.presentation.screens.setupScreens.AccountSetupState
+import org.example.project.presentation.screens.setupScreens.AccountSetupViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

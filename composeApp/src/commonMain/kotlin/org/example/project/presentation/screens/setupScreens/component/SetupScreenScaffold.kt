@@ -25,8 +25,8 @@ import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.util.DeviceConfiguration
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupCategoryState
-import org.example.project.presentation.viewmodel.accountSetup.AccountSetupState
+import org.example.project.presentation.screens.setupScreens.AccountSetupCategoryState
+import org.example.project.presentation.screens.setupScreens.AccountSetupState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
