@@ -48,7 +48,6 @@ import org.example.project.presentation.viewmodel.customerRequest.CustomerReques
 import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 

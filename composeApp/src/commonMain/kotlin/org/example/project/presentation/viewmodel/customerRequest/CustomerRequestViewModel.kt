@@ -1,13 +1,11 @@
 package org.example.project.presentation.viewmodel.customerRequest
 
-import crafto.composeapp.generated.resources.Res
 import org.example.project.domain.repository.CustomerRequestRepository
 import org.example.project.presentation.viewmodel.base.BaseViewModel
 import org.example.project.presentation.viewmodel.base.ErrorUiState
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @KoinViewModel
 @OptIn(ExperimentalUuidApi::class)
