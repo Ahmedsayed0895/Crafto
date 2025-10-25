@@ -2,18 +2,9 @@ package org.example.project.presentation.screens.customerRequest.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,21 +15,20 @@ import org.example.project.presentation.designsystem.components.BottomSheet
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.PrimaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestInteractionListener
-import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestUiState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun RateBottomSheet(
     onDismiss: () -> Unit,
-    updateRate:Int?=null,
-    onClick: (numberOfRate:Int) -> Unit,
+    updateRate: Int? = null,
+    onClick: (numberOfRate: Int) -> Unit,
 ) {
+    var selectedRate by remember { mutableStateOf(updateRate ?: 0) }
 
     BottomSheet(
         showCloseIcon = true,
-        onDismissRequest = { onDismiss()},
+        onDismissRequest = { onDismiss() },
         headerContent = {
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)
@@ -51,23 +41,31 @@ fun RateBottomSheet(
             }
         },
         content = {
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Rating(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(bottom = 8.dp),
-                    isSelected = true,
-                    onClick={
+                    currentRate = selectedRate,
+                    onClick = { newRate ->
+                        selectedRate = newRate
                     }
                 )
+
                 PrimaryButton(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(vertical = 16.dp, horizontal = 16.dp),
                     text = "Add Rating",
-                    enabled = true,
-                    buttonState = ButtonState.Enable,
+                    enabled = selectedRate > 0,
+                    buttonState = if (selectedRate > 0) ButtonState.Enable else ButtonState.DISABLED,
                     contentPadding = PaddingValues(vertical = 15.dp),
-                    onClick ={
-//                        onClick()
+                    onClick = {
+                        onClick(selectedRate)
+                        onDismiss()
                     }
                 )
             }
@@ -78,24 +76,27 @@ fun RateBottomSheet(
 @Composable
 private fun Rating(
     modifier: Modifier = Modifier,
-    isSelected: Boolean,
-    onClick: (rateNumber:Int) -> Unit
+    currentRate: Int,
+    onClick: (rateNumber: Int) -> Unit
 ) {
-
-    var rateNumber by remember { mutableStateOf(0) }
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        repeat(5) {
+        repeat(5) { index ->
+            val starNumber = index + 1
+            val isSelected = starNumber <= currentRate
             Image(
-                painter = painterResource(if (isSelected) Res.drawable.rate_done else Res.drawable.rate),
-                contentDescription = "rate",
-                modifier = Modifier.padding(end = 8.dp).clickable{
-                    rateNumber++
-                    onClick(rateNumber)
-                }
+                painter = painterResource(
+                    if (isSelected) Res.drawable.rate_done else Res.drawable.rate
+                ),
+                contentDescription = "Rate star",
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .clickable {
+                        onClick(starNumber)
+                    }
             )
         }
     }
@@ -104,13 +105,11 @@ private fun Rating(
 @Preview
 @Composable
 private fun RateBottomSheetPreview() {
-    AppTheme(
-        isDarkTheme = false
-    ) {
+    AppTheme(isDarkTheme = false) {
         RateBottomSheet(
             onClick = {},
             onDismiss = {},
-            updateRate = 0,
+            updateRate = 3,
         )
     }
 }

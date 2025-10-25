@@ -78,7 +78,11 @@ fun CraftsmanCard(
 
 
     Row(
-        modifier = modifier.fillMaxWidth().background(AppTheme.craftoColors.background.card),
+        modifier = modifier.fillMaxWidth()
+            .background(
+            color = AppTheme.craftoColors.background.card,
+            shape = RoundedCornerShape(AppTheme.craftoRadius.x2l),
+        ).padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
 
