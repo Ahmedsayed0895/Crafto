@@ -1,8 +1,8 @@
-package org.example.project.presentation.viewmodel.customerRequest
+package org.example.project.presentation.screens.customerRequest
 
 import org.example.project.domain.repository.CustomerRequestRepository
-import org.example.project.presentation.viewmodel.base.BaseViewModel
-import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.presentation.shared.base.BaseViewModel
+import org.example.project.presentation.shared.base.ErrorUiState
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
 import kotlin.uuid.ExperimentalUuidApi

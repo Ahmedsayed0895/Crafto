@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.customerRequest
+package org.example.project.presentation.screens.customerRequest
 
 interface CustomerRequestInteractionListener {
 

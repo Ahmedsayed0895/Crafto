@@ -6,32 +6,23 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.dialog
@@ -41,13 +32,11 @@ import org.example.project.presentation.designsystem.components.CategoryItemHori
 import org.example.project.presentation.designsystem.components.CraftsmanCard
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.customerRequest.component.CircularProgressLoading
+import org.example.project.presentation.screens.customerRequest.component.DividedLine
 import org.example.project.presentation.screens.customerRequest.component.NoServiceRequestPlaceholder
 import org.example.project.presentation.screens.customerRequest.component.RateBottomSheet
-import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestInteractionListener
-import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestScreenUiState
-import org.example.project.presentation.viewmodel.customerRequest.CustomerRequestViewModel
+import org.example.project.presentation.screens.customerRequest.component.RequestsTabs
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 
@@ -239,18 +228,6 @@ private fun LazyListScope.requestCancelList(
 }
 
 @Composable
-private fun DividedLine() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(1.dp)
-            .padding(vertical = 16.dp)
-            .clip(RoundedCornerShape(AppTheme.craftoRadius.full))
-            .background(AppTheme.craftoColors.shade.quaternary)
-    )
-}
-
-@Composable
 private fun AppBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
@@ -266,48 +243,5 @@ private fun AppBar(modifier: Modifier = Modifier) {
             contentDescription = "notification",
             tint = AppTheme.craftoColors.shade.primary,
         )
-    }
-}
-
-@Composable
-private fun RequestsTabs(
-    state: CustomerRequestScreenUiState,
-    onTabSelected: (CustomerRequestScreenUiState.RequestsTab) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    TabRow(
-        selectedTabIndex = state.selectedTapIndex.ordinal,
-        modifier = modifier.fillMaxWidth(),
-        containerColor = AppTheme.craftoColors.background.card,
-        indicator = {
-            Box(
-                modifier = Modifier
-                    .tabIndicatorOffset(it[state.selectedTapIndex.ordinal])
-                    .height(2.dp)
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = AppTheme.craftoRadius.full,
-                            topEnd = AppTheme.craftoRadius.full
-                        )
-                    )
-                    .background(AppTheme.craftoColors.brand.primary)
-            )
-        }
-    ) {
-        CustomerRequestScreenUiState.RequestsTab.entries.forEach { tab ->
-            Tab(
-                selected = state.selectedTapIndex == tab,
-                onClick = { onTabSelected(tab) },
-                selectedContentColor = AppTheme.craftoColors.brand.primary,
-                unselectedContentColor = AppTheme.craftoColors.shade.secondary,
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                Text(
-                    text = stringResource(tab.tabTitle),
-                    modifier = Modifier.padding(16.dp),
-                    style = AppTheme.textStyle.body.medium,
-                )
-            }
-        }
     }
 }
