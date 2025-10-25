@@ -48,6 +48,6 @@ class NetworkModule {
     }
 
     private companion object {
-        const val TIME_OUT_INTERVAL_MILLI = 10_000L
+        const val TIME_OUT_INTERVAL_MILLI = 30_000L
     }
 }

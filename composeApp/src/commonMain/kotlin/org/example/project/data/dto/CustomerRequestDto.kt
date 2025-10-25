@@ -2,10 +2,7 @@ package org.example.project.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 @Serializable
 data class CustomerRequestDto(
 
@@ -13,84 +10,88 @@ data class CustomerRequestDto(
     val offers: List<OffersItem>? = null,
 
     @SerialName("districtName")
-    val districtName: String,
+    val districtName: String? = null,
 
     @SerialName("description")
-    val description: String,
+    val description: String? = null,
 
     @SerialName("governmentName")
-    val governmentName: String,
+    val governmentName: String? = null,
 
     @SerialName("title")
-    val title: String,
+    val title: String? = null,
 
     @SerialName("photos")
-    val photos: List<String?>,
+    val photos: List<String>? = null,
 
     @SerialName("districtId")
-    val districtId: Uuid,
+    val districtId: String? = null,
 
     @SerialName("customerId")
-    val customerId: Uuid,
+    val customerId: String? = null,
 
     @SerialName("locationDetails")
-    val locationDetails: String,
+    val locationDetails: String? = null,
 
     @SerialName("id")
-    val id: Uuid,
+    val id: String? = null,
 
     @SerialName("category")
-    val category: Category,
+    val category: Category? = null,
 
     @SerialName("status")
-    val status: String,
+    val status: String? = null,
 
     @SerialName("governmentId")
-    val governmentId: Uuid
+    val governmentId: String? = null
 )
 
-@OptIn(ExperimentalUuidApi::class)
 @Serializable
 data class Category(
 
     @SerialName("categoryColor")
-    val categoryColor: String,
+    val categoryColor: String? = null,
+
+    @SerialName("categoryIconUrl")
+    val categoryIconUrl: String? = null,
 
     @SerialName("categoryName")
-    val categoryName: String,
+    val categoryName: String? = null,
 
     @SerialName("categoryId")
-    val categoryId: Uuid
+    val categoryId: String? = null,
+
+    @SerialName("categoryDescription")
+    val categoryDescription: String? = null
 )
 
-@OptIn(ExperimentalUuidApi::class)
 @Serializable
 data class OffersItem(
 
     @SerialName("customerIssueId")
-    val customerIssueId: Uuid,
+    val customerIssueId: String? = null,
 
     @SerialName("createdDate")
-    val createdDate: String,
+    val createdDate: String? = null,
 
     @SerialName("price")
-    val price: Double,
+    val price: Double? = null,
 
     @SerialName("customerId")
-    val customerId: Uuid,
+    val customerId: String? = null,
 
     @SerialName("visitedDate")
-    val visitedDate: String,
+    val visitedDate: String? = null,
 
     @SerialName("isSelected")
-    val isSelected: Boolean,
+    val isSelected: Boolean? = null,
 
     @SerialName("id")
-    val id: Uuid,
+    val id: String? = null,
 
     @SerialName("craftsmanId")
-    val craftsmanId: Uuid,
+    val craftsmanId: String? = null,
 
     @SerialName("message")
-    val message: String
+    val message: String? = null
 )

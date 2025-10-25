@@ -1,14 +1,11 @@
 package org.example.project.domain.entity
 
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 data class CraftsmanOffer(
-    val id: Uuid,
-    val craftsmanId: Uuid,
-    val customerId: Uuid,
-    val customerIssueId: Uuid,
+    val id: String,
+    val craftsmanId: String,
+    val customerId: String,
+    val customerIssueId: String,
     val price: Double,
     val createdDate: String,
     val visitedDate: String?,

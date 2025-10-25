@@ -10,18 +10,15 @@ import org.example.project.domain.entity.CustomerRequest
 import org.example.project.domain.repository.CustomerRequestRepository
 import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 @Single(binds = [CustomerRequestRepository::class])
 class CustomerRequestRepositoryImpl(
     @Provided private val client: HttpClient
 ) : CustomerRequestRepository {
 
-    override suspend fun getCustomersRequests(customerRequestId: Uuid): List<CustomerRequest> {
-        return safeApiCall< List<CustomerRequestDto>> {
-            client.get("$CUSTOMER_REQUESTS_END_POINT/$customerRequestId")
+    override suspend fun getCustomersRequests(customerId: String): List<CustomerRequest> {
+        return safeApiCall<List<CustomerRequestDto>>{
+            client.get("$CUSTOMER_REQUESTS_END_POINT/$customerId")
         }.map { it.toDomain() }
     }
 
