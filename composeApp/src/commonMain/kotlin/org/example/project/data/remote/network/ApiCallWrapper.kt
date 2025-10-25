@@ -1,6 +1,9 @@
 package org.example.project.data.remote.network
 
 import io.ktor.client.call.body
+import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import org.example.project.data.remote.dto.ErrorResponseDto
@@ -10,6 +13,7 @@ import org.example.project.domain.exception.CraftoException
 import org.example.project.domain.exception.ForbiddenException
 import org.example.project.domain.exception.NetworkException
 import org.example.project.domain.exception.NotFoundException
+import org.example.project.domain.exception.ServerUnavailableException
 import org.example.project.domain.exception.UnauthorizedException
 
 suspend inline fun <reified T> wrapApiCall(
@@ -39,6 +43,12 @@ suspend inline fun <reified T> wrapApiCall(
                 }
                 throw AlreadyExistsException(error?.message ?: "Resource already exists")
             }
+            HttpStatusCode.InternalServerError,
+            HttpStatusCode.BadGateway,
+            HttpStatusCode.ServiceUnavailable,
+            HttpStatusCode.GatewayTimeout -> {
+                throw ServerUnavailableException("Server is experiencing issues. Please try again later.")
+            }
             else -> {
                 val error = try {
                     response.body<ErrorResponseDto>()
@@ -50,9 +60,13 @@ suspend inline fun <reified T> wrapApiCall(
         }
     } catch (e: CraftoException) {
         throw e
-    } catch (e: io.ktor.client.network.sockets.SocketTimeoutException) {
-        throw NetworkException("Connection timeout")
-    } catch (e: Exception) {
+    } catch (e: ConnectTimeoutException) {
+        throw ServerUnavailableException("Cannot connect to server. Please try again later.")
+    } catch (e: SocketTimeoutException) {
+        throw NetworkException("Connection timeout. Please check your internet connection.")
+    } catch (e: HttpRequestTimeoutException) {
+        throw NetworkException("Request timeout. Please try again.")
+    }catch (e: Exception) {
         throw NetworkException("Network error: ${e.message}")
     }
 }
