@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.mapper
+package org.example.project.presentation.mapper
 
 import androidx.compose.ui.graphics.Color
 import org.example.project.domain.entity.Category

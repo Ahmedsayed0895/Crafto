@@ -1,4 +1,4 @@
-package org.example.project.data.datasource.remote
+package org.example.project.data.remote.datasource
 
 import org.example.project.data.remote.dto.CategoryDto
 

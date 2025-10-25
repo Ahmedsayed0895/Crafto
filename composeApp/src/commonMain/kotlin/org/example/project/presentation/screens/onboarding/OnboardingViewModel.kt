@@ -1,18 +1,14 @@
-package org.example.project.presentation.viewmodel
+package org.example.project.presentation.screens.onboarding
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.example.project.domain.entity.OnboardingItem
 import org.example.project.domain.repository.OnboardingRepository
-import org.example.project.presentation.screens.onboarding.OnboardingScreenEffect
-import org.example.project.presentation.screens.onboarding.OnboardingScreenInteractionListener
-import org.example.project.presentation.screens.onboarding.OnboardingScreenState
 import org.example.project.presentation.screens.onboarding.model.toUiState
-import org.example.project.presentation.viewmodel.base.BaseViewModel
+import org.example.project.presentation.screens.shared.base.BaseViewModel
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
-
 
 @KoinViewModel
 class OnboardingViewModel(

@@ -1,6 +1,6 @@
 package org.example.project.di
 
-import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanSetupViewModel
+import org.example.project.presentation.screens.setupscreens.craftsmansetup.CraftsmanSetupViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

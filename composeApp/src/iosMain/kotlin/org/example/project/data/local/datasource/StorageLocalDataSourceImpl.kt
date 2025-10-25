@@ -1,7 +1,5 @@
 package org.example.project.data.local.datasource
 
-import org.example.project.data.datasource.local.StorageLocalDataSource
-import org.koin.core.annotation.Single
 import platform.Foundation.NSUserDefaults
 
 class StorageLocalDataSourceImpl : StorageLocalDataSource {

@@ -1,11 +1,11 @@
-package org.example.project.presentation.viewmodel.craftsmansetup
+package org.example.project.presentation.screens.setupscreens.craftsmansetup
 
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.presentation.model.CategoryUi
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.viewmodel.base.BaseScreenState
-import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.presentation.screens.shared.base.BaseScreenState
+import org.example.project.presentation.screens.shared.base.ErrorUiState
 
 data class CraftsmanSetupUiState(
     override val isLoading: Boolean = false,

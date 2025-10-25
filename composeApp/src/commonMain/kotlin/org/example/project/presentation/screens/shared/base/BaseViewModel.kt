@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.base
+package org.example.project.presentation.screens.shared.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.example.project.presentation.viewmodel.mapper.toErrorUiState
+import org.example.project.presentation.mapper.toErrorUiState
 
 abstract class BaseViewModel<SCREEN_STATE, SCREEN_EFFECT>(
     initialState: SCREEN_STATE,

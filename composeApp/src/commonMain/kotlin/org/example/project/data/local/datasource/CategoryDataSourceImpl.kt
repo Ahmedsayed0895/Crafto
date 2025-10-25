@@ -1,6 +1,6 @@
 package org.example.project.data.local.datasource
 
-import org.example.project.data.datasource.remote.CategoryDataSource
+import org.example.project.data.remote.datasource.CategoryDataSource
 import org.example.project.data.remote.dto.CategoryDto
 
 class CategoryMemoryDataSource(

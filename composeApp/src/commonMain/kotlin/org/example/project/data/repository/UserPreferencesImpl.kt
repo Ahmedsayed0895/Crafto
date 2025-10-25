@@ -1,6 +1,6 @@
 package org.example.project.data.repository
 
-import org.example.project.data.datasource.local.StorageLocalDataSource
+import org.example.project.data.local.datasource.StorageLocalDataSource
 import org.example.project.domain.repository.UserPreferences
 
 class UserPreferencesImpl(

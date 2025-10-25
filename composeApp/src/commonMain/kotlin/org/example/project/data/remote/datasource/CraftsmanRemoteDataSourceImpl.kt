@@ -12,7 +12,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
-import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
 import org.example.project.data.remote.dto.CraftsmanProfileResponseDto
 import org.example.project.data.remote.dto.CraftsmanSetupResponseDto
 import org.example.project.data.remote.dto.CraftsmanStatusResponseDto
@@ -37,7 +36,7 @@ class CraftsmanRemoteDataSourceImpl(
     ): CraftsmanSetupResponseDto {
         return wrapApiCall {
             httpClient.post(ApiConstants.Endpoints.CRAFTSMAN_SETUP) {
-                header(ApiConstants.Headers.USER_ID, userId)
+                header(USER_ID, userId)
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }
@@ -148,7 +147,7 @@ class CraftsmanRemoteDataSourceImpl(
                     }
                 }
             ) {
-                header(ApiConstants.Headers.USER_ID, userId)
+                header(USER_ID, userId)
                 AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId)}")
             }
         }
@@ -157,7 +156,7 @@ class CraftsmanRemoteDataSourceImpl(
     override suspend fun getCraftsmanProfile(userId: String): CraftsmanProfileResponseDto {
         return wrapApiCall {
             httpClient.get(ApiConstants.Endpoints.CRAFTSMAN_PROFILE) {
-                header(ApiConstants.Headers.USER_ID, userId)
+                header(USER_ID, userId)
             }
         }
     }

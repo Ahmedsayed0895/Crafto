@@ -1,8 +1,8 @@
-package org.example.project.presentation.viewmodel.craftsmansetup
+package org.example.project.presentation.screens.setupscreens.craftsmansetup
 
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.presentation.screens.shared.base.ErrorUiState
 
 interface CraftsmanSetupInteractionListener {
     fun onUserTypeSelected(userType: UserType)

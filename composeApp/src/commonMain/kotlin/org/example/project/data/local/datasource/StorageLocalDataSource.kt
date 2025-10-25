@@ -1,4 +1,4 @@
-package org.example.project.data.datasource.local
+package org.example.project.data.local.datasource
 
 interface StorageLocalDataSource {
     suspend fun saveString(key: String, value: String)

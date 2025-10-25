@@ -4,7 +4,7 @@ import org.example.project.data.remote.dto.CreateCraftsmanRequest
 import org.example.project.domain.repository.UserPreferences
 import org.example.project.data.mapper.toDomain
 import org.example.project.data.mapper.toDto
-import org.example.project.data.datasource.remote.CraftsmanRemoteDataSource
+import org.example.project.data.remote.datasource.CraftsmanRemoteDataSource
 import org.example.project.domain.entity.Craftsman
 import org.example.project.domain.entity.CraftsmanStatus
 import org.example.project.domain.entity.PersonalInfo

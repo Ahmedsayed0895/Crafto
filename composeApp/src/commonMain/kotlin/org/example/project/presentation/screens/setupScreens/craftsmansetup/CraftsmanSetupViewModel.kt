@@ -1,8 +1,7 @@
-package org.example.project.presentation.viewmodel.craftsmansetup
+package org.example.project.presentation.screens.setupscreens.craftsmansetup
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.example.project.util.AppLogger
 import org.example.project.domain.usecase.GetCategoriesUseCase
 import org.example.project.domain.usecase.craftsman.CreateCraftsmanProfileUseCase
 import org.example.project.domain.usecase.craftsman.UploadIdCardsUseCase
@@ -10,11 +9,12 @@ import org.example.project.domain.usecase.craftsman.UploadProfilePictureUseCase
 import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.viewmodel.base.BaseViewModel
-import org.example.project.presentation.viewmodel.base.ErrorUiState
-import org.example.project.presentation.viewmodel.mapper.toDomain
-import org.example.project.presentation.viewmodel.mapper.toUi
-import org.example.project.presentation.viewmodel.mapper.toWorkImages
+import org.example.project.presentation.screens.shared.base.BaseViewModel
+import org.example.project.presentation.screens.shared.base.ErrorUiState
+import org.example.project.presentation.mapper.toDomain
+import org.example.project.presentation.mapper.toUi
+import org.example.project.presentation.mapper.toWorkImages
+import org.example.project.util.AppLogger
 
 class CraftsmanSetupViewModel(
     private val createCraftsmanUseCase: CreateCraftsmanProfileUseCase,
@@ -506,4 +506,3 @@ class CraftsmanSetupViewModel(
                 info.address.isNotBlank()
     }
 }
-

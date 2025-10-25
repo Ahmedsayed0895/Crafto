@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.base
+package org.example.project.presentation.screens.shared.base
 
 interface BaseScreenState {
     val isLoading: Boolean

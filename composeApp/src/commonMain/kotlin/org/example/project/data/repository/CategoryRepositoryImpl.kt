@@ -1,7 +1,7 @@
 package org.example.project.data.repository
 
 
-import org.example.project.data.datasource.remote.CategoryDataSource
+import org.example.project.data.remote.datasource.CategoryDataSource
 import org.example.project.data.mapper.toDomain
 import org.example.project.domain.entity.Category
 import org.example.project.domain.repository.CategoryRepository

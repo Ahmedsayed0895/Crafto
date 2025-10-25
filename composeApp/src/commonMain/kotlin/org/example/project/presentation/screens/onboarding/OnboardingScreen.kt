@@ -38,7 +38,6 @@ import org.example.project.presentation.designsystem.components.SecondaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.onboarding.composable.OnboardingIndicator
 import org.example.project.presentation.screens.onboarding.composable.OnboardingItem
-import org.example.project.presentation.viewmodel.OnboardingViewModel
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

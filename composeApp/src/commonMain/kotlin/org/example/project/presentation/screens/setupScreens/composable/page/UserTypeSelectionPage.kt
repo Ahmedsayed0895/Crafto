@@ -2,9 +2,7 @@ package org.example.project.presentation.screens.setupScreens.composable.page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -12,7 +10,7 @@ import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.selection_craftsman
 import crafto.composeapp.generated.resources.selection_customer
 import org.example.project.presentation.designsystem.components.SelectionCard
-import org.example.project.presentation.viewmodel.craftsmansetup.UserType
+import org.example.project.presentation.screens.setupscreens.craftsmansetup.UserType
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

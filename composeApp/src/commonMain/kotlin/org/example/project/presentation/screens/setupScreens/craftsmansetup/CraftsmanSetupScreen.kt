@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.craftsmansetup
+package org.example.project.presentation.screens.setupscreens.craftsmansetup
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -35,11 +35,7 @@ import org.example.project.presentation.screens.setupScreens.composable.page.Per
 import org.example.project.presentation.screens.setupScreens.composable.page.PortfolioUploadPage
 import org.example.project.presentation.screens.setupScreens.composable.page.ServiceSelectionPage
 import org.example.project.presentation.screens.setupScreens.composable.page.UserTypeSelectionPage
-import org.example.project.presentation.viewmodel.base.ErrorUiState
-import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanRegistrationEffect
-import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanSetupUiState
-import org.example.project.presentation.viewmodel.craftsmansetup.CraftsmanSetupViewModel
-import org.example.project.presentation.viewmodel.craftsmansetup.RegistrationStep
+import org.example.project.presentation.screens.shared.base.ErrorUiState
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)

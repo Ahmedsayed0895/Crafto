@@ -1,7 +1,7 @@
 package org.example.project.presentation.screens.onboarding
 
 import org.example.project.presentation.screens.onboarding.model.OnboardingUiState
-import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.presentation.screens.shared.base.ErrorUiState
 
 data class OnboardingScreenState(
     val onboardingData: List<OnboardingUiState> = emptyList(),

@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.mapper
+package org.example.project.presentation.mapper
 
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestTimeoutException
@@ -6,7 +6,7 @@ import org.example.project.domain.exception.ForbiddenException
 import org.example.project.domain.exception.NetworkException
 import org.example.project.domain.exception.UnauthorizedException
 import org.example.project.domain.exception.ValidationException
-import org.example.project.presentation.viewmodel.base.ErrorUiState
+import org.example.project.presentation.screens.shared.base.ErrorUiState
 import org.example.project.util.AppLogger
 
 fun Throwable.toErrorUiState(): ErrorUiState {

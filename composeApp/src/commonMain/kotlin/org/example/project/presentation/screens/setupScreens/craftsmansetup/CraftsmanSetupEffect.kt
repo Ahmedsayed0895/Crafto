@@ -1,4 +1,4 @@
-package org.example.project.presentation.viewmodel.craftsmansetup
+package org.example.project.presentation.screens.setupscreens.craftsmansetup
 
 sealed interface CraftsmanRegistrationEffect {
     data object RegistrationComplete : CraftsmanRegistrationEffect
