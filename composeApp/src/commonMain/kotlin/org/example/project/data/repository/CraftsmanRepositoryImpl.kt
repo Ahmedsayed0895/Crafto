@@ -115,7 +115,8 @@ class CraftsmanRepositoryImpl (
         val response = remoteDataSource.getCraftsmanStatus(craftsmanId)
         return try {
             CraftsmanStatus.valueOf(response.status)
-        } catch (e: IllegalArgumentException) {
+        } catch (
+            e: IllegalArgumentException) {
             throw ApiException("Invalid craftsman status: ${response.status}")
         }
     }

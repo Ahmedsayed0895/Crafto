@@ -20,7 +20,6 @@ object ApiConstants {
 
     // API Endpoints
     object Endpoints {
-        // Craftsman endpoints
         const val CRAFTSMAN_SETUP = "/craftsman/setup"
         const val CRAFTSMAN_PROFILE = "/craftsman/profile"
         const val ONBOARDING_END_POINT = "/onboarding"

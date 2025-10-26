@@ -11,7 +11,7 @@ import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
 import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
 import kotlinx.coroutines.launch
 import org.example.project.presentation.model.ImageData
-import org.example.project.util.AppConstants
+import org.example.project.domain.util.AppConstants
 import org.example.project.util.AppLogger
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime

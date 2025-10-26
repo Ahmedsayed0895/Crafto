@@ -11,12 +11,12 @@ import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    factory { CreateCraftsmanProfileUseCase(get()) }
-    factory { UploadIdCardsUseCase(get()) }
+    factory { CreateCraftsmanProfileUseCase(get(), get()) }
+    factory { UploadIdCardsUseCase(get(),get()) }
     factory { UploadWorkPortfolioUseCase(get()) }
     factory { GetCraftsmanProfileUseCase(get()) }
     factory { GetCraftsmanStatusUseCase(get()) }
     factory { DeleteCraftsmanAccountUseCase(get()) }
     factory { GetCategoriesUseCase(get())}
-    factory { UploadProfilePictureUseCase(get()) }
+    factory { UploadProfilePictureUseCase(get(),get()) }
 }

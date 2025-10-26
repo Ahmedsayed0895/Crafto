@@ -2,10 +2,12 @@ package org.example.project.domain.usecase.craftsman
 
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.repository.CraftsmanRepository
-import org.example.project.util.AppConstants
+import org.example.project.domain.service.ValidationService
+import org.example.project.domain.util.AppConstants
 
 class UploadProfilePictureUseCase(
-    private val repository: CraftsmanRepository
+    private val repository: CraftsmanRepository,
+    private val validationService: ValidationService
 ) {
     suspend operator fun invoke(
         craftsmanId: String,
@@ -20,15 +22,14 @@ class UploadProfilePictureUseCase(
             throw ValidationException("Profile picture is required")
         }
 
-        if (profilePicture.size > AppConstants.FileUpload.MAX_FILE_SIZE) {
+        if (!validationService.isValidFileSize(profilePicture.size)) {
             throw ValidationException(
                 "Profile picture size must be less than ${AppConstants.FileUpload.MAX_FILE_SIZE_MB}MB"
             )
         }
 
-        val extension = profilePictureFileName.substringAfterLast('.', "").lowercase()
-        if (extension !in AppConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
-            throw ValidationException("Profile picture must be JPG or PNG")
+        if (!validationService.isValidImageFileName(profilePictureFileName)) {
+            throw ValidationException("Profile picture must be one of: ${AppConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}")
         }
 
         return repository.uploadProfilePicture(

@@ -3,11 +3,13 @@ package org.example.project.domain.usecase.craftsman
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.repository.CraftsmanRepository
-
+import org.example.project.domain.service.ValidationService
+import org.example.project.domain.util.AppConstants
 
 
 class UploadIdCardsUseCase(
-    private val repository: CraftsmanRepository
+    private val repository: CraftsmanRepository,
+    private val validationService: ValidationService
 ) {
     suspend operator fun invoke(
         craftsmanId: String,
@@ -28,11 +30,11 @@ class UploadIdCardsUseCase(
             throw ValidationException("Please select back ID card image")
         }
 
-        if (idCardFront.size > org.example.project.util.AppConstants.FileUpload.MAX_FILE_SIZE) {
-            throw ValidationException("Front ID card image size must be less than 4MB")
+        if (!validationService.isValidFileSize(idCardFront.size)) {
+            throw ValidationException("Front ID card image size must be less than ${AppConstants.FileUpload.MAX_FILE_SIZE_MB} MB")
         }
 
-        if (idCardBack.size > org.example.project.util.AppConstants.FileUpload.MAX_FILE_SIZE) {
+        if (!validationService.isValidFileSize(idCardBack.size)) {
             throw ValidationException("Back ID card image size must be less than 4MB")
         }
 
@@ -44,18 +46,15 @@ class UploadIdCardsUseCase(
             throw ValidationException("Invalid back ID card file name")
         }
 
-        val frontExtension = idCardFrontFileName.substringAfterLast('.', "").lowercase()
-        val backExtension = idCardBackFileName.substringAfterLast('.', "").lowercase()
-
-        if (frontExtension !in org.example.project.util.AppConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
+        if (!validationService.isValidImageFileName(idCardFrontFileName)) {
             throw ValidationException(
-                "Front ID card must be one of: ${org.example.project.util.AppConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
+                "Front ID card must be one of: ${AppConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
             )
         }
 
-        if (backExtension !in org.example.project.util.AppConstants.FileUpload.ALLOWED_IMAGE_TYPES) {
+        if (!validationService.isValidImageFileName(idCardBackFileName)) {
             throw ValidationException(
-                "Back ID card must be one of: ${org.example.project.util.AppConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
+                "Back ID card must be one of: ${AppConstants.FileUpload.ALLOWED_IMAGE_TYPES.joinToString(", ")}"
             )
         }
 

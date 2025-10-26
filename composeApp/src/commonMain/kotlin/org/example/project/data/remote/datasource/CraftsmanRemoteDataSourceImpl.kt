@@ -24,7 +24,6 @@ import org.example.project.data.remote.network.ApiConstants
 import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
 import org.example.project.data.remote.network.wrapApiCall
 import org.example.project.domain.model.WorkImage
-import org.example.project.util.AppLogger
 
 class CraftsmanRemoteDataSourceImpl(
     private val httpClient: HttpClient,
@@ -51,18 +50,11 @@ class CraftsmanRemoteDataSourceImpl(
         idCardBack: ByteArray,
         idCardBackFileName: String
     ): IdCardUploadResponseDto {
-        AppLogger.d("API", "=== Starting ID Cards Upload ===")
-        AppLogger.d("API", "UserId: $userId")
-        AppLogger.d("API", "CraftsmanId: $craftsmanId")
-        AppLogger.d("API", "Front: $idCardFrontFileName (${idCardFront.size} bytes)")
-        AppLogger.d("API", "Back: $idCardBackFileName (${idCardBack.size} bytes)")
-
         return wrapApiCall {
             httpClient.submitFormWithBinaryData(
                 url = ApiConstants.Endpoints.craftsmanIdCards(craftsmanId),
                 formData = formData {
                     val frontMimeType = getMimeType(idCardFrontFileName)
-                    AppLogger.d("API", "Front MIME type: $frontMimeType")
 
                     append("idCardFront", idCardFront, Headers.build {
                         append(HttpHeaders.ContentType, frontMimeType)
@@ -70,7 +62,6 @@ class CraftsmanRemoteDataSourceImpl(
                     })
 
                     val backMimeType = getMimeType(idCardBackFileName)
-                    AppLogger.d("API", "Back MIME type: $backMimeType")
 
                     append("idCardBack", idCardBack, Headers.build {
                         append(HttpHeaders.ContentType, backMimeType)
@@ -79,7 +70,6 @@ class CraftsmanRemoteDataSourceImpl(
                 }
             ) {
                 header(USER_ID, userId)
-                AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanIdCards(craftsmanId)}")
             }
         }
     }
@@ -90,17 +80,11 @@ class CraftsmanRemoteDataSourceImpl(
         profilePicture: ByteArray,
         profilePictureFileName: String
     ): ProfilePictureUploadResponseDto {
-        AppLogger.d("API", "=== Starting Profile Picture Upload ===")
-        AppLogger.d("API", "UserId: $userId")
-        AppLogger.d("API", "CraftsmanId: $craftsmanId")
-        AppLogger.d("API", "File: $profilePictureFileName (${profilePicture.size} bytes)")
-
         return wrapApiCall {
             httpClient.submitFormWithBinaryData(
                 url = ApiConstants.Endpoints.craftsmanProfilePicture(craftsmanId),
                 formData = formData {
                     val mimeType = getMimeType(profilePictureFileName)
-                    AppLogger.d("API", "Profile picture MIME type: $mimeType")
 
                     append("profilePicture", profilePicture, Headers.build {
                         append(HttpHeaders.ContentType, mimeType)
@@ -109,7 +93,6 @@ class CraftsmanRemoteDataSourceImpl(
                 }
             ) {
                 header(USER_ID, userId)
-                AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanProfilePicture(craftsmanId)}")
             }
         }
     }
@@ -119,23 +102,12 @@ class CraftsmanRemoteDataSourceImpl(
         craftsmanId: String,
         workImages: List<WorkImage>
     ): WorkPortfolioResponseDto {
-        AppLogger.d("API", "=== Starting Portfolio Upload ===")
-        AppLogger.d("API", "UserId: $userId")
-        AppLogger.d("API", "CraftsmanId: $craftsmanId")
-        AppLogger.d("API", "Number of images: ${workImages.size}")
-
-        workImages.forEachIndexed { index, image ->
-            AppLogger.d("API", "Image $index: ${image.fileName}, ${image.data.size} bytes")
-        }
-
         return wrapApiCall {
             httpClient.submitFormWithBinaryData(
                 url = ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId),
                 formData = formData {
                     workImages.forEachIndexed { index, image ->
                         val mimeType = getMimeType(image.fileName)
-                        AppLogger.d("API", "Appending image $index: ${image.fileName} ($mimeType)")
-
                         append(
                             key = "workImages",
                             value = image.data,
@@ -148,7 +120,6 @@ class CraftsmanRemoteDataSourceImpl(
                 }
             ) {
                 header(USER_ID, userId)
-                AppLogger.d("API", "Request sent to: ${ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId)}")
             }
         }
     }
