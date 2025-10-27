@@ -4,8 +4,8 @@ import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.presentation.model.CategoryUi
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.screens.shared.base.BaseScreenState
-import org.example.project.presentation.screens.shared.base.ErrorUiState
+import org.example.project.presentation.shared.base.BaseScreenState
+import org.example.project.presentation.shared.base.ErrorUiState
 
 data class CraftsmanSetupUiState(
     override val isLoading: Boolean = false,

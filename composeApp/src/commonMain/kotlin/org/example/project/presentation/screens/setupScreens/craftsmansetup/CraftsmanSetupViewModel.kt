@@ -7,10 +7,11 @@ import org.example.project.domain.usecase.craftsman.CreateCraftsmanProfileUseCas
 import org.example.project.domain.usecase.craftsman.UploadIdCardsUseCase
 import org.example.project.domain.usecase.craftsman.UploadProfilePictureUseCase
 import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
+import org.example.project.domain.util.AppConstants.FileUpload.MAX_PORTFOLIO_IMAGES
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.screens.shared.base.BaseViewModel
-import org.example.project.presentation.screens.shared.base.ErrorUiState
+import org.example.project.presentation.shared.base.BaseViewModel
+import org.example.project.presentation.shared.base.ErrorUiState
 import org.example.project.presentation.mapper.toDomain
 import org.example.project.presentation.mapper.toUi
 import org.example.project.presentation.mapper.toWorkImages
@@ -166,14 +167,15 @@ class CraftsmanSetupViewModel(
     }
 
     override fun onSkipIdentityVerification() {
-        sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
+        //sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
+        navigateNext()
     }
 
     override fun onPortfolioImagesAdded(images: List<ImageData>) {
         updateState { state ->
             val currentImages = state.portfolioImages
             val totalImages = currentImages + images
-            val limitedImages = totalImages.take(4)
+            val limitedImages = totalImages.take(MAX_PORTFOLIO_IMAGES)
 
             AppLogger.d("Portfolio", "Added ${images.size} images. Total: ${limitedImages.size}")
 
@@ -184,7 +186,7 @@ class CraftsmanSetupViewModel(
 
             state.copy(
                 portfolioImages = limitedImages,
-                canAddMoreImages = limitedImages.size < 4,
+                canAddMoreImages = limitedImages.size < MAX_PORTFOLIO_IMAGES,
                 canNavigateNext = limitedImages.isNotEmpty()
             )
         }
@@ -193,12 +195,47 @@ class CraftsmanSetupViewModel(
     override fun onPortfolioImageRemoved(index: Int) {
         updateState { state ->
             val newImages = state.portfolioImages.toMutableList().apply {
-                removeAt(index)
+                if (index < this.size) {
+                    removeAt(index)
+                }
+            }
+            val newImagesUrl= state.uploadedPortfolioUrls.toMutableList().apply {
+                if (index < this.size) {
+                    removeAt(index)
+                }
             }
             state.copy(
+                uploadedPortfolioUrls = newImagesUrl,
                 portfolioImages = newImages,
                 canAddMoreImages = true,
                 canNavigateNext = newImages.isNotEmpty()
+            )
+        }
+    }
+
+    override fun onProfilePictureRemoved() {
+        updateState { state ->
+            state.copy(
+                profilePicture = null,
+                profilePictureUrl = null
+            )
+        }
+    }
+
+    override fun onFrontIdCardRemoved() {
+        updateState { state ->
+            state.copy(
+                idCardFront = null,
+                canNavigateNext = false
+            )
+        }
+    }
+
+    override fun onBackIdCardRemoved() {
+        updateState { state ->
+            state.copy(
+                idCardBack = null,
+                canNavigateNext = false
             )
         }
     }
@@ -337,8 +374,6 @@ class CraftsmanSetupViewModel(
                     )
                 }
 
-                // Even if profile picture fails, allow user to continue
-                // They can upload it later from settings
                 AppLogger.d("Navigation", "Profile creation complete, navigating to portfolio page")
                 updateState {
                     it.copy(
@@ -347,7 +382,7 @@ class CraftsmanSetupViewModel(
                     )
                 }
             },
-            showLoading = false // Don't show loading since we're already showing it for profile creation
+            showLoading = true
         )
     }
 

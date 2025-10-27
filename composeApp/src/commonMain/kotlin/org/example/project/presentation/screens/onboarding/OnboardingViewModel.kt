@@ -6,7 +6,7 @@ import kotlinx.coroutines.IO
 import org.example.project.domain.entity.OnboardingItem
 import org.example.project.domain.repository.OnboardingRepository
 import org.example.project.presentation.screens.onboarding.model.toUiState
-import org.example.project.presentation.screens.shared.base.BaseViewModel
+import org.example.project.presentation.shared.base.BaseViewModel
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.annotation.Provided
 

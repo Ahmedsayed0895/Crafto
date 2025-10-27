@@ -11,7 +11,7 @@ import org.example.project.domain.exception.NotFoundException
 import org.example.project.domain.exception.ServerUnavailableException
 import org.example.project.domain.exception.UnauthorizedException
 import org.example.project.domain.exception.ValidationException
-import org.example.project.presentation.screens.shared.base.ErrorUiState
+import org.example.project.presentation.shared.base.ErrorUiState
 import org.example.project.util.AppLogger
 
 fun Throwable.toErrorUiState(): ErrorUiState {

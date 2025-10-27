@@ -30,12 +30,12 @@ import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.TextButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.setupScreens.composable.SetupScreenScaffold
-import org.example.project.presentation.screens.setupScreens.composable.page.IdentityVerificationPage
-import org.example.project.presentation.screens.setupScreens.composable.page.PersonalInfoPage
-import org.example.project.presentation.screens.setupScreens.composable.page.PortfolioUploadPage
-import org.example.project.presentation.screens.setupScreens.composable.page.ServiceSelectionPage
-import org.example.project.presentation.screens.setupScreens.composable.page.UserTypeSelectionPage
-import org.example.project.presentation.screens.shared.base.ErrorUiState
+import org.example.project.presentation.screens.setupscreens.composable.page.IdentityVerificationPage
+import org.example.project.presentation.screens.setupscreens.composable.page.PersonalInfoPage
+import org.example.project.presentation.screens.setupscreens.composable.page.PortfolioUploadPage
+import org.example.project.presentation.screens.setupscreens.composable.page.ServiceSelectionPage
+import org.example.project.presentation.screens.setupscreens.composable.page.UserTypeSelectionPage
+import org.example.project.presentation.shared.base.ErrorUiState
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -179,7 +179,8 @@ fun CraftsmanSetupContent(
                                 viewModel.onImagePickerError(ErrorUiState(errorMessage))
                             },
                             isLoading = state.isLoading,
-                            isUploadingProfilePicture = state.isUploadingProfilePicture
+                            isUploadingProfilePicture = state.isUploadingProfilePicture,
+                            onRemove = viewModel::onProfilePictureRemoved
                         )
                     }
 
@@ -191,6 +192,9 @@ fun CraftsmanSetupContent(
                             onAddPhotosClicked = viewModel::onPortfolioImagesAdded,
                             onImageRemoved = viewModel::onPortfolioImageRemoved,
                             onDescriptionChanged = viewModel::onWorkDescriptionChanged,
+                            onError = { errorMessage ->
+                                viewModel.onImagePickerError(ErrorUiState(errorMessage))
+                            } ,
                         )
                     }
 
@@ -199,9 +203,12 @@ fun CraftsmanSetupContent(
                             idCardFront = state.idCardFront,
                             idCardBack = state.idCardBack,
                             onIdCardSelected = viewModel::onIdCardSelected,
-                            onUploadClick = viewModel::onUploadIdCards,
-                            onSkip = {},
-                            onErrorMessage = {} ,
+                            onSkip = viewModel::onSkipIdentityVerification,
+                            onErrorMessage = { errorMessage ->
+                                viewModel.onImagePickerError(ErrorUiState(errorMessage))
+                            },
+                            onFrontImageRemoved = viewModel::onFrontIdCardRemoved,
+                            onBackImageRemoved = viewModel::onBackIdCardRemoved,
                         )
                     }
                 }
