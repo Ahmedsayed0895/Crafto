@@ -1,18 +1,17 @@
-package org.example.project.presentation.screens.setupScreens.composable.page
+package org.example.project.presentation.screens.setupscreens.composable.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -25,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.camera
-import crafto.composeapp.generated.resources.plus
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
+import org.example.project.presentation.screens.setupscreens.composable.ImagePicker
 import org.example.project.presentation.util.rememberImagePicker
 import org.jetbrains.compose.resources.painterResource
 
@@ -36,7 +35,8 @@ fun IdentityVerificationPage(
     idCardFront: ImageData?,
     idCardBack: ImageData?,
     onIdCardSelected: (isFront: Boolean, imageData: ImageData) -> Unit,
-    onUploadClick: () -> Unit,
+    onFrontImageRemoved: () -> Unit,
+    onBackImageRemoved: () -> Unit,
     onSkip: () -> Unit,
     onErrorMessage: (String) -> Unit
 ) {
@@ -48,71 +48,55 @@ fun IdentityVerificationPage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         UploadBox(
+            modifier = Modifier.weight(1f),
             title = "Upload Front of National ID",
             image = idCardFront,
             onSelect = { img -> onIdCardSelected(true, img) },
-            onError = onErrorMessage
+            onError = onErrorMessage,
+            onRemove = onFrontImageRemoved
         )
 
         UploadBox(
+            modifier = Modifier.weight(1f),
             title = "Upload Back of National ID",
             image = idCardBack,
             onSelect = { img -> onIdCardSelected(false, img) },
-            onError = onErrorMessage
+            onError = onErrorMessage,
+            onRemove = onBackImageRemoved
         )
 
-        Spacer(modifier = Modifier.weight(1f))
-
-            OutlinedButton(
-                modifier = Modifier.weight(1f),
-                onClick = onSkip
-            ) { Text("I'll Verify Later") }
+        OutlinedButton(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = onSkip
+        ) { Text("I'll Verify Later") }
     }
 }
 
 @Composable
 private fun UploadBox(
+    modifier: Modifier=Modifier,
     title: String,
     image: ImageData?,
     onSelect: (ImageData) -> Unit,
-    onError: (String) -> Unit
+    onError: (String) -> Unit,
+    onRemove: () -> Unit,
 ) {
-    val imagePicker = rememberImagePicker(
-        singleSelection = true,
-        onImagesSelected = { images ->
-            images.firstOrNull()?.let(onSelect)
-        },
-        onError = onError
-    )
-
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(title, style = AppTheme.textStyle.body.smallMedium)
-        Box(
+
+        ImagePicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(150.dp)
-                .background(
-                    color = AppTheme.craftoColors.background.card,
-                    RoundedCornerShape(12.dp)
-                )
-                .clickable {
-                    imagePicker.launch()
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            if (image == null)
-                Icon(painterResource(Res.drawable.camera), contentDescription = "upload image")
-            else {
-                AsyncImage(
-                    model = image.byteArray,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp))
-                )
-            }
-        }
+                .clip(RoundedCornerShape(12.dp)),
+            onImageSelected = onSelect,
+            onError = onError,
+            selectedImage = image,
+            onRemove = onRemove,
+            contentDescriptor = "ID Card Image",
+        )
     }
 }

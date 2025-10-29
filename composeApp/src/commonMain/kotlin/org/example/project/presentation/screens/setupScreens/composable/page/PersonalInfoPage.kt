@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.composable.page
+package org.example.project.presentation.screens.setupscreens.composable.page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,11 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -19,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.model.PersonalInfoUiModel
-import org.example.project.presentation.screens.setupScreens.composable.ProfilePictureSelector
+import org.example.project.presentation.screens.setupscreens.composable.ImagePicker
 
 @Composable
 fun PersonalInfoPage(
@@ -27,6 +25,7 @@ fun PersonalInfoPage(
     onPersonalInfoChanged: (PersonalInfoUiModel) -> Unit,
     profilePicture: ImageData? = null,
     onProfilePictureSelected: (ImageData) -> Unit,
+    onRemove: () -> Unit,
     onImagePickerError: (String) -> Unit,
     isLoading: Boolean,
     isUploadingProfilePicture: Boolean = false
@@ -39,13 +38,16 @@ fun PersonalInfoPage(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        ProfilePictureSelector(
+        ImagePicker(
             modifier = Modifier.fillMaxWidth(),
             selectedImage = profilePicture,
             onImageSelected = onProfilePictureSelected,
             onError = onImagePickerError,
+            imageSize = 100.dp,
+            shape = CircleShape,
             enabled = !isLoading,
-            isUploading = isUploadingProfilePicture
+            isUploading = isUploadingProfilePicture,
+            onRemove = onRemove,
         )
 
         TextField(

@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.composable.page
+package org.example.project.presentation.screens.setupscreens.composable.page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

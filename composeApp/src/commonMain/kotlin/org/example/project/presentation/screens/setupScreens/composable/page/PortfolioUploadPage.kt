@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.composable.page
+package org.example.project.presentation.screens.setupscreens.composable.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,22 +26,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mohamedrejeb.calf.core.LocalPlatformContext
-import com.mohamedrejeb.calf.io.getName
-import com.mohamedrejeb.calf.io.readByteArray
-import com.mohamedrejeb.calf.picker.FilePickerFileType
-import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
-import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.camera
 import crafto.composeapp.generated.resources.plus
 import crafto.composeapp.generated.resources.x
-import kotlinx.coroutines.launch
 import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.util.rememberImagePicker
 import org.jetbrains.compose.resources.painterResource
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
@@ -52,19 +45,15 @@ fun PortfolioUploadPage(
     onAddPhotosClicked: (List<ImageData>) -> Unit,
     onImageRemoved: (Int) -> Unit,
     workDescription: String,
-    onDescriptionChanged: (String) -> Unit
+    onDescriptionChanged: (String) -> Unit,
+    onError: (String) -> Unit
 ) {
-    val scope = rememberCoroutineScope()
-    val context = LocalPlatformContext.current
-
     val imagePicker = rememberImagePicker(
         singleSelection = false,
         onImagesSelected = { newImages ->
             onAddPhotosClicked(newImages)
         },
-        onError = { errorMessage ->
-            // Handle error - show snackbar/toast
-        }
+        onError = onError
     )
 
     Column(
@@ -107,7 +96,6 @@ fun PortfolioUploadPage(
     }
 }
 
-// Shown when no images yet
 @Composable
 private fun EmptyPortfolioBox(onAddPhotosClicked: () -> Unit) {
     Box(

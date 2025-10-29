@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.composable
+package org.example.project.presentation.screens.setupscreens.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import crafto.composeapp.generated.resources.Res
@@ -98,7 +96,6 @@ fun ProfilePictureSelector(
                     )
                 }
             } else {
-                // Display placeholder - similar to EmptyPortfolioBox style
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -117,52 +114,6 @@ fun ProfilePictureSelector(
                     )
                 }
             }
-//
-//            // Show loading overlay if uploading
-//            if (isUploading) {
-//                Box(
-//                    modifier = Modifier
-//                        .size(100.dp)
-//                        .clip(CircleShape)
-//                        .background(
-//                            AppTheme.craftoColors.shade.secondary.copy(alpha = 0.5f)
-//                        ),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    CircularProgressIndicator(
-//                        color = AppTheme.craftoColors.primary.main,
-//                        strokeWidth = 2.dp,
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                }
-//            }
-//        }
-//
-//        // Status text
-//        Text(
-//            text = when {
-//                isUploading -> "Uploading..."
-//                selectedImage != null -> "Tap to change photo"
-//                else -> "Add profile photo"
-//            },
-//            style = AppTheme.textStyle.caption.medium,
-//            color = if (isUploading)
-//                AppTheme.craftoColors.primary.main
-//            else
-//                AppTheme.craftoColors.text.secondary,
-//            textAlign = TextAlign.Center
-//        )
-//
-//        if (selectedImage == null) {
-//            Text(
-//                text = "(Optional)",
-//                style = AppTheme.textStyle.caption.regular,
-//                color = AppTheme.craftoColors.text.tertiary,
-//                textAlign = TextAlign.Center
-//            )
-//        }
-//    }
-
         }
     }
 }
