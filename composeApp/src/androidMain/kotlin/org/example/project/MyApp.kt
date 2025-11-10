@@ -1,7 +1,7 @@
 package org.example.project
 
 import android.app.Application
-import org.example.project.di.initKoin
+import initKoin
 
 class MyApp : Application() {
     override fun onCreate() {

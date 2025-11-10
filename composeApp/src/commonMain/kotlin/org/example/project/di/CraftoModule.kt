@@ -1,8 +1,11 @@
-package org.example.project.di
-
-import org.koin.core.annotation.ComponentScan
+import org.example.project.data.repository.LocationRepositoryImpl
+import org.example.project.domain.repository.LocationRepository
 import org.koin.core.annotation.Module
+import org.koin.dsl.module
 
 @Module
-@ComponentScan("org.example.project")
-class CraftoModule
+class CraftoModule {
+    val module = module {
+        single<LocationRepository> { LocationRepositoryImpl(get()) }
+    }
+}
