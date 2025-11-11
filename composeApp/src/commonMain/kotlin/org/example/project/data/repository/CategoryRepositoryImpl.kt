@@ -1,17 +1,15 @@
 package org.example.project.data.repository
 
-import org.example.project.data.repository.dataSource.CategoryDataSource
-import org.example.project.data.repository.mapper.toCategoryDomain
+
+import org.example.project.data.remote.datasource.CategoryDataSource
+import org.example.project.data.mapper.toDomain
 import org.example.project.domain.entity.Category
 import org.example.project.domain.repository.CategoryRepository
-import org.koin.core.annotation.Provided
-import org.koin.core.annotation.Single
 
-@Single(binds = [CategoryRepository::class])
+
 class CategoryRepositoryImpl(
-   @Provided val dataSource: CategoryDataSource
+    private val dataSource: CategoryDataSource
 ) : CategoryRepository {
-    override suspend fun getCategories(): List<Category> {
-        return dataSource.getCategories().map { it.toCategoryDomain() }
-    }
+    override suspend fun getCategories(): List<Category> =
+        dataSource.getCategories().map { it.toDomain() }
 }

@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.example.project.presentation.mapper.toErrorUiState
 
 abstract class BaseViewModel<SCREEN_STATE, SCREEN_EFFECT>(
     initialState: SCREEN_STATE,
@@ -21,23 +22,28 @@ abstract class BaseViewModel<SCREEN_STATE, SCREEN_EFFECT>(
     protected val _effect = MutableSharedFlow<SCREEN_EFFECT>()
     val effect = _effect.asSharedFlow()
 
+    protected val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
     protected fun <T> tryToCall(
         call: suspend () -> T,
         onSuccess: (T) -> Unit,
         onError: (error: ErrorUiState) -> Unit,
+        showLoading: Boolean = false,
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
     ) {
         viewModelScope.launch(dispatcher) {
+            if (showLoading) _isLoading.value = true
             try {
                 val result = call()
                 onSuccess(result)
             } catch (e: Exception) {
-                onError(ErrorUiState(e.message ?: "Unknown error"))
+                onError(e.toErrorUiState())
+            } finally {
+                if (showLoading) _isLoading.value = false
             }
         }
     }
-
-
 
     protected fun updateState(updater: (SCREEN_STATE) -> SCREEN_STATE) = _state.update(updater)
 

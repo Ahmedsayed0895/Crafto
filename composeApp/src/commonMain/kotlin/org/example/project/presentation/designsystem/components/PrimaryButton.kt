@@ -20,7 +20,7 @@ fun PrimaryButton(
         modifier = modifier,
         text = text,
         buttonState =buttonState,
-        enabled =enabled,
+        enabled =enabled && buttonState != ButtonState.LOADING,
         colors = ButtonDefaults.buttonColors(
             containerColor = AppTheme.craftoColors.button.primary,
             contentColor = AppTheme.craftoColors.button.onPrimary,

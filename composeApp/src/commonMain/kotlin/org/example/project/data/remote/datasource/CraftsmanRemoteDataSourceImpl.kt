@@ -1,0 +1,159 @@
+package org.example.project.data.remote.datasource
+
+import io.ktor.client.HttpClient
+import io.ktor.client.request.delete
+import io.ktor.client.request.forms.formData
+import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
+import org.example.project.data.remote.dto.CraftsmanProfileResponseDto
+import org.example.project.data.remote.dto.CraftsmanSetupResponseDto
+import org.example.project.data.remote.dto.CraftsmanStatusResponseDto
+import org.example.project.data.remote.dto.CreateCraftsmanRequest
+import org.example.project.data.remote.dto.DeleteAccountResponseDto
+import org.example.project.data.remote.dto.IdCardUploadResponseDto
+import org.example.project.data.remote.dto.ProfilePictureUploadResponseDto
+import org.example.project.data.remote.dto.WorkPortfolioResponseDto
+import org.example.project.data.remote.network.ApiConstants
+import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
+import org.example.project.data.remote.network.wrapApiCall
+import org.example.project.domain.model.WorkImage
+
+class CraftsmanRemoteDataSourceImpl(
+    private val httpClient: HttpClient,
+) : CraftsmanRemoteDataSource {
+
+    override suspend fun createCraftsmanProfile(
+        userId: String,
+        request: CreateCraftsmanRequest
+    ): CraftsmanSetupResponseDto {
+        return wrapApiCall {
+            httpClient.post(ApiConstants.Endpoints.CRAFTSMAN_SETUP) {
+                header(USER_ID, userId)
+                contentType(ContentType.Application.Json)
+                setBody(request)
+            }
+        }
+    }
+
+    override suspend fun uploadIdCards(
+        userId: String,
+        craftsmanId: String,
+        idCardFront: ByteArray,
+        idCardFrontFileName: String,
+        idCardBack: ByteArray,
+        idCardBackFileName: String
+    ): IdCardUploadResponseDto {
+        return wrapApiCall {
+            httpClient.submitFormWithBinaryData(
+                url = ApiConstants.Endpoints.craftsmanIdCards(craftsmanId),
+                formData = formData {
+                    val frontMimeType = getMimeType(idCardFrontFileName)
+
+                    append("idCardFront", idCardFront, Headers.build {
+                        append(HttpHeaders.ContentType, frontMimeType)
+                        append(HttpHeaders.ContentDisposition, "filename=\"$idCardFrontFileName\"")
+                    })
+
+                    val backMimeType = getMimeType(idCardBackFileName)
+
+                    append("idCardBack", idCardBack, Headers.build {
+                        append(HttpHeaders.ContentType, backMimeType)
+                        append(HttpHeaders.ContentDisposition, "filename=\"$idCardBackFileName\"")
+                    })
+                }
+            ) {
+                header(USER_ID, userId)
+            }
+        }
+    }
+
+    override suspend fun uploadProfilePicture(
+        userId: String,
+        craftsmanId: String,
+        profilePicture: ByteArray,
+        profilePictureFileName: String
+    ): ProfilePictureUploadResponseDto {
+        return wrapApiCall {
+            httpClient.submitFormWithBinaryData(
+                url = ApiConstants.Endpoints.craftsmanProfilePicture(craftsmanId),
+                formData = formData {
+                    val mimeType = getMimeType(profilePictureFileName)
+
+                    append("profilePicture", profilePicture, Headers.build {
+                        append(HttpHeaders.ContentType, mimeType)
+                        append(HttpHeaders.ContentDisposition, "filename=\"$profilePictureFileName\"")
+                    })
+                }
+            ) {
+                header(USER_ID, userId)
+            }
+        }
+    }
+
+    override suspend fun uploadWorkPortfolio(
+        userId: String,
+        craftsmanId: String,
+        workImages: List<WorkImage>
+    ): WorkPortfolioResponseDto {
+        return wrapApiCall {
+            httpClient.submitFormWithBinaryData(
+                url = ApiConstants.Endpoints.craftsmanWorkPortfolio(craftsmanId),
+                formData = formData {
+                    workImages.forEachIndexed { index, image ->
+                        val mimeType = getMimeType(image.fileName)
+                        append(
+                            key = "workImages",
+                            value = image.data,
+                            headers = Headers.build {
+                                append(HttpHeaders.ContentType, mimeType)
+                                append(HttpHeaders.ContentDisposition, "filename=\"${image.fileName}\"")
+                            }
+                        )
+                    }
+                }
+            ) {
+                header(USER_ID, userId)
+            }
+        }
+    }
+
+    override suspend fun getCraftsmanProfile(userId: String): CraftsmanProfileResponseDto {
+        return wrapApiCall {
+            httpClient.get(ApiConstants.Endpoints.CRAFTSMAN_PROFILE) {
+                header(USER_ID, userId)
+            }
+        }
+    }
+
+    override suspend fun getCraftsmanStatus(craftsmanId: String): CraftsmanStatusResponseDto {
+        return wrapApiCall {
+            httpClient.get(ApiConstants.Endpoints.craftsmanStatus(craftsmanId))
+        }
+    }
+
+    override suspend fun deleteCraftsmanAccount(
+        userId: String,
+        craftsmanId: String
+    ): DeleteAccountResponseDto {
+        return wrapApiCall {
+            httpClient.delete(ApiConstants.Endpoints.deleteCraftsman(craftsmanId)) {
+                header(USER_ID, userId)
+            }
+        }
+    }
+
+    private fun getMimeType(fileName: String): String {
+        return when (fileName.substringAfterLast('.', "").lowercase()) {
+            "png" -> "image/png"
+            "jpg", "jpeg" -> "image/jpeg"
+            else -> "image/jpeg" // Default to JPEG
+        }
+    }
+}
