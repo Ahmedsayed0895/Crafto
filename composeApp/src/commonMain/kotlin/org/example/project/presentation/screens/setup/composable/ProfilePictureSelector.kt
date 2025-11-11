@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.composable
+package org.example.project.presentation.screens.setup.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

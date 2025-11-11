@@ -2,7 +2,8 @@ package org.example.project
 
 import androidx.compose.runtime.Composable
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.presentation.screens.setupscreens.craftsmansetup.CraftsmanSetupScreen
+import org.example.project.presentation.screens.setup.craftsmansetup.CraftsmanSetupScreen
+import org.example.project.presentation.screens.splash.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -10,6 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     AppTheme {
         //OnboardingScreen()
+        SplashScreen {  }
         CraftsmanSetupScreen()
     }
 }

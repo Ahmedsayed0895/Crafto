@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.craftsmansetup
+package org.example.project.presentation.screens.setup.craftsmansetup
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -26,16 +26,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import crafto.composeapp.generated.resources.Res
+import crafto.composeapp.generated.resources.identity_verification
+import crafto.composeapp.generated.resources.location_hint
+import crafto.composeapp.generated.resources.personal_info
+import crafto.composeapp.generated.resources.portfolio_upload
+import crafto.composeapp.generated.resources.registration_step_1_description
+import crafto.composeapp.generated.resources.registration_step_2_description
+import crafto.composeapp.generated.resources.registration_step_3_description
+import crafto.composeapp.generated.resources.registration_step_4_description
+import crafto.composeapp.generated.resources.registration_step_5_description
+import crafto.composeapp.generated.resources.service_selection
+import crafto.composeapp.generated.resources.user_type
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.TextButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
-import org.example.project.presentation.screens.setupScreens.composable.SetupScreenScaffold
-import org.example.project.presentation.screens.setupscreens.composable.page.IdentityVerificationPage
-import org.example.project.presentation.screens.setupscreens.composable.page.PersonalInfoPage
-import org.example.project.presentation.screens.setupscreens.composable.page.PortfolioUploadPage
-import org.example.project.presentation.screens.setupscreens.composable.page.ServiceSelectionPage
-import org.example.project.presentation.screens.setupscreens.composable.page.UserTypeSelectionPage
+import org.example.project.presentation.screens.setup.composable.SetupScreenScaffold
+import org.example.project.presentation.screens.setup.composable.page.IdentityVerificationPage
+import org.example.project.presentation.screens.setup.composable.page.PersonalInfoPage
+import org.example.project.presentation.screens.setup.composable.page.PortfolioUploadPage
+import org.example.project.presentation.screens.setup.composable.page.ServiceSelectionPage
+import org.example.project.presentation.screens.setup.composable.page.UserTypeSelectionPage
 import org.example.project.presentation.shared.base.ErrorUiState
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -131,18 +144,37 @@ fun CraftsmanSetupContent(
             }
         },
         title = when (state.currentStep) {
-            RegistrationStep.USER_TYPE -> { "How would you like to use Crafto?" }
-            RegistrationStep.SERVICE_SELECTION -> {"What services do you offer?"}
-            RegistrationStep.PERSONAL_INFO -> {"Let’s personalize your profile"}
-            RegistrationStep.PORTFOLIO_UPLOAD -> {"Show Us Your Work"}
-            RegistrationStep.IDENTITY_VERIFICATION -> {"Verify Your Identity\n(Optional)"}
+            RegistrationStep.USER_TYPE -> {
+                stringResource(Res.string.user_type) }
+            RegistrationStep.SERVICE_SELECTION -> {
+                stringResource(Res.string.service_selection)
+                }
+            RegistrationStep.PERSONAL_INFO -> {
+                stringResource(Res.string.personal_info)
+                }
+            RegistrationStep.PORTFOLIO_UPLOAD -> {
+                stringResource(Res.string.portfolio_upload)
+            }
+            RegistrationStep.IDENTITY_VERIFICATION -> {
+                stringResource(Res.string.identity_verification)
+            }
         },
         description =when (state.currentStep) {
-            RegistrationStep.USER_TYPE -> { "You can switch roles anytime from your profile." }
-            RegistrationStep.SERVICE_SELECTION -> {"Choose your specialties to get relevant job requests. You can change this later."}
-            RegistrationStep.PERSONAL_INFO -> {"We’ll use this to personalize your experience. You can add a profile photo too, or skip for now."}
-            RegistrationStep.PORTFOLIO_UPLOAD -> {"Add photos or a video of your past work. This helps build trust with customers."}
-            RegistrationStep.IDENTITY_VERIFICATION -> {"Uploading your ID helps build trust with customers. Verified craftsmen get more jobs and a special badge on their profile."}
+            RegistrationStep.USER_TYPE -> {
+                stringResource(Res.string.registration_step_1_description)
+            }
+            RegistrationStep.SERVICE_SELECTION -> {
+                stringResource(Res.string.registration_step_2_description)
+            }
+            RegistrationStep.PERSONAL_INFO -> {
+                stringResource(Res.string.registration_step_3_description)
+            }
+            RegistrationStep.PORTFOLIO_UPLOAD -> {
+                stringResource(Res.string.registration_step_4_description)
+            }
+            RegistrationStep.IDENTITY_VERIFICATION -> {
+                stringResource(Res.string.registration_step_5_description)
+            }
         }
     ) {
         Column(

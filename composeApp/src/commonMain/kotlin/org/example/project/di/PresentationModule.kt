@@ -1,6 +1,7 @@
 package org.example.project.di
 
-import org.example.project.presentation.screens.setupscreens.craftsmansetup.CraftsmanSetupViewModel
+import org.example.project.presentation.screens.setup.craftsmansetup.CraftsmanSetupViewModel
+import org.example.project.presentation.screens.setup.location.LocationViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -14,4 +15,5 @@ val presentationModule = module {
             uploadProfilePictureUseCase = get(),
         )
     }
+    viewModel {LocationViewModel(get())}
 }

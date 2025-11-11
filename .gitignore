@@ -17,8 +17,9 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# Project exclude paths
-
-### Google Service ###
+# Google Service
+composeApp/google-service.json
 **/google-service.json
 google-service.json
+
+# Project exclude paths

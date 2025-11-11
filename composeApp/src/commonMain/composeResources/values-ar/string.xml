@@ -39,5 +39,37 @@
     <string name="down_arrow">السهم لأسفل</string>
 
 
+    <!-- SetupScreens Strings -->
+    <string name="user_type">How would you like to use Crafto?</string>
+    <string name="service_selection">What services do you offer?</string>
+    <string name="personal_info">Let’s personalize your profile</string>
+    <string name="portfolio_upload">Show Us Your Work</string>
+    <string name="identity_verification">Verify Your Identity\n(Optional)</string>
+    <string name="skip_for_now">I'll Verify Later</string>
+    <string name="next_step">Next Step</string>
+
+    <string name="registration_step_1_description">You can switch roles anytime from your profile.</string>
+    <string name="registration_step_2_description">Choose your specialties to get relevant job requests. You can change this later.</string>
+    <string name="registration_step_3_description">We’ll use this to personalize your experience. You can add a profile photo too, or skip for now.</string>
+    <string name="registration_step_4_description">Add photos of your past work. This helps build trust with customers.</string>
+    <string name="registration_step_5_description">Uploading your ID helps build trust with customers. Verified craftsmen get more jobs and a special badge on their profile.</string>
+
+    <string name="upload_front_of_national_id">Upload front of national ID</string>
+    <string name="upload_back_of_national_id">Upload back of national ID</string>
+    <string name="id_card_image">ID card image</string>
+
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="address">Address</string>
+
+    <string name="describe_your_work">Describe your work (optional)</string>
+    <string name="describe_your_work_hint">You can mention your years of experience, tools you use, or types of jobs you usually handle.</string>
+    <string name="add_photos">Tap to add photos</string>
+
+    <string name="customer">Customer</string>
+    <string name="customer_description">I need help with a\n problem</string>
+    <string name="craftsman">Craftsman</string>
+    <string name="craftsman_description">I offer service</string>
 
 </resources>

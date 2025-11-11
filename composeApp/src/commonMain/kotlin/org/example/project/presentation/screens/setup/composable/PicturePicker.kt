@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.composable
+package org.example.project.presentation.screens.setup.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,10 +26,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.camera
-import crafto.composeapp.generated.resources.plus
 import crafto.composeapp.generated.resources.x
-import io.ktor.util.internal.OpDescriptor
-import org.example.project.presentation.designsystem.colors.Shade
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.util.rememberImagePicker

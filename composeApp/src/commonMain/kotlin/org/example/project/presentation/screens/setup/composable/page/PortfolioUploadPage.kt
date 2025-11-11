@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.composable.page
+package org.example.project.presentation.screens.setup.composable.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,16 +18,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mohamedrejeb.calf.core.LocalPlatformContext
 import crafto.composeapp.generated.resources.Res
+import crafto.composeapp.generated.resources.add_photos
 import crafto.composeapp.generated.resources.camera
+import crafto.composeapp.generated.resources.describe_your_work
+import crafto.composeapp.generated.resources.describe_your_work_hint
 import crafto.composeapp.generated.resources.plus
 import crafto.composeapp.generated.resources.x
 import org.example.project.presentation.designsystem.components.TextField
@@ -35,6 +36,7 @@ import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.model.ImageData
 import org.example.project.presentation.util.rememberImagePicker
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
@@ -86,10 +88,10 @@ fun PortfolioUploadPage(
         }
 
         TextField(
-            labelText = "Describe Your Work (Optional)",
+            labelText = stringResource(Res.string.describe_your_work),
             text = workDescription,
             onTextChange = onDescriptionChanged,
-            hint = "You can mention your years of experience, tools you use, or types of jobs you usually handle.",
+            hint = stringResource(Res.string.describe_your_work_hint),
             modifier = Modifier.fillMaxWidth(),
             maxLines = 4
         )
@@ -118,7 +120,7 @@ private fun EmptyPortfolioBox(onAddPhotosClicked: () -> Unit) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Tap to add photos",
+                text = stringResource(Res.string.add_photos),
                 style = AppTheme.textStyle.body.smallMedium,
                 color = AppTheme.craftoColors.shade.secondary
             )

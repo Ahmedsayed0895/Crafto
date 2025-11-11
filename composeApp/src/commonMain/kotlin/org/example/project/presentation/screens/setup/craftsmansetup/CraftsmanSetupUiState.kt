@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.craftsmansetup
+package org.example.project.presentation.screens.setup.craftsmansetup
 
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.presentation.model.CategoryUi

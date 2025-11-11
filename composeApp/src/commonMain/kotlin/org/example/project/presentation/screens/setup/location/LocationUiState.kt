@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.location
+package org.example.project.presentation.screens.setup.location
 
 import org.example.project.domain.entity.District
 import org.example.project.domain.entity.Governorates

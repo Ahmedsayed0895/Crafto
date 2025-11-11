@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupscreens.craftsmansetup
+package org.example.project.presentation.screens.setup.craftsmansetup
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.location
+package org.example.project.presentation.screens.setup.location
 
 sealed class LocationEffect {
     object NavigateToNextScreen : LocationEffect()

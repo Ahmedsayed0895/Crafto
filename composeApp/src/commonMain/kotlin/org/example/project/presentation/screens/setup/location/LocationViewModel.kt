@@ -1,4 +1,4 @@
-package org.example.project.presentation.screens.setupScreens.location
+package org.example.project.presentation.screens.setup.location
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
