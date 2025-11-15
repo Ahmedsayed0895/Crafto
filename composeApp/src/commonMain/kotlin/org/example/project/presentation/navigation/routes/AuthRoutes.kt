@@ -8,24 +8,11 @@ import org.example.project.presentation.navigation.CraftsmanSetupDestination
 import org.example.project.presentation.navigation.CustomerSetupDestination
 import org.example.project.presentation.navigation.OnboardingDestination
 import org.example.project.presentation.navigation.OtpRegistrationDestination
-import org.example.project.presentation.navigation.SplashDestination
 import org.example.project.presentation.navigation.UserTypeSelectionDestination
 import org.example.project.presentation.screens.auth.UserTypeSelectionScreen
 import org.example.project.presentation.screens.onboarding.OnboardingScreen
 import org.example.project.presentation.screens.register.RegisterScreen
-import org.example.project.presentation.screens.splash.SplashScreen
 
-fun NavGraphBuilder.splashRoute(navController: NavHostController) {
-    composable<SplashDestination> {
-        SplashScreen(
-            onTimeout = {
-                navController.navigate(OnboardingDestination) {
-                    popUpTo(SplashDestination) { inclusive = true }
-                }
-            }
-        )
-    }
-}
 
 fun NavGraphBuilder.onboardingRoute(navController: NavHostController) {
     composable<OnboardingDestination> {
@@ -63,12 +50,14 @@ fun NavGraphBuilder.userTypeSelectionRoute(
                 when (userType) {
                     UserType.CRAFTSMAN -> {
                         navController.navigate(CraftsmanSetupDestination) {
-                            popUpTo(UserTypeSelectionDestination) { inclusive = true }
+                            //popUpTo(UserTypeSelectionDestination) { inclusive = true }
+                            launchSingleTop = true
                         }
                     }
                     UserType.CUSTOMER -> {
                         navController.navigate(CustomerSetupDestination) {
-                            popUpTo(UserTypeSelectionDestination) { inclusive = true }
+                            //popUpTo(UserTypeSelectionDestination) { inclusive = true }
+                            launchSingleTop = true
                         }
                     }
                 }

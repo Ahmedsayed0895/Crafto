@@ -46,9 +46,8 @@ data class CraftsmanSetupUiState(
     val currentStep: RegistrationStep
         get() = RegistrationStep.fromIndex(currentPageIndex)
 
-    //TODO: Use progress calculation
-    val progress: Float
-        get() = (currentPageIndex + 1) / totalPages.toFloat()
+    val hasUploadedIdCards: Boolean
+        get() = idCardFront != null && idCardBack != null
 
     val nextButtonText: String
         get() = when (currentStep) {

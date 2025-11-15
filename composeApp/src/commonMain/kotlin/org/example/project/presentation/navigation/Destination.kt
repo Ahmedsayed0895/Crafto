@@ -29,9 +29,6 @@ val bottomNavBarDestinationsMap = mapOf(
     //SettingsDetailDestination::class.qualifiedName to NavigationBarDestinations.MoreScreen // Keep bottom nav selected
 )
 
-// ===== Auth Flow Destinations =====
-@Serializable
-data object SplashDestination
 
 @Serializable
 data object OnboardingDestination
@@ -42,7 +39,6 @@ data object OtpRegistrationDestination
 @Serializable
 data object UserTypeSelectionDestination
 
-// ===== Setup Destinations =====
 @Serializable
 data object CraftsmanSetupDestination
 
@@ -51,11 +47,3 @@ data object CustomerSetupDestination
 
 //@Serializable
 //data class SettingsDetailDestination(val settingType: String)
-
-// ============= MAIN APP (With Bottom Nav) =============
-@Serializable
-data object MainRoute // Parent for bottom nav
-
-// ============= INITIAL ROUTE =============
-@Serializable
-data object SplashRoute

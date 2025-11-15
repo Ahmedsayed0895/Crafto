@@ -1,6 +1,7 @@
 package org.example.project.presentation.screens.messages
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +20,8 @@ fun MessagesScreen(
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Text("Messages Screen", style = AppTheme.textStyle.title.large,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center

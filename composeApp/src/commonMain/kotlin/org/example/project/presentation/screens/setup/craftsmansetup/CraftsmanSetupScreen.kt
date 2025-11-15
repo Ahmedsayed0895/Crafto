@@ -130,11 +130,11 @@ fun CraftsmanSetupContent(
         onNextButtonClick = {
             when (state.currentStep) {
                 RegistrationStep.IDENTITY_VERIFICATION -> {
-                    if (state.idCardFront != null && state.idCardBack != null) {
+                    if (state.hasUploadedIdCards)
                         viewModel.onUploadIdCards()
-                    } else {
-                        viewModel.onSkipIdentityVerification()
-                    }
+//                    } else {
+//                        viewModel.onSkipIdentityVerification()
+//                    }
                 }
                 else -> viewModel.navigateNext()
             }

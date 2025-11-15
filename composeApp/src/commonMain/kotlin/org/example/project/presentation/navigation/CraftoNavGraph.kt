@@ -2,13 +2,8 @@ package org.example.project.presentation.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -32,7 +27,6 @@ fun CraftoNavGraph(
 
     val coroutineScope = rememberCoroutineScope()
 
-    // Determine start destination on first load
     LaunchedEffect(Unit) {
         coroutineScope.launch {
             try {
@@ -41,7 +35,7 @@ fun CraftoNavGraph(
 
                 startDestination = when {
                     session.isFirstTime -> {
-                        SplashDestination  // Will navigate to Onboarding
+                        OnboardingDestination
                     }
                     session.userId != null && session.userType != null -> {
                         NavigationBarDestinations.HomeScreen
@@ -50,28 +44,27 @@ fun CraftoNavGraph(
                         UserTypeSelectionDestination
                     }
                     else -> {
-                        SplashDestination  // Will navigate to OTP
+                        OtpRegistrationDestination
                     }
                 }
             } catch (e: Exception) {
                 println("Error loading session: ${e.message}")
-                startDestination = SplashDestination
+                startDestination = OnboardingDestination
             } finally {
                 isLoading = false
             }
         }
     }
 
-    // Show loading while checking session
-    if (isLoading || startDestination == null) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
-        return
-    }
+//    if (isLoading || startDestination == null) {
+//        Box(
+//            modifier = Modifier.fillMaxSize(),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            CraftoCircularProgressIndicator()
+//        }
+//        return
+//    }
 
     Scaffold(
         modifier = modifier,
@@ -89,10 +82,7 @@ fun CraftoNavGraph(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = startDestination!!,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            startDestination = startDestination?: OnboardingDestination,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None }
         ) {
@@ -131,7 +121,6 @@ fun NavGraphBuilder.authNavigationGraph(
     navController: NavHostController,
     onUserTypeUpdated: (UserType) -> Unit
 ) {
-    splashRoute(navController)
     onboardingRoute(navController)
     otpRegistrationRoute(navController)
     userTypeSelectionRoute(navController, onUserTypeUpdated)

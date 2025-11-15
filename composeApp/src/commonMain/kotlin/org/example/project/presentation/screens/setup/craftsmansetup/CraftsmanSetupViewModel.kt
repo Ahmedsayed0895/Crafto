@@ -90,7 +90,7 @@ class CraftsmanSetupViewModel(
             updateState { it.copy(error = ErrorUiState("Please upload both ID card images")) }
             return
         }
-        updateState { it.copy(isSwipeEnabled = false) }
+        updateState { it.copy(isSwipeEnabled = false, isUploadingIdCards = true) }
 
         tryToCall(
             call = {
@@ -103,14 +103,18 @@ class CraftsmanSetupViewModel(
                 )
             },
             onSuccess = { verificationDocs ->
-                updateState { it.copy(isSwipeEnabled = true) }
+                updateState { it.copy(
+                    isSwipeEnabled = true,
+                    isUploadingIdCards = false,
+                    verificationDocuments = verificationDocs) }
                 sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
             },
             onError = { error ->
                 updateState {
                     it.copy(
                         error = error,
-                        isSwipeEnabled = true
+                        isSwipeEnabled = true,
+                        isUploadingIdCards = false
                     )
                 }
             },
@@ -119,8 +123,8 @@ class CraftsmanSetupViewModel(
     }
 
     override fun onSkipIdentityVerification() {
-        //sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
-        navigateNext()
+        sendNewEffect(CraftsmanRegistrationEffect.RegistrationComplete)
+        //navigateNext()
     }
 
     override fun onPortfolioImagesAdded(images: List<ImageData>) {
@@ -333,7 +337,6 @@ class CraftsmanSetupViewModel(
         }
 
         if (currentIndex < state.value.totalPages - 1 && state.value.canNavigateNext) {
-            AppLogger.d("Navigation", "Navigating from page $currentIndex to ${currentIndex + 1}")
             updateState { it.copy(currentPageIndex = currentIndex + 1) }
         }
     }
