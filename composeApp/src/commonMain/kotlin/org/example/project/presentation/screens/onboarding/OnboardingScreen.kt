@@ -20,6 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -38,7 +39,6 @@ import org.example.project.presentation.designsystem.components.SecondaryButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.example.project.presentation.screens.onboarding.composable.OnboardingIndicator
 import org.example.project.presentation.screens.onboarding.composable.OnboardingItem
-import org.example.project.presentation.screens.onboarding.OnboardingViewModel
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -46,10 +46,23 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun OnboardingScreen(
-    viewModel: OnboardingViewModel = koinViewModel()
-
+    viewModel: OnboardingViewModel = koinViewModel(),
+    onNavigateToOtp: () -> Unit
 ) {
     val state by viewModel.state.collectAsState()
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                OnboardingScreenEffect.NavigateToGetStartedScreen,
+                OnboardingScreenEffect.NavigateToRegisterScreen -> {
+                    onNavigateToOtp()
+                }
+                OnboardingScreenEffect.NavigateToNext -> {
+                    // Internal navigation handled by pager
+                }
+            }
+        }
+    }
     OnboardingContent(
         state = state,
         interactions = viewModel
@@ -98,7 +111,8 @@ private fun OnboardingContent(
                                 )
                             )
                         }
-                        interactions::onSkipClick
+//                        interactions::onSkipClick
+                        interactions.onSkipClick()
                     },
                     buttonState = ButtonState.Enable,
                     containerColor = AppTheme.craftoColors.button.secondary,
@@ -165,7 +179,8 @@ private fun OnboardingActionsRow(
                         )
                     }
                 } else {
-                    interactions::onGetStartedClick
+                    //interactions::onGetStartedClick
+                    interactions.onGetStartedClick()
                 }
             },
             buttonState = ButtonState.Enable,

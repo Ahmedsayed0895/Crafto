@@ -7,7 +7,7 @@
     <string name="ok_text">Ok</string>
 
     <!--  RegisterScreen -->
-    <string name="welcome_title">Welcome to San3a 👋</string>
+    <string name="welcome_title">Welcome to Crafto 👋</string>
     <string name="enter_phone">Enter your phone number to\n continue</string>
     <string name="phone_hint">+20  000 - 000 - 0000</string>
     <string name="terms_and_conditions">Terms and Conditions</string>

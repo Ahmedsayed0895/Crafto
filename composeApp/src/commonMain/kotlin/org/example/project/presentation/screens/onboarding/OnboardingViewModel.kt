@@ -5,14 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.example.project.domain.entity.OnboardingItem
 import org.example.project.domain.repository.OnboardingRepository
+import org.example.project.domain.usecase.session.MarkOnboardingCompleteUseCase
 import org.example.project.presentation.screens.onboarding.model.toUiState
 import org.example.project.presentation.shared.base.BaseViewModel
-import org.koin.android.annotation.KoinViewModel
-import org.koin.core.annotation.Provided
 
-@KoinViewModel
+
 class OnboardingViewModel(
-    @Provided private val repository: OnboardingRepository,
+    private val repository: OnboardingRepository,
+    private val markOnboardingCompleteUseCase: MarkOnboardingCompleteUseCase,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) :
     BaseViewModel<OnboardingScreenState, OnboardingScreenEffect>(initialState = OnboardingScreenState()),
@@ -22,16 +22,17 @@ class OnboardingViewModel(
         loadData()
     }
 
-
     private fun loadData() {
         tryToCall(
             call = {
                 updateState { it.copy(loading = true) }
                 repository.getOnboardingData()
             },
-            onSuccess =  ::onLoadDataSuccess ,
-            onError = { errorState -> updateState { it.copy(errorMessage = errorState) } },
-            dispatcher = ioDispatcher
+            onSuccess = ::onLoadDataSuccess,
+            onError = { errorState ->
+                updateState { it.copy(errorMessage = errorState, loading = false) }
+            },
+            dispatcher = ioDispatcher,
         )
     }
 
@@ -45,6 +46,7 @@ class OnboardingViewModel(
     }
 
     override fun onSkipClick() {
+        markOnboardingComplete()
         sendNewEffect(OnboardingScreenEffect.NavigateToGetStartedScreen)
     }
 
@@ -53,6 +55,22 @@ class OnboardingViewModel(
     }
 
     override fun onGetStartedClick() {
+        markOnboardingComplete()
         sendNewEffect(OnboardingScreenEffect.NavigateToRegisterScreen)
+    }
+
+    private fun markOnboardingComplete() {
+        tryToCall(
+            call = {
+                markOnboardingCompleteUseCase()
+            },
+            onSuccess = {
+                // Do nothing, just continue navigation
+            },
+            onError = { error ->
+                updateState { it.copy(loading = false) }
+                println("⚠️ Failed to mark onboarding complete: ${error.message}")
+            },
+        )
     }
 }

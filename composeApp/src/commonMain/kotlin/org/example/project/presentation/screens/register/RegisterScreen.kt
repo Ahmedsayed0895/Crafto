@@ -39,17 +39,17 @@ import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun RegisterScreen(
     modifier: Modifier = Modifier,
+    onRegistrationComplete: () -> Unit
 ) {
     RegisterContent(
         modifier = modifier,
         onPrivacyPolicyClick = {},
         onTermsClick = {},
-        onButtonClick = {}
+        onButtonClick = { onRegistrationComplete() }
     )
 }
 
@@ -176,10 +176,10 @@ private fun PrivacyAndTextSection(
     }
 }
 
-@Preview
-@Composable
-private fun RegisterScreenPreview() {
-    AppTheme {
-        RegisterScreen()
-    }
-}
+//@Preview
+//@Composable
+//private fun RegisterScreenPreview() {
+//    AppTheme {
+//        RegisterScreen()
+//    }
+//}

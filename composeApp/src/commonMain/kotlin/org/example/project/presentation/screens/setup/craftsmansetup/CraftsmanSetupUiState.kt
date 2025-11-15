@@ -12,7 +12,7 @@ data class CraftsmanSetupUiState(
     override val error: ErrorUiState? = null,
 
     val currentPageIndex: Int = 0,
-    val totalPages: Int = 5,
+    val totalPages: Int = 4,
     val canNavigateNext: Boolean = false,
     val canNavigateBack: Boolean = false,
     val isSwipeEnabled: Boolean = true,
@@ -22,8 +22,6 @@ data class CraftsmanSetupUiState(
     val isUploadingIdCards: Boolean = false,
     val uploadedPortfolioUrls: List<String> = emptyList(),
     val verificationDocuments: VerificationDocuments? = null,
-
-    val userType: UserType? = null,
 
     val availableCategories: List<CategoryUi> = emptyList(),
     val selectedCategoryIds: Set<Int> = emptySet(),
@@ -48,12 +46,12 @@ data class CraftsmanSetupUiState(
     val currentStep: RegistrationStep
         get() = RegistrationStep.fromIndex(currentPageIndex)
 
+    //TODO: Use progress calculation
     val progress: Float
         get() = (currentPageIndex + 1) / totalPages.toFloat()
 
     val nextButtonText: String
         get() = when (currentStep) {
-            RegistrationStep.USER_TYPE -> "Next"
             RegistrationStep.SERVICE_SELECTION -> "Next"
             RegistrationStep.PERSONAL_INFO -> if (isLoading) "Creating Profile..." else "Next"
             RegistrationStep.PORTFOLIO_UPLOAD -> "Next"
@@ -62,19 +60,13 @@ data class CraftsmanSetupUiState(
 }
 
 enum class RegistrationStep(val index: Int) {
-    USER_TYPE(0),
-    SERVICE_SELECTION(1),
-    PERSONAL_INFO(2),
-    PORTFOLIO_UPLOAD(3),
-    IDENTITY_VERIFICATION(4);
+    SERVICE_SELECTION(0),
+    PERSONAL_INFO(1),
+    PORTFOLIO_UPLOAD(2),
+    IDENTITY_VERIFICATION(3);
 
     companion object {
         fun fromIndex(index: Int): RegistrationStep =
-            entries.firstOrNull { it.index == index } ?: USER_TYPE
+            entries.firstOrNull { it.index == index } ?: SERVICE_SELECTION
     }
-}
-
-enum class UserType {
-    CUSTOMER,
-    CRAFTSMAN
 }

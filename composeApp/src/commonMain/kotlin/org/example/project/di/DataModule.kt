@@ -11,10 +11,12 @@ import org.example.project.data.remote.datasource.CraftsmanRemoteDataSourceImpl
 import org.example.project.data.repository.CategoryRepositoryImpl
 import org.example.project.data.repository.CraftsmanRepositoryImpl
 import org.example.project.data.repository.LocationRepositoryImpl
+import org.example.project.data.repository.OnboardingRepositoryImp
 import org.example.project.data.service.ValidationServiceImpl
 import org.example.project.domain.repository.CategoryRepository
 import org.example.project.domain.repository.CraftsmanRepository
 import org.example.project.domain.repository.LocationRepository
+import org.example.project.domain.repository.OnboardingRepository
 import org.example.project.domain.service.ValidationService
 import org.koin.dsl.module
 
@@ -26,6 +28,9 @@ val dataModule = module {
             remoteDataSource = get(),
             userPreferences = get()
         )
+    }
+    single<OnboardingRepository> {
+        OnboardingRepositoryImp(get())
     }
     single { categorySeed }
     single<CategoryDataSource> { CategoryMemoryDataSource(get()) }

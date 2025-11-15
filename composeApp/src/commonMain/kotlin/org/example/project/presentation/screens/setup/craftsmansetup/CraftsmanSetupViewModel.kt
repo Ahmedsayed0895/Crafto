@@ -27,22 +27,6 @@ class CraftsmanSetupViewModel(
     CraftsmanSetupUiState()
 ), CraftsmanSetupInteractionListener {
 
-    override fun onUserTypeSelected(userType: UserType) {
-        when (userType) {
-            UserType.CRAFTSMAN -> {
-                updateState {
-                    it.copy(
-                        userType = userType,
-                        canNavigateNext = true
-                    )
-                }
-            }
-            UserType.CUSTOMER -> {
-                TODO("Implement Customer setup flow – redirect to CustomerSetupScreen when ready")
-            }
-        }
-    }
-
     init {
         validateCurrentPage()
         fetchCategories()
@@ -392,11 +376,10 @@ class CraftsmanSetupViewModel(
 
     private fun validateCurrentPage() {
         val canProceed = when (state.value.currentStep) {
-            RegistrationStep.USER_TYPE -> state.value.userType != null
             RegistrationStep.SERVICE_SELECTION -> state.value.selectedCategoryIds.isNotEmpty()
             RegistrationStep.PERSONAL_INFO -> validatePersonalInfo(state.value.personalInfo)
             RegistrationStep.PORTFOLIO_UPLOAD -> state.value.portfolioImages.isNotEmpty()
-            RegistrationStep.IDENTITY_VERIFICATION -> true // Optional step
+            RegistrationStep.IDENTITY_VERIFICATION -> true
         }
 
         updateState { it.copy(canNavigateNext = canProceed) }
