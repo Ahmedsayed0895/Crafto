@@ -99,11 +99,13 @@ fun CraftoNavBar(
 fun getCurrentNavBarScreen(navController: NavController): NavigationBarDestinations? {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
-
-    val matchedEntry: Map.Entry<String?, NavigationBarDestinations>? =
-        bottomNavBarDestinationsMap.entries.firstOrNull { (route, _) ->
-            currentRoute?.startsWith(route ?: "") == true
-        }
-
-    return matchedEntry?.value as? NavigationBarDestinations
+    return when {
+        currentRoute == null -> null
+        currentRoute.contains("HomeScreen") -> NavigationBarDestinations.HomeScreen
+        currentRoute.contains("MyRequestsScreen") -> NavigationBarDestinations.MyRequestsScreen
+        currentRoute.contains("MyJobsScreen") -> NavigationBarDestinations.MyJobsScreen
+        currentRoute.contains("MessagesScreen") -> NavigationBarDestinations.MessagesScreen
+        currentRoute.contains("MoreScreen") -> NavigationBarDestinations.MoreScreen
+        else -> null
+    }
 }
