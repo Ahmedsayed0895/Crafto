@@ -98,10 +98,10 @@ fun CraftoNavBar(
 @Composable
 fun getCurrentNavBarScreen(navController: NavController): NavigationBarDestinations? {
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = backStackEntry?.destination?.route
-    val bottomNavBarDestinationsMap: NavigationBarDestinations?=bottomNavBarDestinationsMap.entries.firstOrNull { (route, _) ->
-        currentRoute?.startsWith(route!!) == true
-    }?.value
-
-    return bottomNavBarDestinationsMap
+    val currentRoute: String? = backStackEntry?.destination?.route
+    val matchedEntry: Map.Entry<String?, NavigationBarDestinations>? =
+        bottomNavBarDestinationsMap.entries.firstOrNull { (route, _) ->
+            currentRoute != null && route != null && currentRoute.startsWith(route)
+        }
+    return matchedEntry?.value
 }

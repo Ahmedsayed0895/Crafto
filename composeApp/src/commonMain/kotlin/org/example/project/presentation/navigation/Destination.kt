@@ -20,7 +20,7 @@ sealed interface NavigationBarDestinations {
     data object MoreScreen : NavigationBarDestinations
 }
 
-val bottomNavBarDestinationsMap = mapOf(
+val bottomNavBarDestinationsMap: Map<String?, NavigationBarDestinations> = mapOf(
     NavigationBarDestinations.HomeScreen::class.qualifiedName to NavigationBarDestinations.HomeScreen,
     NavigationBarDestinations.MyRequestsScreen::class.qualifiedName to NavigationBarDestinations.MyRequestsScreen,
     NavigationBarDestinations.MyJobsScreen::class.qualifiedName to NavigationBarDestinations.MyJobsScreen,
