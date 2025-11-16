@@ -22,7 +22,7 @@ fun CraftoNavGraph(
     getUserSessionUseCase: GetUserSessionUseCase = koinInject()
 ) {
     var userType by remember { mutableStateOf<UserType?>(null) }
-    var startDestination by remember { mutableStateOf<Any?>(null) }
+    var startDestination by remember { mutableStateOf<Any>(OnboardingDestination) }
     var isLoading by remember { mutableStateOf(true) }
 
     val coroutineScope = rememberCoroutineScope()
@@ -82,7 +82,7 @@ fun CraftoNavGraph(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = startDestination?: OnboardingDestination,
+            startDestination = startDestination,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None }
         ) {
