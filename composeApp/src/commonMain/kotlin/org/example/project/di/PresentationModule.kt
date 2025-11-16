@@ -1,5 +1,7 @@
 package org.example.project.di
 
+import org.example.project.presentation.screens.auth.UserTypeSelectionViewModel
+import org.example.project.presentation.screens.onboarding.OnboardingViewModel
 import org.example.project.presentation.screens.setup.craftsmansetup.CraftsmanSetupViewModel
 import org.example.project.presentation.screens.setup.location.LocationViewModel
 import org.koin.core.module.dsl.viewModel
@@ -15,5 +17,7 @@ val presentationModule = module {
             uploadProfilePictureUseCase = get(),
         )
     }
-    viewModel {LocationViewModel(get())}
+    viewModel { LocationViewModel(get()) }
+    viewModel { OnboardingViewModel(get(), get()) }
+    viewModel { UserTypeSelectionViewModel(get()) }
 }

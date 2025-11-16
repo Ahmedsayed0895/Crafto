@@ -8,13 +8,11 @@ import org.example.project.data.remote.network.ApiConstants.Endpoints.ONBOARDING
 import org.example.project.data.remote.network.wrapApiCall
 import org.example.project.domain.entity.OnboardingItem
 import org.example.project.domain.repository.OnboardingRepository
-import org.koin.core.annotation.Provided
-import org.koin.core.annotation.Single
 
 
-@Single(binds = [OnboardingRepository::class])
+
 class OnboardingRepositoryImp(
-    @Provided private val httpClient: HttpClient
+    private val httpClient: HttpClient
 ) : OnboardingRepository {
 
     override suspend fun getOnboardingData(): List<OnboardingItem> {

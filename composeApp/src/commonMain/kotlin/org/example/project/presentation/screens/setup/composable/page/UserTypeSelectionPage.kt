@@ -13,18 +13,19 @@ import crafto.composeapp.generated.resources.customer
 import crafto.composeapp.generated.resources.customer_description
 import crafto.composeapp.generated.resources.selection_craftsman
 import crafto.composeapp.generated.resources.selection_customer
+import org.example.project.domain.entity.UserType
 import org.example.project.presentation.designsystem.components.SelectionCard
-import org.example.project.presentation.screens.setup.craftsmansetup.UserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun UserTypeSelectionPage(
     selectedType: UserType?,
-    onTypeSelected: (UserType) -> Unit
+    onTypeSelected: (UserType) -> Unit,
+    modifier: Modifier=Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {

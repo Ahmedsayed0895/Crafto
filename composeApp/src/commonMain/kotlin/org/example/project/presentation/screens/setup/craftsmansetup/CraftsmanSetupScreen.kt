@@ -28,16 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.identity_verification
-import crafto.composeapp.generated.resources.location_hint
 import crafto.composeapp.generated.resources.personal_info
 import crafto.composeapp.generated.resources.portfolio_upload
-import crafto.composeapp.generated.resources.registration_step_1_description
 import crafto.composeapp.generated.resources.registration_step_2_description
 import crafto.composeapp.generated.resources.registration_step_3_description
 import crafto.composeapp.generated.resources.registration_step_4_description
 import crafto.composeapp.generated.resources.registration_step_5_description
 import crafto.composeapp.generated.resources.service_selection
-import crafto.composeapp.generated.resources.user_type
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.TextButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
@@ -46,7 +43,6 @@ import org.example.project.presentation.screens.setup.composable.page.IdentityVe
 import org.example.project.presentation.screens.setup.composable.page.PersonalInfoPage
 import org.example.project.presentation.screens.setup.composable.page.PortfolioUploadPage
 import org.example.project.presentation.screens.setup.composable.page.ServiceSelectionPage
-import org.example.project.presentation.screens.setup.composable.page.UserTypeSelectionPage
 import org.example.project.presentation.shared.base.ErrorUiState
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -134,18 +130,16 @@ fun CraftsmanSetupContent(
         onNextButtonClick = {
             when (state.currentStep) {
                 RegistrationStep.IDENTITY_VERIFICATION -> {
-                    if (state.idCardFront != null && state.idCardBack != null) {
+                    if (state.hasUploadedIdCards)
                         viewModel.onUploadIdCards()
-                    } else {
-                        viewModel.onSkipIdentityVerification()
-                    }
+//                    } else {
+//                        viewModel.onSkipIdentityVerification()
+//                    }
                 }
                 else -> viewModel.navigateNext()
             }
         },
         title = when (state.currentStep) {
-            RegistrationStep.USER_TYPE -> {
-                stringResource(Res.string.user_type) }
             RegistrationStep.SERVICE_SELECTION -> {
                 stringResource(Res.string.service_selection)
                 }
@@ -160,9 +154,6 @@ fun CraftsmanSetupContent(
             }
         },
         description =when (state.currentStep) {
-            RegistrationStep.USER_TYPE -> {
-                stringResource(Res.string.registration_step_1_description)
-            }
             RegistrationStep.SERVICE_SELECTION -> {
                 stringResource(Res.string.registration_step_2_description)
             }
@@ -187,12 +178,6 @@ fun CraftsmanSetupContent(
                 userScrollEnabled = state.isSwipeEnabled && state.canNavigateNext
             ) { page ->
                 when (RegistrationStep.fromIndex(page)) {
-                    RegistrationStep.USER_TYPE -> {
-                        UserTypeSelectionPage(
-                            selectedType = state.userType,
-                            onTypeSelected = viewModel::onUserTypeSelected,
-                        )
-                    }
                     RegistrationStep.SERVICE_SELECTION -> {
                         ServiceSelectionPage(
                             availableCategories = state.availableCategories,

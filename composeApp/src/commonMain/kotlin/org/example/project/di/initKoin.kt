@@ -8,7 +8,6 @@ fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
         config?.invoke(this)
         modules(
-            //CraftoModule().module,
             networkModule,
             dataModule,
             domainModule,

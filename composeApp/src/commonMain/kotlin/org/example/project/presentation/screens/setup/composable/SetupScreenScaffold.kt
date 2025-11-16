@@ -31,10 +31,11 @@ fun SetupScreenScaffold(
     totalPages: Int = 4,
     nextButtonText: String = stringResource(Res.string.next),
     nextButtonEnabled: Boolean = true,
+    showBackButton: Boolean= true,
     nextButtonState: ButtonState = ButtonState.Enable,
     title: String,
     description: String,
-    onBackButtonClick: () -> Unit,
+    onBackButtonClick: () -> Unit = {},
     onNextButtonClick: () -> Unit,
     content: @Composable (() -> Unit)
 ) {
@@ -52,6 +53,7 @@ fun SetupScreenScaffold(
                 totalPages = totalPages,
                 nextButtonText = nextButtonText,
                 nextButtonEnabled = nextButtonEnabled,
+                showBackButton = showBackButton,
                 nextButtonState = nextButtonState,
                 description = description,
                 onBackButtonClick = onBackButtonClick,
@@ -68,6 +70,7 @@ fun SetupScreenScaffold(
                 totalPages = totalPages,
                 nextButtonText = nextButtonText,
                 nextButtonEnabled = nextButtonEnabled,
+                showBackButton = showBackButton,
                 nextButtonState = nextButtonState,
                 title = title,
                 description = description,
@@ -90,6 +93,7 @@ private fun PortraitLayout(
     nextButtonText: String,
     nextButtonEnabled: Boolean,
     nextButtonState: ButtonState,
+    showBackButton: Boolean = true,
     description: String,
     onBackButtonClick: () -> Unit,
     onNextButtonClick: () -> Unit,
@@ -107,7 +111,8 @@ private fun PortraitLayout(
         AccountSetupTopBar(
             onBackButtonClick = onBackButtonClick,
             currentPage = currentPageNumber,
-            totalPages = totalPages )
+            totalPages = totalPages,
+            showBackButton = showBackButton)
 
         TitleDescriptionBox(
             modifier = Modifier.weight(1f),
@@ -141,6 +146,7 @@ private fun LandscapeLayout(
     nextButtonText: String,
     nextButtonEnabled: Boolean,
     nextButtonState: ButtonState,
+    showBackButton: Boolean,
     title: String,
     description: String,
     onBackButtonClick: () -> Unit,
@@ -159,7 +165,8 @@ private fun LandscapeLayout(
         AccountSetupTopBar(
             onBackButtonClick = onBackButtonClick,
             currentPage = currentPageNumber,
-            totalPages = totalPages)
+            totalPages = totalPages,
+            showBackButton = showBackButton)
         Row(
             modifier = Modifier
                 .fillMaxWidth()

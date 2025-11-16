@@ -5,8 +5,6 @@ import org.example.project.presentation.model.PersonalInfoUiModel
 import org.example.project.presentation.shared.base.ErrorUiState
 
 interface CraftsmanSetupInteractionListener {
-    fun onUserTypeSelected(userType: UserType)
-
     fun onCategoryToggled(categoryId: Int)
     fun onPersonalInfoChanged(personalInfo: PersonalInfoUiModel)
 
