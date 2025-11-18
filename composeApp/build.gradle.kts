@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -67,6 +66,8 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.android)
+
+            implementation(libs.androidx.core.splashscreen)
 
         }
         commonMain.dependencies {
