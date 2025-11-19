@@ -19,7 +19,8 @@ import org.koin.compose.koinInject
 fun CraftoNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    getUserSessionUseCase: GetUserSessionUseCase = koinInject()
+    getUserSessionUseCase: GetUserSessionUseCase = koinInject(),
+    onAppReady: () -> Unit = {}
 ) {
     var userType by remember { mutableStateOf<UserType?>(null) }
     var startDestination by remember { mutableStateOf<Any>(OnboardingDestination) }
@@ -37,21 +38,25 @@ fun CraftoNavGraph(
                     session.isFirstTime -> {
                         OnboardingDestination
                     }
+
                     session.userId != null && session.userType != null -> {
                         NavigationBarDestinations.HomeScreen
                     }
+
                     session.userId != null && session.userType == null -> {
                         UserTypeSelectionDestination
                     }
+
                     else -> {
                         OtpRegistrationDestination
                     }
                 }
             } catch (e: Exception) {
-                println("Error loading session: ${e.message}")
+                println("⚠️ Error loading session: ${e.message}")
                 startDestination = OnboardingDestination
             } finally {
                 isLoading = false
+                onAppReady()
             }
         }
     }
@@ -66,30 +71,34 @@ fun CraftoNavGraph(
 //        return
 //    }
 
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
-            getCurrentNavBarScreen(navController)?.let { selectedRoute ->
-                userType?.let { type ->
-                    ShowNavigationBar(
-                        selectedRoute = selectedRoute,
-                        navController = navController,
-                        userType = type
-                    )
+    if (!isLoading) {
+        Scaffold(
+            modifier = modifier,
+            bottomBar = {
+                getCurrentNavBarScreen(navController)?.let { selectedRoute ->
+                    userType?.let { type ->
+                        ShowNavigationBar(
+                            selectedRoute = selectedRoute,
+                            navController = navController,
+                            userType = type
+                        )
+                    }
                 }
             }
-        }
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = startDestination,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None }
-        ) {
-            authNavigationGraph(navController, onUserTypeUpdated = { type -> userType = type })
-            setupNavigationGraph(navController, onUserTypeUpdated = { type -> userType = type })
-            bottomNavigationBarGraph(navController)
-            //detailsNavigationGraph(navController)
+        ) { innerPadding ->
+            NavHost(
+                navController = navController,
+                startDestination = startDestination,
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }
+            ) {
+                authNavigationGraph(navController, onUserTypeUpdated = { type ->
+                    userType = type })
+                setupNavigationGraph(navController, onUserTypeUpdated = { type ->
+                    userType = type })
+                bottomNavigationBarGraph(navController)
+                //detailsNavigationGraph(navController)
+            }
         }
     }
 }

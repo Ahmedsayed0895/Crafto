@@ -12,7 +12,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    onAppReady: () -> Unit = {}
+) {
     AppTheme {
         val navController = rememberNavController()
         CraftoNavGraph(
@@ -20,6 +22,7 @@ fun App() {
             modifier = Modifier
                 .fillMaxSize()
                 .background(AppTheme.craftoColors.background.screen)
-                .navigationBarsPadding())
+                .navigationBarsPadding(),
+            onAppReady = onAppReady,)
     }
 }
