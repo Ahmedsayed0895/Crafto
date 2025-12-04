@@ -3,6 +3,7 @@ package org.example.project.presentation.screens.customer_home.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +29,7 @@ fun WhatYouNeedItem(
 ) {
     Row(
         modifier = modifier
+            .fillMaxWidth()
             .background(
                 color = AppTheme.craftoColors.background.card,
                 shape = RoundedCornerShape(20.dp)
