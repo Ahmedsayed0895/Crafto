@@ -12,23 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.arrow_left
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.screens.customer_home.CustomerHomeScreenState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun WhatYouNeedItem(
-    title: String,
-    content: String,
-    icon: Painter,
-    iconBackgroundColor: Color,
-    iconTint: Color,
+    category: CustomerHomeScreenState.RequestCategory,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -46,19 +41,19 @@ fun WhatYouNeedItem(
             modifier = Modifier
                 .size(40.dp)
                 .background(
-                    color = iconBackgroundColor,
+                    color = category.iconBackgroundColor,
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(10.dp),
-            painter = icon,
+            painter = category.icon,
             contentDescription = null,
-            tint = iconTint
+            tint = category.iconTint
         )
 
         Column(modifier = Modifier.padding(start = 12.dp)) {
             Text(
                 modifier = Modifier.padding(bottom = 4.dp),
-                text = title,
+                text = category.title,
                 style = AppTheme.textStyle.body.medium,
                 color = AppTheme.craftoColors.shade.primary,
                 maxLines = 1,
@@ -66,7 +61,7 @@ fun WhatYouNeedItem(
             )
 
             Text(
-                text = content,
+                text = category.content,
                 style = AppTheme.textStyle.label.mediumRegular,
                 color = AppTheme.craftoColors.shade.secondary,
                 maxLines = 1,
@@ -82,11 +77,13 @@ fun WhatYouNeedItem(
 private fun WhatYouNeedItemPreview(){
     AppTheme{
         WhatYouNeedItem(
-            title = "Plumping",
-            content = "Pipes, faucets, water heaters",
-            icon = painterResource(Res.drawable.arrow_left),
-            iconBackgroundColor = AppTheme.craftoColors.additional.secondaryBlue,
-            iconTint = AppTheme.craftoColors.additional.primaryBlue
+            category = CustomerHomeScreenState.RequestCategory(
+                title = "Plumping",
+                content = "Pipes, faucets, water heaters",
+                icon = painterResource(Res.drawable.arrow_left),
+                iconBackgroundColor = AppTheme.craftoColors.additional.secondaryBlue,
+                iconTint = AppTheme.craftoColors.additional.primaryBlue
+            )
         )
     }
 }
