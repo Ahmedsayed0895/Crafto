@@ -10,7 +10,7 @@ class DeleteCraftsmanAccountUseCase(
     suspend operator fun invoke(
         craftsmanId: String,
         confirmDelete: Boolean = false
-    ) {
+    ): Boolean {
         if (craftsmanId.isBlank()) {
             throw ValidationException("Craftsman ID is required")
         }
@@ -19,6 +19,6 @@ class DeleteCraftsmanAccountUseCase(
             throw ValidationException("Please confirm account deletion")
         }
 
-        repository.deleteCraftsmanAccount(craftsmanId)
+        return repository.deleteCraftsmanAccount(craftsmanId)
     }
 }
