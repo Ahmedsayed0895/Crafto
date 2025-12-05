@@ -3,7 +3,9 @@ package org.example.project.presentation.designsystem.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,39 +37,49 @@ fun AppBar(
     title: String? = null,
     locationItem: (@Composable () -> Unit)? = null,
     endIcon: Painter? = null,
-    hasBackground: Boolean = true,
+    background: Color = Color.Transparent,
+    paddingValues: PaddingValues = PaddingValues(0.dp),
     showBackButton: Boolean = false,
     onBackButtonClick: () -> Unit = {},
     onEndIconClick: () -> Unit = {},
 ) {
-    val background =
-        if (hasBackground) AppTheme.craftoColors.background.screen else Color.Transparent
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .background(background)
-    ) {
-        BackButton(
-            showBackButton = showBackButton,
-            onBackButtonClick = onBackButtonClick
-        )
-        Column(
-            modifier = Modifier.weight(1f),
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(background)
+                .padding(paddingValues)
         ) {
-            Title(
-                title = title,
-                modifier = Modifier
+            BackButton(
+                showBackButton = showBackButton,
+                onBackButtonClick = onBackButtonClick
             )
-            if (locationItem != null) {
-                locationItem()
+            Column(
+                modifier = Modifier.weight(1f),
+            ) {
+                Title(
+                    title = title,
+                    modifier = Modifier
+                )
+                if (locationItem != null) {
+                    locationItem()
+                }
             }
+
+            EndIcon(painter = endIcon, onEndIconClick = onEndIconClick)
         }
 
-        EndIcon(painter = endIcon, onEndIconClick = onEndIconClick)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(color = AppTheme.craftoColors.stroke.primary)
+        )
     }
+
 }
 
 @Composable

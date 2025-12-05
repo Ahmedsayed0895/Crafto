@@ -1,6 +1,6 @@
 package org.example.project.presentation.screens.customer_home.composable
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,6 +15,7 @@ import crafto.composeapp.generated.resources.notifications
 import org.example.project.presentation.designsystem.components.AppBar
 import org.example.project.presentation.designsystem.textstyle.AppTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CustomerHomeAppBar(
@@ -24,7 +25,9 @@ fun CustomerHomeAppBar(
     modifier: Modifier = Modifier,
 ) {
     AppBar(
-        modifier = modifier.padding(start = 16.dp, end = 8.dp),
+        modifier = modifier,
+        paddingValues = PaddingValues(start = 16.dp, end = 8.dp),
+        background = AppTheme.craftoColors.background.card,
         title = "Good Morning, $customerName!",
         endIcon = painterResource(Res.drawable.notifications),
         onEndIconClick = onNotificationIconClicked,
@@ -44,4 +47,16 @@ fun CustomerHomeAppBar(
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun CustomerHomeAppBarPreview(){
+    AppTheme{
+        CustomerHomeAppBar(
+            customerName = "Mostafa",
+            customerLocation = "Baghdad, Iraq",
+            onNotificationIconClicked = {}
+        )
+    }
 }

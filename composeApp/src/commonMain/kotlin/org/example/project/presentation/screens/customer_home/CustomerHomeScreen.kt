@@ -55,7 +55,8 @@ private fun CustomerHomeScreenContent(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(AppTheme.craftoColors.background.screen),
+                .background(AppTheme.craftoColors.background.screen)
+                .padding(top = 16.dp),
             contentPadding = innerPadding
         ) {
             item {
