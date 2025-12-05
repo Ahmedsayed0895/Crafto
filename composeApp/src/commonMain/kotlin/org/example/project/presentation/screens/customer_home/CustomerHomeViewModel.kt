@@ -26,6 +26,10 @@ class CustomerHomeViewModel(
         TODO("Not yet implemented")
     }
 
+    override fun onNotificationIconClicked() {
+        TODO("Not yet implemented")
+    }
+
     private fun fetchAllCategories() {
         tryToCall(
             call = { getCategoriesUseCase() },

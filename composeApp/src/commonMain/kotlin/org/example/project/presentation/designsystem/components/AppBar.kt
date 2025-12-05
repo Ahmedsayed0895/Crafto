@@ -57,13 +57,13 @@ fun AppBar(
         Column(
             modifier = Modifier.weight(1f),
         ) {
-            if (locationItem != null) {
-                locationItem()
-            }
             Title(
                 title = title,
                 modifier = Modifier
             )
+            if (locationItem != null) {
+                locationItem()
+            }
         }
 
         EndIcon(painter = endIcon, onEndIconClick = onEndIconClick)

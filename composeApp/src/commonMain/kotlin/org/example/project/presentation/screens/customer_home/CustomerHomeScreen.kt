@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import crafto.composeapp.generated.resources.Res
 import crafto.composeapp.generated.resources.arrow_left
-import org.example.project.presentation.designsystem.components.AppBar
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.screens.customer_home.composable.CustomerHomeAppBar
 import org.example.project.presentation.screens.customer_home.composable.MostRequestItem
 import org.example.project.presentation.screens.customer_home.composable.WhatYouNeedItem
 import org.jetbrains.compose.resources.painterResource
@@ -45,7 +45,11 @@ private fun CustomerHomeScreenContent(
             .fillMaxSize()
             .background(AppTheme.craftoColors.background.screen),
         topBar = {
-            AppBar { }
+            CustomerHomeAppBar(
+                customerName = state.customer.name,
+                customerLocation = state.customer.location,
+                onNotificationIconClicked = interactionListener::onNotificationIconClicked,
+            )
         }
     ) { innerPadding ->
         LazyColumn(
@@ -130,6 +134,7 @@ private fun CustomerHomeScreenPreview(){
             interactionListener = object : CustomerHomeInteractionListener{
                 override fun onSearchClicked() {}
                 override fun onRequestCategoryClicked() {}
+                override fun onNotificationIconClicked() {}
             }
         )
     }

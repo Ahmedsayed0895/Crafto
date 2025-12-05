@@ -7,6 +7,7 @@ import org.example.project.presentation.shared.base.ErrorUiState
 data class CustomerHomeScreenState(
     val isError: ErrorUiState? = null,
     val isLoading: Boolean = false,
+    val customer: CustomerUiState = CustomerUiState(),
     val mostRequestedCategories: List<RequestCategoryUiState> = listOf(),
     val allCategories: List<RequestCategoryUiState> = listOf()
 ){
@@ -16,5 +17,9 @@ data class CustomerHomeScreenState(
         val icon: Painter?,
         val iconBackgroundColor: Color,
         val iconTint: Color,
+    )
+    data class CustomerUiState(
+        val name: String = "",
+        val location: String = "",
     )
 }
