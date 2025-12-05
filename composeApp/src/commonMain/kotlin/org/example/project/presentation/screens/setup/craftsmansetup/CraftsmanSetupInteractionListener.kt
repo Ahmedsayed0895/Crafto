@@ -1,12 +1,12 @@
 package org.example.project.presentation.screens.setup.craftsmansetup
 
 import org.example.project.presentation.model.ImageData
-import org.example.project.presentation.model.PersonalInfoUiModel
+import org.example.project.presentation.model.CraftsmanPersonalInfoUiModel
 import org.example.project.presentation.shared.base.ErrorUiState
 
 interface CraftsmanSetupInteractionListener {
     fun onCategoryToggled(categoryId: Int)
-    fun onPersonalInfoChanged(personalInfo: PersonalInfoUiModel)
+    fun onPersonalInfoChanged(personalInfo: CraftsmanPersonalInfoUiModel)
 
     fun onIdCardSelected(isFront: Boolean, imageData: ImageData)
     fun onUploadIdCards()

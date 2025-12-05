@@ -23,13 +23,17 @@ object ApiConstants {
         const val CRAFTSMAN_SETUP = "/craftsman/setup"
         const val CRAFTSMAN_PROFILE = "/craftsman/profile"
         const val ONBOARDING_END_POINT = "/onboarding"
+        const val CUSTOMER_SETUP = "/customer/setup"
+        const val CUSTOMER_PROFILE = "/customer/profile"
+
 
         fun craftsmanProfilePicture(craftsmanId: String) = "/craftsman/$craftsmanId/profile-picture"
+        fun customerProfilePicture(customerId: String) = "/customer/$customerId/profile-picture"
         fun craftsmanIdCards(craftsmanId: String) = "/craftsman/$craftsmanId/verify/id-cards"
         fun craftsmanWorkPortfolio(craftsmanId: String) = "/craftsman/$craftsmanId/verify/work-portfolio"
         fun craftsmanStatus(craftsmanId: String) = "/craftsman/$craftsmanId/status"
         fun deleteCraftsman(craftsmanId: String) = "/craftsman/$craftsmanId"
-
+        fun deleteCustomer(customerId: String) = "/customer/$customerId"
     }
 
 }

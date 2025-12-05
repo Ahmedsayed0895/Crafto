@@ -1,6 +1,6 @@
 package org.example.project.presentation.model
 
-data class PersonalInfoUiModel(
+data class CraftsmanPersonalInfoUiModel(
     val firstName: String,
     val lastName: String,
     val phoneNumber: String,

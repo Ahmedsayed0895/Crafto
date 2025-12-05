@@ -3,7 +3,7 @@ package org.example.project.presentation.screens.setup.craftsmansetup
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.presentation.model.CategoryUi
 import org.example.project.presentation.model.ImageData
-import org.example.project.presentation.model.PersonalInfoUiModel
+import org.example.project.presentation.model.CraftsmanPersonalInfoUiModel
 import org.example.project.presentation.shared.base.BaseScreenState
 import org.example.project.presentation.shared.base.ErrorUiState
 
@@ -26,7 +26,7 @@ data class CraftsmanSetupUiState(
     val availableCategories: List<CategoryUi> = emptyList(),
     val selectedCategoryIds: Set<Int> = emptySet(),
 
-    val personalInfo: PersonalInfoUiModel = PersonalInfoUiModel("", "", "", ""),
+    val personalInfo: CraftsmanPersonalInfoUiModel = CraftsmanPersonalInfoUiModel("", "", "", ""),
 
     val portfolioImages: List<ImageData> = emptyList(),
     val workDescription: String = "",

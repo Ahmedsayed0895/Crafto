@@ -14,7 +14,7 @@ val presentationModule = module {
             uploadIdCardsUseCase = get(),
             uploadWorkPortfolioUseCase = get(),
             getCategoriesUseCase = get(),
-            uploadProfilePictureUseCase = get(),
+            uploadCraftsmanProfilePictureUseCase = get(),
         )
     }
     viewModel { LocationViewModel(get()) }

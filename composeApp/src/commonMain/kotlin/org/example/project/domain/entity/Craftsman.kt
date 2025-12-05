@@ -3,9 +3,9 @@ package org.example.project.domain.entity
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
-data class Craftsman @OptIn(ExperimentalTime::class) constructor(
+data class CraftsmanProfile @OptIn(ExperimentalTime::class) constructor(
     val craftsmanId: String,
-    val personalInfo: PersonalInfo,
+    val craftsmanPersonalInfo: CraftsmanPersonalInfo,
     val profilePictureUrl: String? = null,
     val categories: List<String>,
     val status: CraftsmanStatus,
@@ -15,7 +15,7 @@ data class Craftsman @OptIn(ExperimentalTime::class) constructor(
 ){
     fun isVerified(): Boolean = verificationStatus == VerificationStatus.VERIFIED
     fun canReceiveJobs(): Boolean = status == CraftsmanStatus.ACTIVE && isVerified()
-    fun isProfileComplete(): Boolean = hasRequiredDocuments() && personalInfo.isComplete()
+    fun isProfileComplete(): Boolean = hasRequiredDocuments() && craftsmanPersonalInfo.isComplete()
 
     private fun hasRequiredDocuments(): Boolean {
         return verification.idCardFrontUrl != null &&
@@ -23,14 +23,14 @@ data class Craftsman @OptIn(ExperimentalTime::class) constructor(
                 verification.workPortfolioUrls.isNotEmpty()
     }
 
-    private fun PersonalInfo.isComplete(): Boolean {
+    private fun CraftsmanPersonalInfo.isComplete(): Boolean {
         return firstName.isNotEmpty() &&
                 lastName.isNotEmpty() &&
                 address.isNotEmpty()
     }
 }
 
-data class PersonalInfo(
+data class CraftsmanPersonalInfo(
     val firstName: String,
     val lastName: String,
     val phoneNumber: String,

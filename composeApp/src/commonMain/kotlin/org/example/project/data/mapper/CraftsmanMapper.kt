@@ -2,22 +2,22 @@ package org.example.project.data.mapper
 
 import org.example.project.data.remote.dto.CategoryDto
 import org.example.project.data.remote.dto.CraftsmanProfileResponseDto
-import org.example.project.data.remote.dto.PersonalInfoDto
+import org.example.project.data.remote.dto.CraftsmanPersonalInfoDto
 import org.example.project.data.remote.dto.VerificationInfoDto
 import org.example.project.domain.entity.Category
-import org.example.project.domain.entity.Craftsman
+import org.example.project.domain.entity.CraftsmanProfile
 import org.example.project.domain.entity.CraftsmanStatus
-import org.example.project.domain.entity.PersonalInfo
+import org.example.project.domain.entity.CraftsmanPersonalInfo
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.entity.VerificationStatus
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
 @OptIn(ExperimentalTime::class)
-fun CraftsmanProfileResponseDto.toDomain(): Craftsman {
-    return Craftsman(
+fun CraftsmanProfileResponseDto.toDomain(): CraftsmanProfile {
+    return CraftsmanProfile(
         craftsmanId = craftsmanId,
-        personalInfo = personalInfo.toDomain(),
+        craftsmanPersonalInfo = personalInfo.toDomain(),
         categories = categories,
         profilePictureUrl = profilePictureUrl,
         status = CraftsmanStatus.valueOf(status),
@@ -35,8 +35,8 @@ fun VerificationInfoDto.toVerificationDocuments(): VerificationDocuments {
     )
 }
 
-fun PersonalInfoDto.toDomain(): PersonalInfo {
-    return PersonalInfo(
+fun CraftsmanPersonalInfoDto.toDomain(): CraftsmanPersonalInfo {
+    return CraftsmanPersonalInfo(
         firstName = firstName,
         lastName = lastName,
         phoneNumber = phoneNumber,
@@ -44,8 +44,8 @@ fun PersonalInfoDto.toDomain(): PersonalInfo {
     )
 }
 
-fun PersonalInfo.toDto(): PersonalInfoDto {
-    return PersonalInfoDto(
+fun CraftsmanPersonalInfo.toDto(): CraftsmanPersonalInfoDto {
+    return CraftsmanPersonalInfoDto(
         firstName = firstName,
         lastName = lastName,
         phoneNumber = phoneNumber,

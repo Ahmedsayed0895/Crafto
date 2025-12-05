@@ -6,7 +6,7 @@ import org.example.project.domain.usecase.craftsman.DeleteCraftsmanAccountUseCas
 import org.example.project.domain.usecase.craftsman.GetCraftsmanProfileUseCase
 import org.example.project.domain.usecase.craftsman.GetCraftsmanStatusUseCase
 import org.example.project.domain.usecase.craftsman.UploadIdCardsUseCase
-import org.example.project.domain.usecase.craftsman.UploadProfilePictureUseCase
+import org.example.project.domain.usecase.craftsman.UploadCraftsmanProfilePictureUseCase
 import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
 import org.example.project.domain.usecase.session.ClearUserSessionUseCase
 import org.example.project.domain.usecase.session.GetUserSessionUseCase
@@ -22,7 +22,7 @@ val domainModule = module {
     factory { GetCraftsmanStatusUseCase(get()) }
     factory { DeleteCraftsmanAccountUseCase(get()) }
     factory { GetCategoriesUseCase(get())}
-    factory { UploadProfilePictureUseCase(get(),get()) }
+    factory { UploadCraftsmanProfilePictureUseCase(get(),get()) }
 
     factory { GetUserSessionUseCase(get()) }
     factory { SaveUserTypeUseCase(get()) }

@@ -24,6 +24,8 @@ import org.example.project.data.remote.network.ApiConstants
 import org.example.project.data.remote.network.ApiConstants.Headers.USER_ID
 import org.example.project.data.remote.network.wrapApiCall
 import org.example.project.domain.model.WorkImage
+import org.example.project.data.utils.getMimeType
+
 
 class CraftsmanRemoteDataSourceImpl(
     private val httpClient: HttpClient,
@@ -146,14 +148,6 @@ class CraftsmanRemoteDataSourceImpl(
             httpClient.delete(ApiConstants.Endpoints.deleteCraftsman(craftsmanId)) {
                 header(USER_ID, userId)
             }
-        }
-    }
-
-    private fun getMimeType(fileName: String): String {
-        return when (fileName.substringAfterLast('.', "").lowercase()) {
-            "png" -> "image/png"
-            "jpg", "jpeg" -> "image/jpeg"
-            else -> "image/jpeg" // Default to JPEG
         }
     }
 }

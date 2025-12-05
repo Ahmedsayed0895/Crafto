@@ -21,14 +21,14 @@ import crafto.composeapp.generated.resources.last_name
 import crafto.composeapp.generated.resources.phone_number
 import org.example.project.presentation.designsystem.components.TextField
 import org.example.project.presentation.model.ImageData
-import org.example.project.presentation.model.PersonalInfoUiModel
+import org.example.project.presentation.model.CraftsmanPersonalInfoUiModel
 import org.example.project.presentation.screens.setup.composable.ImagePicker
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PersonalInfoPage(
-    personalInfo: PersonalInfoUiModel,
-    onPersonalInfoChanged: (PersonalInfoUiModel) -> Unit,
+    personalInfo: CraftsmanPersonalInfoUiModel,
+    onPersonalInfoChanged: (CraftsmanPersonalInfoUiModel) -> Unit,
     profilePicture: ImageData? = null,
     onProfilePictureSelected: (ImageData) -> Unit,
     onRemove: () -> Unit,

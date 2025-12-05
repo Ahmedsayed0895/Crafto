@@ -1,14 +1,14 @@
 package org.example.project.domain.repository
 
-import org.example.project.domain.entity.Craftsman
+import org.example.project.domain.entity.CraftsmanProfile
 import org.example.project.domain.entity.CraftsmanStatus
-import org.example.project.domain.entity.PersonalInfo
+import org.example.project.domain.entity.CraftsmanPersonalInfo
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.model.WorkImage
 
 interface CraftsmanRepository {
     suspend fun createCraftsmanProfile(
-        personalInfo: PersonalInfo,
+        craftsmanPersonalInfo: CraftsmanPersonalInfo,
         categories: List<String>
     ): String
 
@@ -31,9 +31,9 @@ interface CraftsmanRepository {
         workImages: List<WorkImage>
     ): List<String>
 
-    suspend fun getCraftsmanProfile(): Craftsman
+    suspend fun getCraftsmanProfile(): CraftsmanProfile
 
     suspend fun getCraftsmanStatus(craftsmanId: String): CraftsmanStatus
 
-    suspend fun deleteCraftsmanAccount(craftsmanId: String)
+    suspend fun deleteCraftsmanAccount(craftsmanId: String): Boolean
 }

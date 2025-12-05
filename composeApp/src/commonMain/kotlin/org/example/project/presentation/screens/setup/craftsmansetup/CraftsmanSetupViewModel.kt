@@ -5,11 +5,11 @@ import kotlinx.coroutines.launch
 import org.example.project.domain.usecase.GetCategoriesUseCase
 import org.example.project.domain.usecase.craftsman.CreateCraftsmanProfileUseCase
 import org.example.project.domain.usecase.craftsman.UploadIdCardsUseCase
-import org.example.project.domain.usecase.craftsman.UploadProfilePictureUseCase
+import org.example.project.domain.usecase.craftsman.UploadCraftsmanProfilePictureUseCase
 import org.example.project.domain.usecase.craftsman.UploadWorkPortfolioUseCase
 import org.example.project.domain.util.AppConstants.FileUpload.MAX_PORTFOLIO_IMAGES
 import org.example.project.presentation.model.ImageData
-import org.example.project.presentation.model.PersonalInfoUiModel
+import org.example.project.presentation.model.CraftsmanPersonalInfoUiModel
 import org.example.project.presentation.shared.base.BaseViewModel
 import org.example.project.presentation.shared.base.ErrorUiState
 import org.example.project.presentation.mapper.toDomain
@@ -22,7 +22,7 @@ class CraftsmanSetupViewModel(
     private val uploadIdCardsUseCase: UploadIdCardsUseCase,
     private val uploadWorkPortfolioUseCase: UploadWorkPortfolioUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val uploadProfilePictureUseCase: UploadProfilePictureUseCase,
+    private val uploadCraftsmanProfilePictureUseCase: UploadCraftsmanProfilePictureUseCase,
 ) : BaseViewModel<CraftsmanSetupUiState, CraftsmanRegistrationEffect>(
     CraftsmanSetupUiState()
 ), CraftsmanSetupInteractionListener {
@@ -51,7 +51,7 @@ class CraftsmanSetupViewModel(
         }
     }
 
-    override fun onPersonalInfoChanged(personalInfo: PersonalInfoUiModel) {
+    override fun onPersonalInfoChanged(personalInfo: CraftsmanPersonalInfoUiModel) {
         updateState {
             it.copy(
                 personalInfo = personalInfo,
@@ -264,7 +264,7 @@ class CraftsmanSetupViewModel(
 
         tryToCall(
             call = {
-                uploadProfilePictureUseCase(
+                uploadCraftsmanProfilePictureUseCase(
                     craftsmanId = craftsmanId,
                     profilePicture = profilePicture.byteArray,
                     profilePictureFileName = profilePicture.fileName
@@ -398,7 +398,7 @@ class CraftsmanSetupViewModel(
         tryToCall(
             call = {
                 createCraftsmanUseCase(
-                    personalInfo = state.value.personalInfo.toDomain(),
+                    craftsmanPersonalInfo = state.value.personalInfo.toDomain(),
                     categories = selectedCategoryTitles
                 )
             },
@@ -434,7 +434,7 @@ class CraftsmanSetupViewModel(
         )
     }
 
-    private fun validatePersonalInfo(info: PersonalInfoUiModel): Boolean {
+    private fun validatePersonalInfo(info: CraftsmanPersonalInfoUiModel): Boolean {
         return info.firstName.length >= 3 &&
                 info.lastName.length >= 3 &&
                 info.phoneNumber.length >= 10 &&

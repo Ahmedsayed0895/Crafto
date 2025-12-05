@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreateCraftsmanRequest(
-    val personalInfo: PersonalInfoDto,
+    val personalInfo: CraftsmanPersonalInfoDto,
     val categories: List<String>
 )
 
@@ -12,6 +12,7 @@ data class CreateCraftsmanRequest(
 data class CraftsmanSetupResponseDto(
     val craftsmanId: String,
     val status: String,
+    val profilePictureUrl: String? = null,
     val message: String
 )
 
@@ -35,7 +36,7 @@ data class WorkPortfolioResponseDto(
 @Serializable
 data class CraftsmanProfileResponseDto(
     val craftsmanId: String,
-    val personalInfo: PersonalInfoDto,
+    val personalInfo: CraftsmanPersonalInfoDto,
     val categories: List<String>,
     val profilePictureUrl: String? = null,
     val status: String,
@@ -53,20 +54,7 @@ data class CraftsmanStatusResponseDto(
 )
 
 @Serializable
-data class ProfilePictureUploadResponseDto(
-    val craftsmanId: String,
-    val profilePictureUrl: String,
-    val message: String
-)
-
-@Serializable
-data class DeleteAccountResponseDto(
-    val success: Boolean,
-    val message: String
-)
-
-@Serializable
-data class PersonalInfoDto(
+data class CraftsmanPersonalInfoDto(
     val firstName: String,
     val lastName: String,
     val phoneNumber: String,
@@ -79,18 +67,4 @@ data class VerificationInfoDto(
     val idCardFrontUrl: String?,
     val idCardBackUrl: String?,
     val workPortfolioUrls: List<String>
-)
-
-@Serializable
-data class ErrorResponseDto(
-    val code: String,
-    val message: String,
-    val timestamp: String
-)
-
-
-data class CategoryDto(
-    val id: Int,
-    val title: String,
-    val colorHex: Long
 )

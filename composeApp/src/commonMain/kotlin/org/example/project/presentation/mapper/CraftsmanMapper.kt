@@ -2,14 +2,14 @@ package org.example.project.presentation.mapper
 
 import androidx.compose.ui.graphics.Color
 import org.example.project.domain.entity.Category
-import org.example.project.domain.entity.PersonalInfo
+import org.example.project.domain.entity.CraftsmanPersonalInfo
 import org.example.project.domain.model.WorkImage
 import org.example.project.presentation.model.CategoryUi
 import org.example.project.presentation.model.ImageData
-import org.example.project.presentation.model.PersonalInfoUiModel
+import org.example.project.presentation.model.CraftsmanPersonalInfoUiModel
 
-fun PersonalInfoUiModel.toDomain(): PersonalInfo {
-    return PersonalInfo(
+fun CraftsmanPersonalInfoUiModel.toDomain(): CraftsmanPersonalInfo {
+    return CraftsmanPersonalInfo(
         firstName = firstName,
         lastName = lastName,
         phoneNumber = phoneNumber,

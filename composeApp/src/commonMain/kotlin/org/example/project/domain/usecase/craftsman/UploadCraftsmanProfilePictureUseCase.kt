@@ -5,7 +5,7 @@ import org.example.project.domain.repository.CraftsmanRepository
 import org.example.project.domain.service.ValidationService
 import org.example.project.domain.util.AppConstants
 
-class UploadProfilePictureUseCase(
+class UploadCraftsmanProfilePictureUseCase(
     private val repository: CraftsmanRepository,
     private val validationService: ValidationService
 ) {

@@ -5,9 +5,9 @@ import org.example.project.domain.repository.UserPreferences
 import org.example.project.data.mapper.toDomain
 import org.example.project.data.mapper.toDto
 import org.example.project.data.remote.datasource.CraftsmanRemoteDataSource
-import org.example.project.domain.entity.Craftsman
+import org.example.project.domain.entity.CraftsmanProfile
 import org.example.project.domain.entity.CraftsmanStatus
-import org.example.project.domain.entity.PersonalInfo
+import org.example.project.domain.entity.CraftsmanPersonalInfo
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.exception.ApiException
 import org.example.project.domain.exception.UnauthorizedException
@@ -22,7 +22,7 @@ class CraftsmanRepositoryImpl (
 ) : CraftsmanRepository {
     @OptIn(ExperimentalTime::class)
     override suspend fun createCraftsmanProfile(
-        personalInfo: PersonalInfo,
+        craftsmanPersonalInfo: CraftsmanPersonalInfo,
         categories: List<String>
     ): String {
         var userId = userPreferences.getUserId()
@@ -35,7 +35,7 @@ class CraftsmanRepositoryImpl (
         }
 
         val request = CreateCraftsmanRequest(
-            personalInfo = personalInfo.toDto(),
+            personalInfo = craftsmanPersonalInfo.toDto(),
             categories = categories
         )
 
@@ -103,7 +103,7 @@ class CraftsmanRepositoryImpl (
         return response.workImageUrls
     }
 
-    override suspend fun getCraftsmanProfile(): Craftsman {
+    override suspend fun getCraftsmanProfile(): CraftsmanProfile {
         val userId = userPreferences.getUserId()
             ?: throw UnauthorizedException()
 
@@ -121,7 +121,7 @@ class CraftsmanRepositoryImpl (
         }
     }
 
-    override suspend fun deleteCraftsmanAccount(craftsmanId: String) {
+    override suspend fun deleteCraftsmanAccount(craftsmanId: String): Boolean {
 
         val userId = userPreferences.getUserId()
             ?: throw UnauthorizedException()
@@ -132,6 +132,7 @@ class CraftsmanRepositoryImpl (
             throw ApiException(response.message)
         }
         userPreferences.clearUserId()
+        return response.success
     }
 
 }

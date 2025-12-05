@@ -1,9 +1,9 @@
 package org.example.project
 
 import kotlinx.coroutines.test.runTest
-import org.example.project.domain.entity.Craftsman
+import org.example.project.domain.entity.CraftsmanProfile
 import org.example.project.domain.entity.CraftsmanStatus
-import org.example.project.domain.entity.PersonalInfo
+import org.example.project.domain.entity.CraftsmanPersonalInfo
 import org.example.project.domain.entity.VerificationDocuments
 import org.example.project.domain.exception.ValidationException
 import org.example.project.domain.model.WorkImage
@@ -29,7 +29,7 @@ class CreateCraftsmanProfileUseCaseTest {
     @Test
     fun `invoke succeeds with valid input`() = runTest {
         // Given
-        val personalInfo = PersonalInfo(
+        val craftsmanPersonalInfo = CraftsmanPersonalInfo(
             firstName = "John",
             lastName = "Doe",
             phoneNumber = "+1234567890",
@@ -37,7 +37,7 @@ class CreateCraftsmanProfileUseCaseTest {
         )
 
         // When
-        val result = useCase(personalInfo, listOf("plumbing"))
+        val result = useCase(craftsmanPersonalInfo, listOf("plumbing"))
 
         // Then
         assertEquals("craftsman123", result)
@@ -46,7 +46,7 @@ class CreateCraftsmanProfileUseCaseTest {
     @Test
     fun `invoke throws ValidationException for empty categories`() = runTest {
         // Given
-        val personalInfo = PersonalInfo(
+        val craftsmanPersonalInfo = CraftsmanPersonalInfo(
             firstName = "John",
             lastName = "Doe",
             phoneNumber = "+1234567890",
@@ -55,7 +55,7 @@ class CreateCraftsmanProfileUseCaseTest {
 
         // When/Then
         val exception = assertFailsWith<ValidationException> {
-            useCase(personalInfo, emptyList())
+            useCase(craftsmanPersonalInfo, emptyList())
         }
         assertEquals("Please select at least one service category", exception.message)
     }
@@ -63,7 +63,7 @@ class CreateCraftsmanProfileUseCaseTest {
     @Test
     fun `invoke throws ValidationException for invalid phone`() = runTest {
         // Given
-        val personalInfo = PersonalInfo(
+        val craftsmanPersonalInfo = CraftsmanPersonalInfo(
             firstName = "John",
             lastName = "Doe",
             phoneNumber = "invalid",
@@ -72,14 +72,14 @@ class CreateCraftsmanProfileUseCaseTest {
 
         // When/Then
         assertFailsWith<ValidationException> {
-            useCase(personalInfo, listOf("plumbing"))
+            useCase(craftsmanPersonalInfo, listOf("plumbing"))
         }
     }
 }
 
 class TestCraftsmanRepository : CraftsmanRepository {
     override suspend fun createCraftsmanProfile(
-        personalInfo: PersonalInfo,
+        craftsmanPersonalInfo: CraftsmanPersonalInfo,
         categories: List<String>
     ): String {
         return "craftsman123"
@@ -102,7 +102,7 @@ class TestCraftsmanRepository : CraftsmanRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCraftsmanProfile(): Craftsman {
+    override suspend fun getCraftsmanProfile(): CraftsmanProfile {
         TODO("Not yet implemented")
     }
 
