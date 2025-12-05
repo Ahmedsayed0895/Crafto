@@ -24,7 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun WhatYouNeedItem(
-    category: CustomerHomeScreenState.RequestCategory,
+    category: CustomerHomeScreenState.RequestCategoryUiState,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -47,7 +47,7 @@ fun WhatYouNeedItem(
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(10.dp),
-            painter = category.icon,
+            painter = painterResource(Res.drawable.arrow_left),
             contentDescription = null,
             tint = category.iconTint
         )
@@ -79,7 +79,7 @@ fun WhatYouNeedItem(
 private fun WhatYouNeedItemPreview(){
     AppTheme{
         WhatYouNeedItem(
-            category = CustomerHomeScreenState.RequestCategory(
+            category = CustomerHomeScreenState.RequestCategoryUiState(
                 title = "Plumping",
                 content = "Pipes, faucets, water heaters",
                 icon = painterResource(Res.drawable.arrow_left),

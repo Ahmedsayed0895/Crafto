@@ -2,16 +2,18 @@ package org.example.project.presentation.screens.customer_home
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import org.example.project.presentation.shared.base.ErrorUiState
 
 data class CustomerHomeScreenState(
-    val isError: Boolean? = null,
-    val mostRequestedCategories: List<RequestCategory> = listOf(),
-    val allCategories: List<RequestCategory> = listOf()
+    val isError: ErrorUiState? = null,
+    val isLoading: Boolean = false,
+    val mostRequestedCategories: List<RequestCategoryUiState> = listOf(),
+    val allCategories: List<RequestCategoryUiState> = listOf()
 ){
-    data class RequestCategory(
+    data class RequestCategoryUiState(
         val title: String,
         val content: String,
-        val icon: Painter,
+        val icon: Painter?,
         val iconBackgroundColor: Color,
         val iconTint: Color,
     )

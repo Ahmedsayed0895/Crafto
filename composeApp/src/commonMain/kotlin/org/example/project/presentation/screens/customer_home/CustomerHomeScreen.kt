@@ -99,21 +99,21 @@ private fun CustomerHomeScreenContent(
 @Composable
 private fun CustomerHomeScreenPreview(){
     val categories = listOf(
-        CustomerHomeScreenState.RequestCategory(
+        CustomerHomeScreenState.RequestCategoryUiState(
             title = "Plumping",
             content = "Pipes, faucets, water heaters",
             icon = painterResource(Res.drawable.arrow_left),
             iconBackgroundColor = AppTheme.craftoColors.additional.secondaryBlue,
             iconTint = AppTheme.craftoColors.additional.primaryBlue
         ),
-        CustomerHomeScreenState.RequestCategory(
+        CustomerHomeScreenState.RequestCategoryUiState(
             title = "Plumping",
             content = "Pipes, faucets, water heaters",
             icon = painterResource(Res.drawable.arrow_left),
             iconBackgroundColor = AppTheme.craftoColors.additional.secondaryBlue,
             iconTint = AppTheme.craftoColors.additional.primaryBlue
         ),
-        CustomerHomeScreenState.RequestCategory(
+        CustomerHomeScreenState.RequestCategoryUiState(
             title = "Plumping",
             content = "Pipes, faucets, water heaters",
             icon = painterResource(Res.drawable.arrow_left),

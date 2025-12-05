@@ -22,7 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MostRequestItem(
-    category: CustomerHomeScreenState.RequestCategory,
+    category: CustomerHomeScreenState.RequestCategoryUiState,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -43,7 +43,7 @@ fun MostRequestItem(
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(10.dp),
-            painter = category.icon,
+            painter = painterResource(Res.drawable.arrow_left),
             contentDescription = null,
             tint = category.iconTint
         )
@@ -72,7 +72,7 @@ fun MostRequestItem(
 private fun MostRequestItemPreview(){
     AppTheme{
         MostRequestItem(
-            category = CustomerHomeScreenState.RequestCategory(
+            category = CustomerHomeScreenState.RequestCategoryUiState(
                 title = "Plumping",
                 content = "Pipes, faucets, water heaters",
                 icon = painterResource(Res.drawable.arrow_left),
