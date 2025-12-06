@@ -1,6 +1,6 @@
-package org.example.project.data.repository.mapper
+package org.example.project.data.mapper
 
-import org.example.project.data.dto.GovernoratesDto
+import org.example.project.data.remote.dto.GovernoratesDto
 import org.example.project.domain.entity.Governorates
 
 fun List<GovernoratesDto>.toGovernorates(): List<Governorates> {

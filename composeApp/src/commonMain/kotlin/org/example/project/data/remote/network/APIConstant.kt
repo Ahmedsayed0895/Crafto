@@ -26,6 +26,10 @@ object ApiConstants {
         const val CUSTOMER_SETUP = "/customer/setup"
         const val CUSTOMER_PROFILE = "/customer/profile"
 
+        const val LOCATION_PATH = "location"
+        const val GOVERNORATES_ENDPOINT = "governorates"
+        const val DISTRICT_ENDPOINT = "district"
+
 
         fun craftsmanProfilePicture(craftsmanId: String) = "/craftsman/$craftsmanId/profile-picture"
         fun customerProfilePicture(customerId: String) = "/customer/$customerId/profile-picture"

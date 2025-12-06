@@ -38,6 +38,7 @@ import crafto.composeapp.generated.resources.service_selection
 import org.example.project.presentation.designsystem.components.ButtonState
 import org.example.project.presentation.designsystem.components.TextButton
 import org.example.project.presentation.designsystem.textstyle.AppTheme
+import org.example.project.presentation.screens.setup.composable.ErrorSnackBar
 import org.example.project.presentation.screens.setup.composable.SetupScreenScaffold
 import org.example.project.presentation.screens.setup.composable.page.IdentityVerificationPage
 import org.example.project.presentation.screens.setup.composable.page.PersonalInfoPage
@@ -100,7 +101,7 @@ fun CraftsmanSetupScreen(
             contentAlignment = Alignment.BottomCenter
         ) {
             state.error?.let { error ->
-                ErrorSnackbar(
+                ErrorSnackBar(
                     error = error,
                     onDismiss = viewModel::clearError
                 )
@@ -231,31 +232,5 @@ fun CraftsmanSetupContent(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun ErrorSnackbar(
-    error: ErrorUiState,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Snackbar(
-        modifier = modifier.padding(16.dp),
-        shape = RoundedCornerShape( 8.dp),
-        containerColor = AppTheme.craftoColors.additional.primaryRed.copy(alpha = 0.95f),
-        contentColor = AppTheme.craftoColors.button.onPrimary,
-        action = {
-            TextButton(
-                onClick = onDismiss, text = "Dismiss",
-                enabled = true, buttonState = ButtonState.Enable
-            )
-        }
-    ) {
-        Text(
-            text = error.message,
-            style = AppTheme.textStyle.body.medium,
-            color = AppTheme.craftoColors.button.onPrimary
-        )
     }
 }

@@ -1,6 +1,6 @@
-package org.example.project.data.repository.mapper
+package org.example.project.data.mapper
 
-import org.example.project.data.dto.DistrictDto
+import org.example.project.data.remote.dto.DistrictDto
 import org.example.project.domain.entity.District
 
 fun List<DistrictDto>.toDistrict(): List<District> {

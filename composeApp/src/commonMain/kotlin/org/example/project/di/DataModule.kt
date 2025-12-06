@@ -8,13 +8,17 @@ import org.example.project.data.local.datasource.CategoryMemoryDataSource
 import org.example.project.data.repository.UserPreferencesImpl
 import org.example.project.data.memory.categorySeed
 import org.example.project.data.remote.datasource.CraftsmanRemoteDataSourceImpl
+import org.example.project.data.remote.datasource.CustomerRemoteDataSource
+import org.example.project.data.remote.datasource.CustomerRemoteDataSourceImpl
 import org.example.project.data.repository.CategoryRepositoryImpl
 import org.example.project.data.repository.CraftsmanRepositoryImpl
+import org.example.project.data.repository.CustomerRepositoryImpl
 import org.example.project.data.repository.LocationRepositoryImpl
 import org.example.project.data.repository.OnboardingRepositoryImp
 import org.example.project.data.service.ValidationServiceImpl
 import org.example.project.domain.repository.CategoryRepository
 import org.example.project.domain.repository.CraftsmanRepository
+import org.example.project.domain.repository.CustomerRepository
 import org.example.project.domain.repository.LocationRepository
 import org.example.project.domain.repository.OnboardingRepository
 import org.example.project.domain.service.ValidationService
@@ -25,6 +29,13 @@ val dataModule = module {
     single<CraftsmanRemoteDataSource> { CraftsmanRemoteDataSourceImpl(get()) }
     single<CraftsmanRepository> {
         CraftsmanRepositoryImpl(
+            remoteDataSource = get(),
+            userPreferences = get()
+        )
+    }
+    single<CustomerRemoteDataSource> { CustomerRemoteDataSourceImpl(get()) }
+    single<CustomerRepository> {
+        CustomerRepositoryImpl(
             remoteDataSource = get(),
             userPreferences = get()
         )

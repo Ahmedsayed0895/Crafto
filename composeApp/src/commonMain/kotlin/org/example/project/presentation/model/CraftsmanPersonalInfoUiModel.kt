@@ -5,5 +5,4 @@ data class CraftsmanPersonalInfoUiModel(
     val lastName: String,
     val phoneNumber: String,
     val address: String
-
 )
